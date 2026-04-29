@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Block {
+    title: string;
+    description: string;
+}
+
+interface FitItem {
+    title: string;
+    description: string;
+}
+
+interface Phase {
+    number: string;
+    title: string;
+    weeks: string;
+    description: string;
+}
+
+interface CostBand {
+    title: string;
+    description: string;
+}
+
+interface RelatedService {
+    title: string;
+    description: string;
+    href: string;
+}
+
+const leistungsblocks: Block[] = [
+    {
+        title: 'Audit der bestehenden Webseite',
+        description:
+            'Wir schauen uns Ihre aktuelle Webseite genau an: Welche Inhalte gibt es, welche Funktionen sind kritisch, welche werden nicht mehr genutzt? Daraus entsteht der Migrationsplan.',
+    },
+    {
+        title: 'Inhalts-Übernahme',
+        description:
+            'Texte, Bilder, Dokumente, Struktur – wir übernehmen alles, was übernommen werden soll. Bei dieser Gelegenheit räumen wir auch auf, wenn Sie das möchten.',
+    },
+    {
+        title: 'Tech-Stack-Wechsel',
+        description:
+            'Von WordPress, Joomla, Typo3 oder ähnlichen Plattformen migrieren wir auf moderne Stacks wie Astro, Next.js oder schlanke WordPress-Setups – je nachdem, was zu Ihrem Pflege-Bedarf passt.',
+    },
+    {
+        title: 'SEO-Erhalt',
+        description:
+            'Bestehende URLs leiten wir per 301-Weiterleitung auf die neuen Seiten um. Suchmaschinen-Rankings, externe Verlinkungen und bestehende Bookmarks bleiben erhalten.',
+    },
+    {
+        title: 'Test-Umgebung & Cutover',
+        description:
+            'Die neue Webseite entsteht parallel auf einer Test-Umgebung. Sie sehen alles vor dem Live-Gang, können Feedback geben. Der Wechsel passiert dann an einem geplanten Termin – idealerweise am Wochenende, ohne Ausfallzeit für Ihre Besucher.',
+    },
+    {
+        title: 'Übergabe & Hosting-Wechsel',
+        description:
+            'Falls Sie das Hosting wechseln (z. B. zu Hostpoint in der Schweiz), übernehmen wir den kompletten Umzug inklusive Domain-Anpassung und SSL-Zertifikat. Sie müssen sich um nichts kümmern.',
+    },
+];
+
+const fitItems: FitItem[] = [
+    {
+        title: 'Ihre Webseite lädt langsam.',
+        description:
+            'Ladezeiten über 3 Sekunden kosten Sie Besucher und SEO-Ranking. Mit einem modernen Stack und Schweizer Hosting sind 1–2 Sekunden realistisch.',
+    },
+    {
+        title: 'Sie hatten Sicherheits-Probleme oder befürchten welche.',
+        description:
+            'Veraltete CMS-Versionen, ungewartete Plugins, fehlende Backups: Migrationen sind oft die Gelegenheit, einen sauberen Schnitt zu machen und auf eine sichere Basis zu kommen.',
+    },
+    {
+        title: 'Pflege ist umständlich oder gefährlich geworden.',
+        description:
+            'Wenn jedes Update das Risiko birgt, dass etwas kaputt geht, oder wenn Sie nicht mehr wissen, welches Plugin wofür ist, ist es Zeit für eine saubere Basis.',
+    },
+    {
+        title: 'Sie wechseln das Hosting in die Schweiz.',
+        description:
+            'Datenstandort Schweiz, revDSG-konform, Schweizer Support – viele KMU verbinden den Wechsel mit einer technischen Modernisierung. Beides parallel anzugehen, spart Aufwand.',
+    },
+];
+
+const phases: Phase[] = [
+    {
+        number: '01',
+        title: 'Audit & Konzept',
+        weeks: '(Woche 1–2)',
+        description:
+            'Wir analysieren Ihre aktuelle Webseite, identifizieren Inhalte, Funktionen und URLs. Wir schlagen Tech-Stack und Hosting vor und legen den Migrationsplan fest. Sie erhalten ein klares Angebot.',
+    },
+    {
+        number: '02',
+        title: 'Aufbau auf Test-Umgebung',
+        weeks: '(Woche 2–5)',
+        description:
+            'Wir bauen die neue Webseite auf einer Test-Umgebung. Inhalte werden übernommen, Designs angepasst und URL-Struktur sauber definiert. Sie sehen den Stand laufend und geben Feedback.',
+    },
+    {
+        number: '03',
+        title: 'Tests & Vorbereitung',
+        weeks: '(Woche 5–6)',
+        description:
+            'Wir testen alles: Browser, Geräte, Geschwindigkeit, alle Links und alle Weiterleitungen. Parallel bereiten wir den Hosting-Wechsel und SSL-Zertifikate vor.',
+    },
+    {
+        number: '04',
+        title: 'Cutover & Nachsorge',
+        weeks: '(Woche 6–7)',
+        description:
+            'Wir wechseln am geplanten Termin (meist Wochenende) auf die neue Webseite. Direkt danach prüfen wir, dass alle 301-Weiterleitungen greifen und keine SEO-Rankings verloren gehen. In den ersten Wochen bleiben wir eng dran.',
+    },
+];
+
+const costBands: CostBand[] = [
+    {
+        title: 'Kompakte Migration',
+        description:
+            'Kleine bis mittlere Webseite, klare Inhalte, überschaubare URL-Struktur. Wechsel auf moderneren Stack mit besserer Performance, ohne tiefgreifende Re-Strukturierung.',
+    },
+    {
+        title: 'Standard-Migration',
+        description:
+            'Mittlere Webseite mit etwas komplexerem Aufbau, 50–200 Inhaltsseiten, eventuell Blog oder News-Bereich. Inkl. saubere URL-Re-Struktur und SEO-Erhalt-Prüfung.',
+    },
+    {
+        title: 'Erweiterte Migration',
+        description:
+            'Grössere Webseite oder Webshop, mit individuellen Funktionen, mehrsprachigem Inhalt oder Anbindungen an Drittsysteme. Mit gründlichem Audit, Inhaltsbereinigung und Performance-Optimierung.',
+    },
+];
+
+const relatedServices: RelatedService[] = [
+    {
+        title: 'Webseiten',
+        description: 'Webseiten für KMU, sauber gebaut.',
+        href: '/leistungen/webseiten',
+    },
+    {
+        title: 'Webshops',
+        description: 'Online verkaufen, ohne im System zu versinken.',
+        href: '/leistungen/webshops',
+    },
+    {
+        title: 'Wartung & Support',
+        description: 'Damit Ihre Webseite zuverlässig läuft.',
+        href: '/leistungen/wartung',
+    },
+    {
+        title: 'SEO & Performance',
+        description: 'Schneller laden, besser gefunden werden.',
+        href: '/leistungen/seo-performance',
+    },
+];
+---
+<BaseLayout
+    title="Migrationen – Swissly IT Solutions"
+    description="Veralteten Webauftritt auf modernen Tech-Stack bringen – ohne dass Inhalte oder Suchmaschinen-Rankings verloren gehen. Saubere Migration aus einer Hand."
+>
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Leistung · Migrationen</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Veralteten Auftritt auf modernen Stack bringen.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-10 max-w-3xl">
+                Ihre Webseite läuft, ist aber langsam, sicherheitsanfällig oder schwer zu pflegen? Wir migrieren sie auf einen modernen Tech-Stack – ohne dass dabei Inhalte oder Suchmaschinen-Rankings verloren gehen.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+                <a
+                    href="/kontakt"
+                    class="bg-swissly-gold text-swissly-navy font-body font-medium px-6 py-3 rounded hover:bg-swissly-gold/90 transition"
+                >
+                    Erstgespräch anfragen
+                </a>
+                <a
+                    href="#leistungsumfang"
+                    class="text-swissly-offwhite font-body font-medium px-6 py-3 border border-swissly-offwhite/30 rounded hover:border-swissly-gold hover:text-swissly-gold transition"
+                >
+                    Was ist enthalten
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="leistungsumfang" class="bg-swissly-offwhite">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Leistungsumfang</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Was eine saubere Migration ausmacht.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                Migrieren heisst nicht nur „umziehen". Eine gute Migration nutzt den Anlass, um die Webseite gleichzeitig schneller, sicherer und einfacher pflegbar zu machen – ohne dass Sie Sichtbarkeit oder Inhalte verlieren.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {leistungsblocks.map((block) => (
+                    <div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-3 leading-tight">
+                            {block.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            {block.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Zielgruppe</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Wann sich eine Migration lohnt.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-12 max-w-3xl">
+                Nicht jede alte Webseite muss migriert werden. Wenn Sie sich in einem der folgenden Punkte wiederfinden, lohnt sich der Schritt:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {fitItems.map((item) => (
+                    <div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {item.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {item.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-swissly-offwhite/10">
+                <h3 class="font-headline text-lg font-bold text-swissly-offwhite/80 mb-3 leading-tight">
+                    Wofür wir nicht der richtige Partner sind:
+                </h3>
+                <p class="font-body text-base text-swissly-offwhite/60 leading-relaxed">
+                    Reine 1:1-Migrationen, bei denen alles exakt gleich aussehen und funktionieren soll wie zuvor (inklusive der alten Strukturprobleme). Wenn Sie wirklich nur „kopieren" wollen, sind Sie bei uns nicht richtig – wir verbessern bei der Migration immer auch das, was sich verbessern lässt.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// So läuft das Projekt ab</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Vom Audit bis zum Cutover.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                Migrationen sind sensibler als Neubauten – ein falscher Schritt kann SEO-Rankings oder Inhalte kosten. Wir arbeiten in vier klaren Phasen:
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                {phases.map((phase) => (
+                    <div class="flex flex-col">
+                        <p class="font-mono text-5xl font-bold text-swissly-gold mb-4 leading-none tabular-nums">
+                            {phase.number}
+                        </p>
+                        <div class="h-px bg-swissly-divider mb-6"></div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-2 leading-tight">
+                            {phase.title}
+                        </h3>
+                        <p class="font-mono text-xs text-swissly-text/60 mb-3 tracking-wide">
+                            {phase.weeks}
+                        </p>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            {phase.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <p class="font-body italic text-sm text-swissly-text/60 leading-relaxed mt-12 max-w-2xl">
+                Hinweis: Die Wochenangaben sind Richtwerte für eine kleine bis mittlere Migration. Komplexere Webseiten oder Webshops dauern länger.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Aufwand</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Was eine Migration zeitlich bedeutet.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-16 max-w-3xl">
+                Der Aufwand hängt stark davon ab, wie komplex die alte Webseite ist und wie viel „Aufräumen" mit dazu kommt. Drei typische Grössenordnungen:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {costBands.map((band) => (
+                    <div class="bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-8 hover:border-swissly-gold transition">
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-4 leading-tight">
+                            {band.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {band.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-12 p-6 border-l-4 border-swissly-gold bg-swissly-offwhite/5">
+                <h3 class="font-headline text-lg font-bold text-swissly-offwhite mb-2 leading-tight">
+                    Konkrete Zahlen kommen im Erstgespräch.
+                </h3>
+                <p class="font-body text-base text-swissly-offwhite/80 leading-relaxed">
+                    Wir schauen uns Ihre aktuelle Webseite an und schätzen den Migrationsaufwand transparent ein. Sie wissen, ob es zu Ihrem Budget passt. Ohne Verkaufsdruck.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-24 text-center">
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6">
+                Webseite reif für eine saubere Migration?
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-10 max-w-2xl mx-auto">
+                Im 30-minütigen Erstgespräch schauen wir kurz auf Ihre aktuelle Webseite, klären Migrationsbedarf und schlagen einen Weg vor. Kostenlos, unverbindlich und ohne Verkaufsgespräch.
+            </p>
+
+            <a
+                href="/kontakt"
+                class="inline-block bg-swissly-navy text-swissly-offwhite font-body font-medium px-8 py-4 rounded hover:bg-swissly-navy/90 transition text-base"
+            >
+                Erstgespräch anfragen
+            </a>
+
+            <p class="font-mono text-xs text-swissly-text/60 tracking-wide mt-8">
+                // Antwort innerhalb 24 Stunden · Werktags
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-24">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Auch interessant</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl font-bold text-swissly-offwhite leading-tight mb-12">
+                Weitere Leistungen.
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {relatedServices.map((service) => (
+                    <a
+                        href={service.href}
+                        class="group flex flex-col bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-6 hover:border-swissly-gold hover:bg-swissly-offwhite/10 transition"
+                    >
+                        <h3 class="font-headline text-lg font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {service.title}
+                        </h3>
+                        <p class="font-body text-sm text-swissly-offwhite/70 leading-relaxed mb-4 flex-grow">
+                            {service.description}
+                        </p>
+                        <span class="font-body text-sm font-medium text-swissly-gold mt-auto">
+                            →
+                        </span>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+</BaseLayout>
