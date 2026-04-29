@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Block {
+    title: string;
+    description: string;
+}
+
+interface FitItem {
+    title: string;
+    description: string;
+}
+
+interface Phase {
+    number: string;
+    title: string;
+    weeks: string;
+    description: string;
+}
+
+interface CostBand {
+    title: string;
+    description: string;
+}
+
+interface RelatedService {
+    title: string;
+    description: string;
+    href: string;
+}
+
+const leistungsblocks: Block[] = [
+    {
+        title: 'Shop-Konzept',
+        description:
+            'Wir klären mit Ihnen Sortiment, Zielgruppe und Verkaufsprozess. Sie wissen vor dem Bau, wie Bestellungen reinkommen, wie Sie Produkte pflegen und welche Funktionen Sie wirklich brauchen.',
+    },
+    {
+        title: 'Produkte & Kategorien',
+        description:
+            'Wir richten Ihre Produkt-Datenbank ein, inklusive Varianten, Lagerbeständen und Kategorien. Sie pflegen Ihre Produkte selber im Backend – verständlich strukturiert, ohne IT-Schulung.',
+    },
+    {
+        title: 'Schweizer Zahlungsarten',
+        description:
+            'Twint, Kreditkarte, Rechnung, Vorkasse – wir binden die Zahlungsarten ein, die Ihre Kundinnen und Kunden tatsächlich nutzen. Standard-Anbieter sind Stripe, Datatrans oder Wallee.',
+    },
+    {
+        title: 'Versand & Logistik',
+        description:
+            'Versandkosten, Liefergebiete, Selbstabholung – wir konfigurieren die Versandlogik passend zu Ihrem Geschäft. Anbindung an Schweizerische Post oder externe Versanddienstleister auf Wunsch.',
+    },
+    {
+        title: 'Schweizer Hosting',
+        description:
+            'Ihr Webshop läuft auf Schweizer Servern, revDSG-konform, mit deutschsprachigem Support. Auch Kundendaten und Bestellungen bleiben in der Schweiz.',
+    },
+    {
+        title: 'Übergabe & Schulung',
+        description:
+            'Am Ende erhalten Sie nicht nur den Shop, sondern auch eine kurze Einführung, wie Sie Bestellungen bearbeiten, Produkte pflegen und das System nutzen. Plus vollständige Dokumentation.',
+    },
+];
+
+const fitItems: FitItem[] = [
+    {
+        title: 'Sie verkaufen physische oder digitale Produkte.',
+        description:
+            'Von Hofladen-Erzeugnissen bis Fachhandel-Sortiment, von Online-Kursen bis Software-Lizenzen – wir bauen Shops für ein breites Spektrum.',
+    },
+    {
+        title: 'Sie wollen den Shop selber pflegen.',
+        description:
+            'Produkte, Preise, Aktionen ändern Sie eigenständig im Backend. Wir richten alles so ein, dass Sie nicht für jede Änderung uns brauchen.',
+    },
+    {
+        title: 'Sie brauchen Schweizer Standards.',
+        description:
+            'Twint statt PayPal, CHF statt EUR, Rechnung als Standard-Zahlungsart, Versand innerhalb der Schweiz. Wir kennen die Erwartungen Schweizer Kundinnen und Kunden.',
+    },
+    {
+        title: 'Sie planen mit überschaubarem Sortiment.',
+        description:
+            'Bis ca. 500 Produkte funktioniert unser Standard-Setup gut. Bei deutlich grösseren Sortimenten oder komplexen B2B-Anforderungen klären wir vorab, ob wir der richtige Partner sind.',
+    },
+];
+
+const phases: Phase[] = [
+    {
+        number: '01',
+        title: 'Konzept & Planung',
+        weeks: '(Woche 1–3)',
+        description:
+            'Wir analysieren Ihr Sortiment, Ihren Verkaufsprozess und Ihre Zielgruppe. Wir wählen die Shop-Plattform, die Zahlungsarten und die Versandlogik. Sie erhalten ein klares Angebot.',
+    },
+    {
+        number: '02',
+        title: 'Design & Setup',
+        weeks: '(Woche 3–5)',
+        description:
+            'Wir gestalten Shop-Layout und Produktseiten passend zu Ihrer Marke. Parallel richten wir die Plattform ein und konfigurieren Zahlungsarten, Versand und Steuern.',
+    },
+    {
+        number: '03',
+        title: 'Produktdaten & Tests',
+        weeks: '(Woche 5–8)',
+        description:
+            'Ihre ersten Produkte werden eingepflegt – entweder von Ihnen oder von uns. Wir testen den kompletten Bestellprozess: vom Klick bis zur Versandbestätigung.',
+    },
+    {
+        number: '04',
+        title: 'Launch & Schulung',
+        weeks: '(Woche 8–10)',
+        description:
+            'Wir gehen live, schulen Sie im Backend-Umgang und bleiben während der ersten Wochen eng dran. So fangen wir typische Anfangs-Stolpersteine direkt ab.',
+    },
+];
+
+const costBands: CostBand[] = [
+    {
+        title: 'Starter-Shop',
+        description:
+            'Bis 50 Produkte, Standard-Zahlungsarten, einfacher Versand. Ideal, wenn Sie zum ersten Mal online verkaufen oder ein klar abgegrenztes Sortiment haben.',
+    },
+    {
+        title: 'Standard-Shop',
+        description:
+            'Bis 200 Produkte, Produktvarianten (Grösse, Farbe), erweiterte Versandlogik, Aktionen und Gutscheine. Die typische Grösse für etablierte Schweizer KMU.',
+    },
+    {
+        title: 'Erweiterter Shop',
+        description:
+            'Bis 500 Produkte, mehrsprachig, B2B-Funktionen wie Kunden-Login mit individuellen Preisen, Anbindung an Buchhaltung oder Warenwirtschaft. Für Betriebe mit komplexerem Verkaufsprozess.',
+    },
+];
+
+const relatedServices: RelatedService[] = [
+    {
+        title: 'Webseiten',
+        description: 'Webseiten für KMU, sauber gebaut.',
+        href: '/leistungen/webseiten',
+    },
+    {
+        title: 'Wartung & Support',
+        description: 'Damit Ihr Shop zuverlässig läuft.',
+        href: '/leistungen/wartung',
+    },
+    {
+        title: 'Migrationen',
+        description: 'Veralteten Shop auf modernen Stack bringen.',
+        href: '/leistungen/migrationen',
+    },
+    {
+        title: 'SEO & Performance',
+        description: 'Schneller laden, besser gefunden werden.',
+        href: '/leistungen/seo-performance',
+    },
+];
+---
+<BaseLayout
+    title="Webshops – Swissly IT Solutions"
+    description="Online-Shops für Schweizer KMU – mit Twint, Schweizer Hosting und einem Backend, das im Verkaufsalltag funktioniert."
+>
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Leistung · Webshops</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Webshops, die im Verkaufsalltag funktionieren.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-10 max-w-3xl">
+                Wir entwickeln Online-Shops für Schweizer KMU – mit klarem Backend, einfachem Bestellprozess und Schweizer Zahlungsarten. So, dass Sie verkaufen können, ohne in Technik zu versinken.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+                <a
+                    href="/kontakt"
+                    class="bg-swissly-gold text-swissly-navy font-body font-medium px-6 py-3 rounded hover:bg-swissly-gold/90 transition"
+                >
+                    Erstgespräch anfragen
+                </a>
+                <a
+                    href="#leistungsumfang"
+                    class="text-swissly-offwhite font-body font-medium px-6 py-3 border border-swissly-offwhite/30 rounded hover:border-swissly-gold hover:text-swissly-gold transition"
+                >
+                    Was ist enthalten
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="leistungsumfang" class="bg-swissly-offwhite">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Leistungsumfang</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Was Sie bei uns bekommen.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                Ein Webshop ist mehr als ein Bestellformular. Wir richten Ihren Shop so ein, dass er von Tag eins für den Schweizer Markt funktioniert – mit allem, was für einen reibungslosen Verkaufsalltag nötig ist.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {leistungsblocks.map((block) => (
+                    <div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-3 leading-tight">
+                            {block.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            {block.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Zielgruppe</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Wann ein Swissly-Webshop passt.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-12 max-w-3xl">
+                Nicht jedes Geschäft braucht einen Webshop – und nicht jeder Webshop ist gleich. Wenn Sie sich in einem der folgenden Punkte wiederfinden, sind Sie bei uns richtig:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {fitItems.map((item) => (
+                    <div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {item.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {item.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-swissly-offwhite/10">
+                <h3 class="font-headline text-lg font-bold text-swissly-offwhite/80 mb-3 leading-tight">
+                    Wofür wir nicht der richtige Partner sind:
+                </h3>
+                <p class="font-body text-base text-swissly-offwhite/60 leading-relaxed">
+                    Grosse Marktplätze mit Tausenden Produkten und mehreren Händlern, hochkomplexe B2B-Shops mit individuellen Preislisten pro Kunde, oder Shops, die zwingend an proprietäre Warenwirtschaftssysteme andocken müssen. Für solche Anliegen vermitteln wir Sie gerne weiter.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// So läuft das Projekt ab</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Vom Konzept bis zum ersten Verkauf.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                Webshops sind aufwendiger als reine Webseiten – entsprechend länger der Prozess. Wir arbeiten in vier klaren Phasen:
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                {phases.map((phase) => (
+                    <div class="flex flex-col">
+                        <p class="font-mono text-5xl font-bold text-swissly-gold mb-4 leading-none tabular-nums">
+                            {phase.number}
+                        </p>
+                        <div class="h-px bg-swissly-divider mb-6"></div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-2 leading-tight">
+                            {phase.title}
+                        </h3>
+                        <p class="font-mono text-xs text-swissly-text/60 mb-3 tracking-wide">
+                            {phase.weeks}
+                        </p>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            {phase.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <p class="font-body italic text-sm text-swissly-text/60 leading-relaxed mt-12 max-w-2xl">
+                Hinweis: Die Wochenangaben sind Richtwerte für einen Standard-Webshop mit überschaubarem Sortiment. Komplexere Projekte dauern länger – das halten wir im Angebot fest.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Aufwand</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Was ein Webshop zeitlich bedeutet.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-16 max-w-3xl">
+                Wir arbeiten mit Stundenkontingenten, nicht mit Pauschalen. Damit Sie eine Vorstellung bekommen, was üblich ist, hier drei typische Grössenordnungen:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {costBands.map((band) => (
+                    <div class="bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-8 hover:border-swissly-gold transition">
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-4 leading-tight">
+                            {band.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {band.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-12 p-6 border-l-4 border-swissly-gold bg-swissly-offwhite/5">
+                <h3 class="font-headline text-lg font-bold text-swissly-offwhite mb-2 leading-tight">
+                    Konkrete Zahlen kommen im Erstgespräch.
+                </h3>
+                <p class="font-body text-base text-swissly-offwhite/80 leading-relaxed">
+                    Nach 30 Minuten Gespräch wissen wir, in welchem Band Ihr Projekt liegt – und Sie wissen, ob es zu Ihrem Budget passt. Ohne Verkaufsdruck.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-24 text-center">
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6">
+                Klingt das nach Ihrem Verkaufskanal?
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-10 max-w-2xl mx-auto">
+                Im 30-minütigen Erstgespräch klären wir Ihre Anforderungen, mögliche Lösungen und den realistischen Aufwand. Kostenlos, unverbindlich und ohne Verkaufsgespräch.
+            </p>
+
+            <a
+                href="/kontakt"
+                class="inline-block bg-swissly-navy text-swissly-offwhite font-body font-medium px-8 py-4 rounded hover:bg-swissly-navy/90 transition text-base"
+            >
+                Erstgespräch anfragen
+            </a>
+
+            <p class="font-mono text-xs text-swissly-text/60 tracking-wide mt-8">
+                // Antwort innerhalb 24 Stunden · Werktags
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-24">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Auch interessant</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl font-bold text-swissly-offwhite leading-tight mb-12">
+                Weitere Leistungen.
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {relatedServices.map((service) => (
+                    <a
+                        href={service.href}
+                        class="group flex flex-col bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-6 hover:border-swissly-gold hover:bg-swissly-offwhite/10 transition"
+                    >
+                        <h3 class="font-headline text-lg font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {service.title}
+                        </h3>
+                        <p class="font-body text-sm text-swissly-offwhite/70 leading-relaxed mb-4 flex-grow">
+                            {service.description}
+                        </p>
+                        <span class="font-body text-sm font-medium text-swissly-gold mt-auto">
+                            →
+                        </span>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+</BaseLayout>
