@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Paragraph {
+    heading: string;
+    body: string;
+}
+
+const paragraphs: Paragraph[] = [
+    {
+        heading: 'Kindheitsfreunde',
+        body: 'Wir kennen uns seit der Kindheit. Was uns von Anfang an verbunden hat, war eine Begeisterung für Technik – Geräte auseinandernehmen, verstehen wie etwas funktioniert, selber etwas bauen. Aus dieser Faszination wurde mit den Jahren ein Berufswunsch, dann eine konkrete Idee: einmal etwas Eigenes aufbauen, gemeinsam.',
+    },
+    {
+        heading: 'Die Gründung',
+        body: 'Im Frühjahr 2026 war es so weit. Wir hatten beide unsere Ausbildungen abgeschlossen, mehrere Jahre in IT-Projekten gearbeitet und genug gesehen, um zu wissen: Es gibt Platz für eine kleine, ehrliche Tech-Boutique in der Zentralschweiz. Eine, die KMU praxisnahe Lösungen baut – ohne Konzern-Aufpreis, ohne Buzzword-Fassade.',
+    },
+    {
+        heading: 'Was uns stört (und antreibt)',
+        body: 'Wir haben in unseren bisherigen Stationen ein wiederkehrendes Muster gesehen: IT zieht oft brillante, aber introvertierte Köpfe an. Das Resultat sind Lösungen, die technisch sauber sind, aber an denen Kundinnen und Kunden ohne IT-Hintergrund verzweifeln. Genau das wollen wir anders machen. IT muss nicht einschüchternd sein – sie kann sogar Spass machen, wenn man sie richtig erklärt.',
+    },
+    {
+        heading: 'Wie wir uns ergänzen',
+        body: 'Wir sind beide ruhig, offen und in der Lage, im Zweifel auch einmal nachzugeben – das macht Entscheidungen einfacher als in vielen anderen Konstellationen. In den fachlichen Schwerpunkten ergänzen wir uns: Taha bringt das Web-Know-how und das Gespür für Kundenkommunikation mit, Georg die Stärke in Cybersecurity und das organisatorische Rückgrat. Beide packen wir bei jedem Projekt gemeinsam an.',
+    },
+];
+---
+<BaseLayout
+    title="Über uns – Swissly IT Solutions"
+    description="Hinter Swissly stehen zwei Personen, die IT erklären können. Lernen Sie Georg und Taha kennen – Tech-Boutique aus Ebikon, Zentralschweiz."
+>
+    <section class="bg-swissly-navy min-h-[50vh] flex items-center">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-32 w-full">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Über uns</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight max-w-4xl">
+                Hinter Swissly stehen zwei Personen, die IT erklären können.
+            </h1>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
+            {paragraphs.map((paragraph) => (
+                <div>
+                    <h3 class="font-headline text-xl md:text-2xl font-bold text-swissly-navy mb-4">
+                        {paragraph.heading}
+                    </h3>
+                    <p class="font-body text-base md:text-lg text-swissly-text leading-relaxed mb-12 last:mb-0">
+                        {paragraph.body}
+                    </p>
+                </div>
+            ))}
+        </div>
+    </section>
+</BaseLayout>
