@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Block {
+    title: string;
+    description: string;
+}
+
+interface FitItem {
+    title: string;
+    description: string;
+}
+
+interface Phase {
+    number: string;
+    title: string;
+    weeks: string;
+    description: string;
+}
+
+interface CostBand {
+    title: string;
+    description: string;
+}
+
+interface RelatedService {
+    title: string;
+    description: string;
+    href: string;
+}
+
+const leistungsblocks: Block[] = [
+    {
+        title: 'Performance-Audit',
+        description:
+            'Wir messen Ihre Ladezeiten, Core Web Vitals und identifizieren konkrete Engstellen. Sie bekommen einen klaren Befund mit priorisierten Massnahmen.',
+    },
+    {
+        title: 'Bilder & Assets',
+        description:
+            'Grosse Bilder sind häufig der grösste Bremsklotz. Wir optimieren Bilder, setzen moderne Formate (WebP, AVIF) ein und reduzieren Dateigrössen ohne sichtbaren Qualitätsverlust.',
+    },
+    {
+        title: 'Code & Caching',
+        description:
+            'Wir minimieren CSS und JavaScript, setzen Browser-Caching korrekt und optimieren die Reihenfolge, in der Ressourcen geladen werden. Resultat: messbar schnellerer Seitenaufbau.',
+    },
+    {
+        title: 'Technisches SEO',
+        description:
+            'Meta-Tags, strukturierte Daten (Schema.org), Sitemap, robots.txt, kanonische URLs – alles, was Suchmaschinen brauchen, um Ihre Webseite richtig einzuordnen.',
+    },
+    {
+        title: 'Mobile-Optimierung',
+        description:
+            'Google wertet die mobile Version Ihrer Webseite zuerst. Wir stellen sicher, dass alles auf dem Smartphone gleich gut funktioniert wie auf dem Desktop – Layout, Geschwindigkeit, Bedienbarkeit.',
+    },
+    {
+        title: 'Monitoring & Reporting',
+        description:
+            'Wir richten Tools ein (Google Search Console, Web Vitals-Monitoring), damit Sie sehen, ob die Massnahmen wirken. Sie bekommen eine kurze Auswertung, was sich gemacht hat.',
+    },
+];
+
+const fitItems: FitItem[] = [
+    {
+        title: 'Ihre Webseite lädt spürbar langsam.',
+        description:
+            'Wenn Sie selber merken, dass die Seite träge ist, merken es Ihre Besucher auch – und Google ebenso. Performance ist ein direkter Ranking-Faktor.',
+    },
+    {
+        title: 'Sie ranken schlechter als die Konkurrenz.',
+        description:
+            'Wenn Mitbewerber bei relevanten Suchbegriffen vor Ihnen erscheinen, kann das technische Gründe haben. Oft sind es Bagatellen, die sich gezielt beheben lassen.',
+    },
+    {
+        title: 'Sie planen einen Relaunch oder grössere Änderungen.',
+        description:
+            'Neue Webseite oder Migration ist die ideale Gelegenheit, SEO-Themen direkt sauber mitzudenken. Später zu reparieren ist immer aufwendiger.',
+    },
+    {
+        title: 'Sie haben gerade gemerkt, dass etwas schief lief.',
+        description:
+            'Verlorene Rankings nach einem Webseiten-Update, kaputte Weiterleitungen, indexierte Seiten, die nicht indexiert werden sollten: Wir helfen, technische SEO-Probleme zu identifizieren und zu beheben.',
+    },
+];
+
+const phases: Phase[] = [
+    {
+        number: '01',
+        title: 'Audit',
+        weeks: '(Woche 1)',
+        description:
+            'Wir messen Ist-Zustand: Ladezeiten, Core Web Vitals, technische SEO-Prüfung, indexierte Seiten. Sie erhalten einen Befund mit priorisierten Massnahmen – mit oder ohne Fortsetzung bei uns.',
+    },
+    {
+        number: '02',
+        title: 'Quick Wins',
+        weeks: '(Woche 2–3)',
+        description:
+            'Die wichtigsten und schnellsten Massnahmen setzen wir zuerst um: Bild-Optimierung, Caching, kritische Meta-Tags. Sie sehen oft schon nach einer Woche messbare Verbesserung.',
+    },
+    {
+        number: '03',
+        title: 'Vertiefte Optimierung',
+        weeks: '(Woche 3–5)',
+        description:
+            'Komplexere Massnahmen: Code-Optimierung, strukturierte Daten, mobile Performance, gezielte Anpassungen für wichtige Landingpages.',
+    },
+    {
+        number: '04',
+        title: 'Monitoring & Übergabe',
+        weeks: '(Woche 5–6)',
+        description:
+            'Wir richten Monitoring ein und übergeben dokumentiert. Sie sehen, was wirkt, und können Resultate über die nächsten Monate selber verfolgen. Auf Wunsch begleiten wir Sie weiter.',
+    },
+];
+
+const costBands: CostBand[] = [
+    {
+        title: 'Audit & Quick-Wins',
+        description:
+            'Reiner Audit mit priorisierten Empfehlungen plus die wichtigsten Sofort-Massnahmen. Ideal, wenn Sie wissen wollen, wo Sie stehen, und die grössten Engstellen schnell beheben möchten.',
+    },
+    {
+        title: 'Standard-Optimierung',
+        description:
+            'Umfassende Performance- und technische SEO-Optimierung für eine bestehende Webseite. Inkl. Bildern, Caching, Meta-Tags, strukturierten Daten und mobile Optimierung.',
+    },
+    {
+        title: 'Erweiterte Optimierung',
+        description:
+            'Vollumfängliche Optimierung inkl. tieferer technischer Anpassungen, Konfiguration von Monitoring-Tools, Begleitung über mehrere Monate. Für Webseiten, bei denen SEO ein zentraler Erfolgsfaktor ist.',
+    },
+];
+
+const relatedServices: RelatedService[] = [
+    {
+        title: 'Webseiten',
+        description: 'Webseiten für KMU, sauber gebaut.',
+        href: '/leistungen/webseiten',
+    },
+    {
+        title: 'Webshops',
+        description: 'Online verkaufen, ohne im System zu versinken.',
+        href: '/leistungen/webshops',
+    },
+    {
+        title: 'Wartung & Support',
+        description: 'Damit Ihre Webseite zuverlässig läuft.',
+        href: '/leistungen/wartung',
+    },
+    {
+        title: 'Migrationen',
+        description: 'Veralteten Auftritt auf modernen Stack bringen.',
+        href: '/leistungen/migrationen',
+    },
+];
+---
+<BaseLayout
+    title="SEO & Performance – Swissly IT Solutions"
+    description="Technische SEO- und Performance-Optimierung für KMU-Webseiten. Schneller laden, besser gefunden werden – ohne Werbebudget-Diskussionen."
+>
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Leistung · SEO & Performance</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Schneller laden, besser gefunden werden.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-10 max-w-3xl">
+                Wir optimieren Ihre Webseite technisch – damit sie schneller lädt, mehr Besucher über Google bekommt und im Geschäftsalltag bessere Resultate liefert. Ohne Werbebudget-Diskussionen.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+                <a
+                    href="/kontakt"
+                    class="bg-swissly-gold text-swissly-navy font-body font-medium px-6 py-3 rounded hover:bg-swissly-gold/90 transition"
+                >
+                    Erstgespräch anfragen
+                </a>
+                <a
+                    href="#leistungsumfang"
+                    class="text-swissly-offwhite font-body font-medium px-6 py-3 border border-swissly-offwhite/30 rounded hover:border-swissly-gold hover:text-swissly-gold transition"
+                >
+                    Was ist enthalten
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="leistungsumfang" class="bg-swissly-offwhite">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Leistungsumfang</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Was technische SEO-Optimierung umfasst.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                Wir konzentrieren uns auf das, was sich technisch optimieren lässt. Inhaltliches SEO – also was auf Ihrer Webseite steht – übernehmen Sie oder ein Texter Ihrer Wahl. Wir sorgen dafür, dass die technische Basis stimmt.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {leistungsblocks.map((block) => (
+                    <div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-3 leading-tight">
+                            {block.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            {block.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Zielgruppe</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Wann sich SEO- & Performance-Optimierung lohnt.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-12 max-w-3xl">
+                Nicht jede Webseite braucht Optimierung. Wenn Sie sich in einem der folgenden Punkte wiederfinden, lohnt sich der Schritt:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {fitItems.map((item) => (
+                    <div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {item.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {item.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-swissly-offwhite/10">
+                <h3 class="font-headline text-lg font-bold text-swissly-offwhite/80 mb-3 leading-tight">
+                    Wofür wir nicht der richtige Partner sind:
+                </h3>
+                <p class="font-body text-base text-swissly-offwhite/60 leading-relaxed">
+                    Reines Content-Marketing oder klassische SEA-Kampagnen (Google Ads, bezahlte Werbung) bieten wir nicht an – dafür empfehlen wir gerne Spezialisten weiter. Wir konzentrieren uns auf die technische Seite der Suchmaschinen-Optimierung.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// So läuft das Projekt ab</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Vom Audit zur messbaren Verbesserung.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                SEO- & Performance-Projekte sind oft kürzer als Neubauten, dafür klar strukturiert. So gehen wir vor:
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                {phases.map((phase) => (
+                    <div class="flex flex-col">
+                        <p class="font-mono text-5xl font-bold text-swissly-gold mb-4 leading-none tabular-nums">
+                            {phase.number}
+                        </p>
+                        <div class="h-px bg-swissly-divider mb-6"></div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-2 leading-tight">
+                            {phase.title}
+                        </h3>
+                        <p class="font-mono text-xs text-swissly-text/60 mb-3 tracking-wide">
+                            {phase.weeks}
+                        </p>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            {phase.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <p class="font-body italic text-sm text-swissly-text/60 leading-relaxed mt-12 max-w-2xl">
+                Hinweis: Die Wochenangaben sind Richtwerte. Reine Audits dauern kürzer, umfassende Optimierungs-Projekte können länger gehen.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Aufwand</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Was Optimierung zeitlich bedeutet.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-16 max-w-3xl">
+                Der Aufwand hängt davon ab, wie viel optimiert werden kann (und soll). Drei typische Grössenordnungen:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {costBands.map((band) => (
+                    <div class="bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-8 hover:border-swissly-gold transition">
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-4 leading-tight">
+                            {band.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {band.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-12 p-6 border-l-4 border-swissly-gold bg-swissly-offwhite/5">
+                <h3 class="font-headline text-lg font-bold text-swissly-offwhite mb-2 leading-tight">
+                    Konkrete Zahlen kommen im Erstgespräch.
+                </h3>
+                <p class="font-body text-base text-swissly-offwhite/80 leading-relaxed">
+                    Nach 30 Minuten Gespräch und einem kurzen Blick auf Ihre Webseite wissen wir, in welchem Band Ihr Projekt liegt – und Sie wissen, ob es zu Ihrem Budget passt. Ohne Verkaufsdruck.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-24 text-center">
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6">
+                Webseite langsamer oder schlechter sichtbar als gewünscht?
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-10 max-w-2xl mx-auto">
+                Im 30-minütigen Erstgespräch schauen wir kurz auf Ihre Webseite, identifizieren mögliche Stellschrauben und schlagen passende Massnahmen vor. Kostenlos, unverbindlich und ohne Verkaufsgespräch.
+            </p>
+
+            <a
+                href="/kontakt"
+                class="inline-block bg-swissly-navy text-swissly-offwhite font-body font-medium px-8 py-4 rounded hover:bg-swissly-navy/90 transition text-base"
+            >
+                Erstgespräch anfragen
+            </a>
+
+            <p class="font-mono text-xs text-swissly-text/60 tracking-wide mt-8">
+                // Antwort innerhalb 24 Stunden · Werktags
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-24">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Auch interessant</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl font-bold text-swissly-offwhite leading-tight mb-12">
+                Weitere Leistungen.
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {relatedServices.map((service) => (
+                    <a
+                        href={service.href}
+                        class="group flex flex-col bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-6 hover:border-swissly-gold hover:bg-swissly-offwhite/10 transition"
+                    >
+                        <h3 class="font-headline text-lg font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {service.title}
+                        </h3>
+                        <p class="font-body text-sm text-swissly-offwhite/70 leading-relaxed mb-4 flex-grow">
+                            {service.description}
+                        </p>
+                        <span class="font-body text-sm font-medium text-swissly-gold mt-auto">
+                            →
+                        </span>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+</BaseLayout>
