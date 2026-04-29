@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Block {
+    title: string;
+    description: string;
+}
+
+interface FitItem {
+    title: string;
+    description: string;
+}
+
+interface Phase {
+    number: string;
+    title: string;
+    weeks: string;
+    description: string;
+}
+
+interface CostBand {
+    title: string;
+    description: string;
+}
+
+interface RelatedService {
+    title: string;
+    description: string;
+    href: string;
+}
+
+const leistungsblocks: Block[] = [
+    {
+        title: 'Sicherheits-Updates',
+        description:
+            'Wir spielen sicherheitsrelevante Updates für Astro, Next.js, WordPress oder die jeweilige Plattform zeitnah ein. Bekannte Schwachstellen werden geschlossen, bevor sie zum Problem werden.',
+    },
+    {
+        title: 'Plattform-Updates',
+        description:
+            'Grössere Versions-Updates des CMS oder Frameworks prüfen wir vor dem Einspielen, testen sie auf einer Staging-Umgebung und gehen erst dann live. Kein Risiko für Ihre laufende Webseite.',
+    },
+    {
+        title: 'Backups & Monitoring',
+        description:
+            'Wir richten regelmässige Backups ein und überwachen die Erreichbarkeit Ihrer Webseite. Wenn etwas ausfällt, wissen wir es – oft bevor Sie es bemerken.',
+    },
+    {
+        title: 'Performance-Checks',
+        description:
+            'Ladezeiten und Core Web Vitals checken wir periodisch. Wenn sich etwas verschlechtert, identifizieren wir die Ursache und beheben sie, bevor SEO-Rankings darunter leiden.',
+    },
+    {
+        title: 'Kleine Anpassungen',
+        description:
+            'Kleinere inhaltliche oder technische Änderungen sind in den meisten Wartungspaketen enthalten. Sie wollen einen Text ändern oder einen Banner austauschen? Sagen Sie Bescheid.',
+    },
+    {
+        title: 'Erreichbarkeit',
+        description:
+            'Bei Problemen erreichen Sie uns per E-Mail. Antwort innerhalb eines Werktags, bei dringenden Vorfällen schneller. Sie haben einen direkten Ansprechpartner – nicht ein Ticket-System.',
+    },
+];
+
+const fitItems: FitItem[] = [
+    {
+        title: 'Sie haben keine IT-Abteilung.',
+        description:
+            'Wenn keiner in Ihrem Betrieb täglich mit Webseiten-Updates beschäftigt ist, sind Sie bei uns gut aufgehoben. Wir kümmern uns, Sie konzentrieren sich auf Ihr Geschäft.',
+    },
+    {
+        title: 'Sie nutzen Ihre Webseite geschäftskritisch.',
+        description:
+            'Falls ein Ausfall oder ein Sicherheitsvorfall echte Konsequenzen hätte – verlorene Anfragen, beeinträchtigtes Vertrauen, Compliance-Probleme – ist Wartung kein Luxus, sondern Pflicht.',
+    },
+    {
+        title: 'Sie hatten schon einmal einen Sicherheitsvorfall.',
+        description:
+            'Gehackte WordPress-Webseiten, Spam-Links, Defacement: das sind keine Einzelfälle. Wer einmal davon betroffen war, weiss, warum Wartung sich auszahlt.',
+    },
+    {
+        title: 'Sie planen langfristig mit der Webseite.',
+        description:
+            'Eine ungewartete Webseite veraltet schnell – nicht inhaltlich, sondern technisch. Wenn Ihre Webseite drei oder fünf Jahre laufen soll, ist Wartung der einfachste Weg dahin.',
+    },
+];
+
+const phases: Phase[] = [
+    {
+        number: '01',
+        title: 'Erstgespräch & Audit',
+        weeks: '(Woche 1)',
+        description:
+            'Wir schauen uns Ihre Webseite an, prüfen aktuelle Versionen, Sicherheitsstand und Backup-Situation. Sie erhalten einen kurzen Befund – mit oder ohne Vertragsabschluss bei uns.',
+    },
+    {
+        number: '02',
+        title: 'Onboarding',
+        weeks: '(Woche 1–2)',
+        description:
+            'Falls Sie sich für unser Wartungspaket entscheiden: Wir bekommen die nötigen Zugänge, richten Backups und Monitoring ein und dokumentieren Ihre Webseite intern. Bei übernommenen Webseiten von anderen Agenturen kommen wir damit oft zum ersten Mal auf einen sauberen Stand.',
+    },
+    {
+        number: '03',
+        title: 'Laufender Betrieb',
+        weeks: '(monatlich)',
+        description:
+            'Wir arbeiten Updates ab, prüfen Performance und Erreichbarkeit und erledigen kleinere Anpassungen. Sie bekommen einen kurzen monatlichen Bericht.',
+    },
+    {
+        number: '04',
+        title: 'Reaktion bei Vorfällen',
+        weeks: '(bei Bedarf)',
+        description:
+            'Wenn etwas nicht funktioniert, schreiben Sie uns. Wir reagieren innerhalb eines Werktags, bei dringenden Vorfällen schneller. Falls nötig, springen wir auch ausserhalb der üblichen Arbeitszeiten ein – nach Absprache.',
+    },
+];
+
+const costBands: CostBand[] = [
+    {
+        title: 'Basis-Wartung',
+        description:
+            'Sicherheits-Updates, Backups, Monitoring und Erreichbarkeit per E-Mail. Ideal für stabile Webseiten, die nur regelmässig gepflegt werden müssen, ohne viele inhaltliche Änderungen.',
+    },
+    {
+        title: 'Standard-Wartung',
+        description:
+            'Wie Basis, plus monatlich ein Kontingent für kleinere inhaltliche oder technische Anpassungen. Die typische Wahl für KMU, die ihre Webseite aktiv pflegen möchten, ohne sie selber zu bauen.',
+    },
+    {
+        title: 'Erweiterte Wartung',
+        description:
+            'Wie Standard, plus grösseres Kontingent für regelmässige Anpassungen, neue Sektionen oder kleinere Funktions-Erweiterungen. Für Webseiten, die sich aktiv weiterentwickeln.',
+    },
+];
+
+const relatedServices: RelatedService[] = [
+    {
+        title: 'Webseiten',
+        description: 'Webseiten für KMU, sauber gebaut.',
+        href: '/leistungen/webseiten',
+    },
+    {
+        title: 'Webshops',
+        description: 'Online verkaufen, ohne im System zu versinken.',
+        href: '/leistungen/webshops',
+    },
+    {
+        title: 'Migrationen',
+        description: 'Veralteten Auftritt auf modernen Stack bringen.',
+        href: '/leistungen/migrationen',
+    },
+    {
+        title: 'SEO & Performance',
+        description: 'Schneller laden, besser gefunden werden.',
+        href: '/leistungen/seo-performance',
+    },
+];
+---
+<BaseLayout
+    title="Wartung & Support – Swissly IT Solutions"
+    description="Wartung und Support für Webseiten – Sicherheits-Updates, Backups und ein direkter Ansprechpartner. Damit Ihre Webseite zuverlässig läuft."
+>
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Leistung · Wartung & Support</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Damit Ihre Webseite zuverlässig läuft.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-10 max-w-3xl">
+                Eine Webseite ist kein Möbelstück. Sie braucht Pflege, Updates und einen Ansprechpartner, wenn etwas klemmt. Wir übernehmen das für Sie – zu klaren Konditionen.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+                <a
+                    href="/kontakt"
+                    class="bg-swissly-gold text-swissly-navy font-body font-medium px-6 py-3 rounded hover:bg-swissly-gold/90 transition"
+                >
+                    Erstgespräch anfragen
+                </a>
+                <a
+                    href="#leistungsumfang"
+                    class="text-swissly-offwhite font-body font-medium px-6 py-3 border border-swissly-offwhite/30 rounded hover:border-swissly-gold hover:text-swissly-gold transition"
+                >
+                    Was ist enthalten
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="leistungsumfang" class="bg-swissly-offwhite">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Leistungsumfang</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Was wir für Sie übernehmen.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                Unsere Wartung deckt das ab, was im Hintergrund laufen muss, damit Ihre Webseite sicher, schnell und aktuell bleibt. Sie müssen sich um nichts kümmern.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {leistungsblocks.map((block) => (
+                    <div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-3 leading-tight">
+                            {block.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            {block.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Zielgruppe</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Wann sich Wartung lohnt.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-12 max-w-3xl">
+                Wartung ist nicht für jeden notwendig – aber für die meisten Betreiber sinnvoll. Wenn Sie sich in einem der folgenden Punkte wiederfinden, lohnt sich ein Wartungspaket:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {fitItems.map((item) => (
+                    <div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {item.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {item.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-swissly-offwhite/10">
+                <h3 class="font-headline text-lg font-bold text-swissly-offwhite/80 mb-3 leading-tight">
+                    Wofür wir nicht der richtige Partner sind:
+                </h3>
+                <p class="font-body text-base text-swissly-offwhite/60 leading-relaxed">
+                    Reine 24/7-Service-Verträge mit garantierter Reaktion innerhalb von Minuten brauchen Strukturen, die wir als Boutique nicht abbilden können. Für solche Anforderungen vermitteln wir Sie gerne an grosse Hosting-Anbieter weiter.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// So läuft die Zusammenarbeit ab</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Vom Vertrag bis zum laufenden Betrieb.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                Wartung ist kein Projekt mit klarem Ende, sondern eine laufende Zusammenarbeit. So starten wir typischerweise:
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                {phases.map((phase) => (
+                    <div class="flex flex-col">
+                        <p class="font-mono text-5xl font-bold text-swissly-gold mb-4 leading-none tabular-nums">
+                            {phase.number}
+                        </p>
+                        <div class="h-px bg-swissly-divider mb-6"></div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-2 leading-tight">
+                            {phase.title}
+                        </h3>
+                        <p class="font-mono text-xs text-swissly-text/60 mb-3 tracking-wide">
+                            {phase.weeks}
+                        </p>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            {phase.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <p class="font-body italic text-sm text-swissly-text/60 leading-relaxed mt-12 max-w-2xl">
+                Hinweis: Wartungsverträge laufen monatlich und sind jederzeit zum Monatsende kündbar. Keine 24-Monats-Bindung.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Aufwand</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Was Wartung monatlich bedeutet.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-16 max-w-3xl">
+                Wir bieten unsere Wartung in drei Paketen an, die sich am Wartungsbedarf der jeweiligen Webseite orientieren. Jedes Paket läuft monatlich:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {costBands.map((band) => (
+                    <div class="bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-8 hover:border-swissly-gold transition">
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-4 leading-tight">
+                            {band.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {band.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-12 p-6 border-l-4 border-swissly-gold bg-swissly-offwhite/5">
+                <h3 class="font-headline text-lg font-bold text-swissly-offwhite mb-2 leading-tight">
+                    Konkrete Zahlen kommen im Erstgespräch.
+                </h3>
+                <p class="font-body text-base text-swissly-offwhite/80 leading-relaxed">
+                    Nach 30 Minuten Gespräch und einem kurzen Audit Ihrer Webseite wissen wir, welches Paket passt – und Sie wissen, ob es zu Ihrem Budget passt. Ohne Verkaufsdruck.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-24 text-center">
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6">
+                Bereit, sich um Ihre Webseite nicht mehr selber kümmern zu müssen?
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-10 max-w-2xl mx-auto">
+                Im 30-minütigen Erstgespräch klären wir Ihren Wartungsbedarf, schauen kurz auf Ihre aktuelle Webseite und schlagen ein passendes Paket vor. Kostenlos und unverbindlich.
+            </p>
+
+            <a
+                href="/kontakt"
+                class="inline-block bg-swissly-navy text-swissly-offwhite font-body font-medium px-8 py-4 rounded hover:bg-swissly-navy/90 transition text-base"
+            >
+                Erstgespräch anfragen
+            </a>
+
+            <p class="font-mono text-xs text-swissly-text/60 tracking-wide mt-8">
+                // Antwort innerhalb 24 Stunden · Werktags
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-24">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Auch interessant</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl font-bold text-swissly-offwhite leading-tight mb-12">
+                Weitere Leistungen.
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {relatedServices.map((service) => (
+                    <a
+                        href={service.href}
+                        class="group flex flex-col bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-6 hover:border-swissly-gold hover:bg-swissly-offwhite/10 transition"
+                    >
+                        <h3 class="font-headline text-lg font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {service.title}
+                        </h3>
+                        <p class="font-body text-sm text-swissly-offwhite/70 leading-relaxed mb-4 flex-grow">
+                            {service.description}
+                        </p>
+                        <span class="font-body text-sm font-medium text-swissly-gold mt-auto">
+                            →
+                        </span>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+</BaseLayout>
