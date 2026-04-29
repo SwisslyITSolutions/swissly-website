@@ -1,0 +1,69 @@
+---
+interface Bullet {
+    icon: string;
+    title: string;
+    description: string;
+}
+
+const bullets: Bullet[] = [
+    {
+        icon: '🇨🇭',
+        title: 'Server-Standort Schweiz',
+        description:
+            'Ihre Daten verlassen die Schweizer Rechtshoheit nicht. Keine Cloud-Verträge mit unklaren Drittland-Klauseln.',
+    },
+    {
+        icon: '🛡️',
+        title: 'revDSG-konform',
+        description:
+            'Ihre Webseite und das Hosting erfüllen die Vorgaben des revidierten Schweizer Datenschutzgesetzes – ohne dass Sie sich darum kümmern müssen.',
+    },
+    {
+        icon: '⚡',
+        title: 'Schnelle Ladezeiten in der DACH-Region',
+        description:
+            'Server in der Schweiz heisst kurze Wege zu Ihren Kundinnen und Kunden – messbar bessere Performance.',
+    },
+    {
+        icon: '☎️',
+        title: 'Schweizer Support, deutschsprachig',
+        description:
+            'Wenn doch einmal etwas am Server klemmt: Sie haben uns als Ansprechpartner – und wir haben Hostpoint mit Schweizer Support im Rücken.',
+    },
+];
+---
+<section id="hosting-switzerland" class="bg-swissly-navy">
+    <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+            <div>
+                <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Hosting in Switzerland</p>
+
+                <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6">
+                    Ihre Daten bleiben in der Schweiz.
+                </h2>
+
+                <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed">
+                    Wir hosten Ihre Webseite ausschliesslich bei Schweizer Anbietern – aktuell auf den Servern von Hostpoint. Das ist für uns nicht Marketing, sondern Teil unseres Selbstverständnisses: Schweizer Qualität, Schweizer Datenschutz, klare Zuständigkeiten. Damit Sie wissen, wo Ihre Daten liegen und wer dafür verantwortlich ist.
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-8">
+                {bullets.map((bullet) => (
+                    <div class="flex flex-row gap-4">
+                        <span class="text-3xl leading-none flex-shrink-0" aria-hidden="true">
+                            {bullet.icon}
+                        </span>
+                        <div>
+                            <h3 class="font-headline text-base font-bold text-swissly-offwhite mb-2 leading-tight">
+                                {bullet.title}
+                            </h3>
+                            <p class="font-body text-sm text-swissly-offwhite/70 leading-relaxed">
+                                {bullet.description}
+                            </p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>
