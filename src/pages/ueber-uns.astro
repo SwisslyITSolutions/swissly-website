@@ -6,6 +6,57 @@ interface Paragraph {
     body: string;
 }
 
+interface Value {
+    number: string;
+    title: string;
+    description: string;
+}
+
+interface Bio {
+    name: string;
+    role: string;
+    body: string;
+    funFact: string;
+}
+
+const values: Value[] = [
+    {
+        number: '// 01',
+        title: 'Verständlichkeit',
+        description:
+            'IT-Themen müssen so erklärt werden, dass Sie verstehen, was Sie kaufen. Wir sprechen mit Ihnen Klartext, nicht in Akronymen, und übergeben am Ende eine Lösung, die Sie auch ohne uns nachvollziehen können. Wenn Sie eine Erklärung nicht verstehen, liegt das nicht an Ihnen – sondern daran, dass wir noch eine bessere finden müssen.',
+    },
+    {
+        number: '// 02',
+        title: 'Verlässlichkeit',
+        description:
+            'Wir sagen, was wir tun, und wir tun, was wir sagen. Termine halten, Budgets einhalten, erreichbar sein, wenn etwas brennt. Diese Selbstverständlichkeiten sind in der IT-Branche keine Selbstverständlichkeit mehr – bei uns sind sie es.',
+    },
+    {
+        number: '// 03',
+        title: 'Praxisnähe',
+        description:
+            'Eine Webseite, die zwar technisch beeindruckt, aber im Geschäftsalltag nicht funktioniert, ist eine schlechte Webseite. Wir bauen Lösungen, die zu Ihrem Betrieb passen – nicht zu unserem letzten Projekt oder zum aktuellen Tech-Trend. Massstab ist, ob Sie damit produktiv werden, nicht ob es im Portfolio gut aussieht.',
+    },
+];
+
+const bios: Bio[] = [
+    {
+        name: 'Georg Ristic',
+        role: '// Cybersecurity & Organisation',
+        body: 'Georg Ristic kommt aus einer eher untypischen Tech-Laufbahn: gelernter Milchtechnologe EFZ, Berufsmatura, dann Studium in Information and Cybersecurity an der Hochschule Luzern. Technik begleitet ihn seit der Kindheit – als Kind hat er Geräte auseinandergenommen, heute baut er sichere Webseiten. Im Militär bekleidet er den Rang Hauptfeldweibel; das hat ihn gelehrt, in stressigen Situationen einen kühlen Kopf zu behalten. In Projekten ist er der Allrounder mit Adlerauge für Details – wenn etwas nicht stimmig ist, sieht er es. Wenn er nicht am Computer sitzt, ist er fast täglich im Fitness, auf dem Velo oder im Winter auf den Skiern.',
+        funFact:
+            'Sechs Jahre Pfadi Luzern, mit Leitungsfunktion. Das erklärt vielleicht, warum er auch im Chaos noch Pläne macht.',
+    },
+    {
+        name: 'Taha Afif',
+        role: '// Web & Kundenkommunikation',
+        body: 'Taha Afif hat zuerst eine Lehre als Montage-Elektriker EFZ gemacht und danach das Studium zum Dipl. Wirtschaftsinformatiker HF abgeschlossen. Anschliessend zwei Jahre als Softwareentwickler und IT-Consultant – genug, um zu merken, dass ihm vor allem die Verbindung aus Technik, Web und direktem Kundenkontakt liegt. Seine Stärke ist es, sich in Kunden hineinzuversetzen und technische Themen so zu erklären, dass sie verständlich werden – ohne abzuschrecken. Daneben hat er ein gutes Auge für Webdesign, Struktur und Benutzerfreundlichkeit. Was ihn antreibt: aus einer Idee Schritt für Schritt eine echte Lösung zu bauen und zu sehen, wie er Kundinnen und Kunden damit Zeit, Stress oder Unsicherheit abnehmen kann.',
+        funFact:
+            'Sechs Jahre nach seiner Elektriker-Zeit wird er von Freunden und Familie immer noch gefragt, ob er nicht mal eben die Lampen montieren könnte.',
+    },
+];
+
 const paragraphs: Paragraph[] = [
     {
         heading: 'Kindheitsfreunde',
@@ -51,6 +102,63 @@ const paragraphs: Paragraph[] = [
                     </p>
                 </div>
             ))}
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Unsere Werte</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-16">
+                Wofür wir stehen.
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                {values.map((value) => (
+                    <div>
+                        <p class="font-mono text-xs text-swissly-gold mb-3 tracking-wide">{value.number}</p>
+                        <h3 class="font-headline text-2xl font-bold text-swissly-offwhite mb-4 leading-tight">
+                            {value.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {value.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Das Team</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-16">
+                Georg & Taha.
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+                {bios.map((bio) => (
+                    <div>
+                        <div class="aspect-square bg-swissly-divider rounded-lg mb-6 flex items-center justify-center">
+                            <span class="font-mono text-xs text-swissly-text/40">// Foto folgt</span>
+                        </div>
+                        <h3 class="font-headline text-2xl font-bold text-swissly-navy mb-2">
+                            {bio.name}
+                        </h3>
+                        <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">
+                            {bio.role}
+                        </p>
+                        <p class="font-body text-base text-swissly-text leading-relaxed mb-4">
+                            {bio.body}
+                        </p>
+                        <div class="pt-4 border-t border-swissly-divider mt-4 italic text-sm text-swissly-text/70 leading-relaxed">
+                            <span class="font-mono text-xs text-swissly-gold mb-2 tracking-wide not-italic block">// Fun Fact</span>
+                            {bio.funFact}
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     </section>
 </BaseLayout>
