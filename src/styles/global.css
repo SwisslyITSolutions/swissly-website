@@ -1,1 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
+
+@theme {
+  /* Designsystem-Farben */
+  --color-swissly-navy: #1a2d45;
+  --color-swissly-offwhite: #fafaf7;
+  --color-swissly-gold: #b89968;
+  --color-swissly-text: #4a5568;
+  --color-swissly-divider: #e8eaed;
+
+  /* Schriften */
+  --font-headline: "Geist", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-swissly-offwhite text-swissly-text font-body;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-headline;
+  }
+}
