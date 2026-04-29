@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FormField from '../components/ui/FormField.astro';
+
+interface ThemaOption {
+    value: string;
+    label: string;
+}
+
+const themaOptions: ThemaOption[] = [
+    { value: 'webseite', label: 'Neue Webseite' },
+    { value: 'redesign', label: 'Redesign / Migration' },
+    { value: 'webshop', label: 'Webshop' },
+    { value: 'wartung', label: 'Wartung & Support' },
+    { value: 'seo', label: 'SEO & Performance' },
+    { value: 'sonstiges', label: 'Sonstiges' },
+];
+---
+<BaseLayout
+    title="Kontakt – Swissly IT Solutions"
+    description="Sprechen wir über Ihr Projekt. Schicken Sie uns eine Nachricht und wir melden uns innerhalb eines Werktags."
+>
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Kontakt</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Sprechen wir über Ihr Projekt.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed max-w-3xl">
+                Schicken Sie uns eine Nachricht über das Formular. Wir melden uns innerhalb eines Werktags bei Ihnen zurück und schlagen einen Termin für ein 30-minütiges Erstgespräch vor – kostenlos, unverbindlich und ohne Verkaufsgespräch.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-2xl mx-auto px-6 py-20 md:py-28">
+            <!-- TODO: Form-Action durch echten Backend-Endpoint ersetzen
+                 (z.B. Cloudflare Worker oder Make.com Webhook).
+                 Nach Submit: Weiterleitung zu /kontakt/danke -->
+            <form id="kontakt-form" method="POST" action="#" class="space-y-6">
+                <FormField
+                    type="text"
+                    name="name"
+                    label="Name *"
+                    placeholder="Ihr Vor- und Nachname"
+                    required
+                />
+
+                <FormField
+                    type="text"
+                    name="firma"
+                    label="Firma"
+                    hint="(optional)"
+                    placeholder="Falls Sie für ein Unternehmen anfragen"
+                />
+
+                <FormField
+                    type="email"
+                    name="email"
+                    label="E-Mail *"
+                    placeholder="ihre.adresse@beispiel.ch"
+                    required
+                />
+
+                <FormField
+                    type="tel"
+                    name="telefon"
+                    label="Telefon (optional)"
+                    placeholder="Falls Ihnen ein Anruf lieber ist"
+                />
+
+                <div>
+                    <label class="block font-body text-sm font-medium text-swissly-text mb-2">
+                        Worum geht es? *
+                    </label>
+                    <span class="block font-body text-xs text-swissly-text/60 mb-3 italic">
+                        Mehrfachauswahl möglich
+                    </span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {themaOptions.map((option) => (
+                            <label class="flex items-center gap-3 cursor-pointer p-3 border border-swissly-divider rounded hover:border-swissly-gold transition-colors">
+                                <input
+                                    type="checkbox"
+                                    name="thema"
+                                    value={option.value}
+                                    class="w-4 h-4 accent-swissly-gold"
+                                />
+                                <span class="font-body text-sm text-swissly-text">{option.label}</span>
+                            </label>
+                        ))}
+                    </div>
+                </div>
+
+                <div>
+                    <label for="nachricht" class="block font-body text-sm font-medium text-swissly-text mb-2">
+                        Nachricht *
+                    </label>
+                    <textarea
+                        name="nachricht"
+                        id="nachricht"
+                        rows="6"
+                        required
+                        placeholder="Beschreiben Sie kurz, was Sie vorhaben – ein paar Sätze reichen"
+                        class="block w-full px-4 py-3 bg-white border border-swissly-divider rounded font-body text-base text-swissly-text focus:outline-none focus:border-swissly-gold focus:ring-1 focus:ring-swissly-gold transition-colors resize-y"
+                    ></textarea>
+                </div>
+
+                <div class="hidden" aria-hidden="true">
+                    <label for="website">Website (Bitte leer lassen)</label>
+                    <input type="text" name="website" id="website" tabindex="-1" />
+                </div>
+
+                <div class="pt-2">
+                    <p class="font-body text-sm text-swissly-text/70 leading-relaxed">
+                        Mit dem Absenden stimmen Sie zu, dass wir Ihre Angaben zur Bearbeitung Ihrer Anfrage verwenden. Details in unserer <a href="/datenschutz" class="text-swissly-gold hover:underline">Datenschutzerklärung</a>.
+                    </p>
+                </div>
+
+                <div class="pt-4">
+                    <button
+                        type="submit"
+                        class="bg-swissly-navy text-swissly-offwhite font-body font-medium px-8 py-4 rounded hover:bg-swissly-navy/90 transition inline-flex items-center gap-2 cursor-pointer"
+                    >
+                        Anfrage senden
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</BaseLayout>
