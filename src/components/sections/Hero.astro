@@ -1,0 +1,58 @@
+---
+const codeHtml = `<span class="text-swissly-offwhite/40">// swissly.config.ts</span>
+
+<span class="text-swissly-gold">export</span> <span class="text-swissly-gold">const</span> studio <span class="text-swissly-offwhite/70">=</span> <span class="text-swissly-offwhite/70">{</span>
+  <span class="text-blue-300/80">team</span><span class="text-swissly-offwhite/70">:</span>    <span class="text-swissly-offwhite/70">[</span><span class="text-green-400/80">'Georg'</span><span class="text-swissly-offwhite/70">,</span> <span class="text-green-400/80">'Taha'</span><span class="text-swissly-offwhite/70">],</span>
+  <span class="text-blue-300/80">stack</span><span class="text-swissly-offwhite/70">:</span>   <span class="text-swissly-offwhite/70">[</span><span class="text-green-400/80">'Astro'</span><span class="text-swissly-offwhite/70">,</span> <span class="text-green-400/80">'Next.js'</span><span class="text-swissly-offwhite/70">,</span> <span class="text-green-400/80">'Tailwind'</span><span class="text-swissly-offwhite/70">],</span>
+  <span class="text-blue-300/80">hosting</span><span class="text-swissly-offwhite/70">:</span> <span class="text-green-400/80">'🇨🇭 Hostpoint'</span><span class="text-swissly-offwhite/70">,</span>
+  <span class="text-blue-300/80">values</span><span class="text-swissly-offwhite/70">:</span>  <span class="text-swissly-offwhite/70">[</span><span class="text-green-400/80">'verständlich'</span><span class="text-swissly-offwhite/70">,</span> <span class="text-green-400/80">'verlässlich'</span><span class="text-swissly-offwhite/70">,</span> <span class="text-green-400/80">'praxisnah'</span><span class="text-swissly-offwhite/70">],</span>
+<span class="text-swissly-offwhite/70">}</span> <span class="text-swissly-gold">as</span> <span class="text-swissly-gold">const</span><span class="text-swissly-offwhite/70">;</span>`;
+---
+<section class="bg-swissly-navy min-h-[calc(100vh-72px)] flex items-center">
+    <div class="max-w-7xl mx-auto px-6 py-16 md:py-24 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Webdesign aus der Zentralschweiz</p>
+
+                <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                    Webseiten, die einfach laufen.
+                </h1>
+
+                <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-10 max-w-xl">
+                    Wir entwickeln Webseiten und Webshops für KMU in der Deutschschweiz – sauber gebaut, verständlich erklärt und gehostet auf Schweizer Servern.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a
+                        href="/kontakt"
+                        class="bg-swissly-gold text-swissly-navy font-body font-medium px-6 py-3 rounded hover:bg-swissly-gold/90 transition"
+                    >
+                        Erstgespräch anfragen
+                    </a>
+                    <a
+                        href="#was-wir-tun"
+                        class="text-swissly-offwhite font-body font-medium px-6 py-3 border border-swissly-offwhite/30 rounded hover:border-swissly-gold hover:text-swissly-gold transition"
+                    >
+                        Was wir machen
+                    </a>
+                </div>
+
+                <div class="mt-12 pt-6 border-t border-swissly-offwhite/10">
+                    <p class="font-mono text-xs text-swissly-offwhite/60 tracking-wide">
+                        // Available · Hosted in Switzerland 🇨🇭
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-6 shadow-2xl backdrop-blur-sm">
+                <div class="flex items-center gap-2 pb-4 border-b border-swissly-offwhite/10 mb-4">
+                    <span class="w-3 h-3 rounded-full bg-red-500/60" aria-hidden="true"></span>
+                    <span class="w-3 h-3 rounded-full bg-yellow-500/60" aria-hidden="true"></span>
+                    <span class="w-3 h-3 rounded-full bg-green-500/60" aria-hidden="true"></span>
+                    <span class="font-mono text-xs text-swissly-offwhite/60 ml-2">swissly.config.ts</span>
+                </div>
+                <pre class="font-mono text-sm leading-relaxed overflow-x-auto"><code set:html={codeHtml} /></pre>
+            </div>
+        </div>
+    </div>
+</section>
