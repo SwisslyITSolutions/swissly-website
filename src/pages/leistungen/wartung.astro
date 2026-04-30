@@ -192,7 +192,7 @@ const relatedServices: RelatedService[] = [
 
     <section id="leistungsumfang" class="bg-swissly-offwhite">
         <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
-            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Leistungsumfang</p>
+            <p class="font-mono text-sm text-swissly-gold-dark mb-4 tracking-wide">// Leistungsumfang</p>
 
             <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
                 Was wir für Sie übernehmen.
@@ -255,7 +255,7 @@ const relatedServices: RelatedService[] = [
 
     <section class="bg-swissly-offwhite">
         <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
-            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// So läuft die Zusammenarbeit ab</p>
+            <p class="font-mono text-sm text-swissly-gold-dark mb-4 tracking-wide">// So läuft die Zusammenarbeit ab</p>
 
             <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
                 Vom Vertrag bis zum laufenden Betrieb.
@@ -268,14 +268,14 @@ const relatedServices: RelatedService[] = [
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 {phases.map((phase) => (
                     <div class="flex flex-col">
-                        <p class="font-mono text-5xl font-bold text-swissly-gold mb-4 leading-none tabular-nums">
+                        <p class="font-mono text-5xl font-bold text-swissly-gold-dark mb-4 leading-none tabular-nums">
                             {phase.number}
                         </p>
                         <div class="h-px bg-swissly-divider mb-6"></div>
                         <h3 class="font-headline text-xl font-bold text-swissly-navy mb-2 leading-tight">
                             {phase.title}
                         </h3>
-                        <p class="font-mono text-xs text-swissly-text/60 mb-3 tracking-wide">
+                        <p class="font-mono text-xs text-swissly-text/85 mb-3 tracking-wide">
                             {phase.weeks}
                         </p>
                         <p class="font-body text-base text-swissly-text leading-relaxed">
@@ -285,7 +285,7 @@ const relatedServices: RelatedService[] = [
                 ))}
             </div>
 
-            <p class="font-body italic text-sm text-swissly-text/60 leading-relaxed mt-12 max-w-2xl">
+            <p class="font-body italic text-sm text-swissly-text/85 leading-relaxed mt-12 max-w-2xl">
                 Hinweis: Wartungsverträge laufen monatlich und sind jederzeit zum Monatsende kündbar. Keine 24-Monats-Bindung.
             </p>
         </div>
@@ -309,7 +309,7 @@ const relatedServices: RelatedService[] = [
                         <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-4 leading-tight">
                             {band.title}
                         </h3>
-                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                        <p class="font-body text-base text-swissly-offwhite/90 leading-relaxed">
                             {band.description}
                         </p>
                     </div>
@@ -344,7 +344,7 @@ const relatedServices: RelatedService[] = [
                 Erstgespräch anfragen
             </a>
 
-            <p class="font-mono text-xs text-swissly-text/60 tracking-wide mt-8">
+            <p class="font-mono text-xs text-swissly-text/85 tracking-wide mt-8">
                 // Antwort innerhalb 24 Stunden · Werktags
             </p>
         </div>
@@ -367,10 +367,10 @@ const relatedServices: RelatedService[] = [
                         <h3 class="font-headline text-lg font-bold text-swissly-offwhite mb-3 leading-tight">
                             {service.title}
                         </h3>
-                        <p class="font-body text-sm text-swissly-offwhite/70 leading-relaxed mb-4 flex-grow">
+                        <p class="font-body text-sm text-swissly-offwhite/90 leading-relaxed mb-4 flex-grow">
                             {service.description}
                         </p>
-                        <span class="font-body text-sm font-medium text-swissly-gold mt-auto">
+                        <span class="font-body text-sm font-medium text-amber-300 mt-auto">
                             →
                         </span>
                     </a>

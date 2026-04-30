@@ -1,0 +1,12 @@
+{
+  "enabledPlugins": {
+    "chrome-devtools-mcp@claude-plugins-official": true
+  },
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-search",
+      "Bash(npm run build)"
+    ]
+  }
+}

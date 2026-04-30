@@ -1,0 +1,15 @@
+name = "swissly-contact"
+main = "src/worker.ts"
+compatibility_date = "2026-04-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://swisslyit.ch,http://localhost:4321,http://localhost:4322,http://localhost:4323"
+
+# Secrets (gesetzt via `wrangler secret put NAME`):
+#   NOTION_TOKEN        - Internal Integration Token aus notion.so/profile/integrations
+#   LEADS_DATABASE_ID   - b25acf939c5640f9b6d1be29c7a26f44
+
+# Optional: eigene Domain anhängen
+# [[routes]]
+# pattern = "api.swisslyit.ch/contact"
+# custom_domain = true

@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface QuickLink {
+    href: string;
+    label: string;
+    description: string;
+}
+
+const quickLinks: QuickLink[] = [
+    {
+        href: '/leistungen',
+        label: 'Leistungen',
+        description: 'Webseiten, Webshops, Wartung, Migrationen, SEO',
+    },
+    {
+        href: '/ueber-uns',
+        label: 'Über uns',
+        description: 'Wer hinter Swissly IT Solutions steht',
+    },
+    {
+        href: '/kontakt',
+        label: 'Kontakt',
+        description: 'Erstgespräch anfragen',
+    },
+];
+---
+<BaseLayout
+    title="Seite nicht gefunden – Swissly IT Solutions"
+    description="Diese Seite existiert nicht oder wurde verschoben."
+    noindex={true}
+>
+    <section class="bg-swissly-navy min-h-[70vh] flex items-center">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28 w-full">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Error · 404</p>
+
+            <h1 class="font-headline text-5xl md:text-6xl lg:text-7xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Diese Seite gibt es nicht.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-12 max-w-2xl">
+                Vielleicht wurde sie verschoben, umbenannt oder hat nie existiert. Hier sind ein paar Stellen, an denen Sie weiterkommen:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                {quickLinks.map((link) => (
+                    <a
+                        href={link.href}
+                        class="group flex flex-col bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-6 hover:border-swissly-gold hover:bg-swissly-offwhite/10 transition"
+                    >
+                        <h2 class="font-headline text-lg font-bold text-swissly-offwhite mb-2 leading-tight">
+                            {link.label}
+                        </h2>
+                        <p class="font-body text-sm text-swissly-offwhite/90 leading-relaxed mb-4 flex-grow">
+                            {link.description}
+                        </p>
+                        <span class="font-body text-sm font-medium text-amber-300 mt-auto">
+                            →
+                        </span>
+                    </a>
+                ))}
+            </div>
+
+            <a
+                href="/"
+                class="inline-block bg-swissly-gold text-swissly-navy font-body font-medium px-6 py-3 rounded hover:bg-swissly-gold/90 transition"
+            >
+                Zurück zur Startseite
+            </a>
+        </div>
+    </section>
+</BaseLayout>

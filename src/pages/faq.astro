@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface FaqItem {
+    question: string;
+    answer: string;
+}
+
+const items: FaqItem[] = [
+    {
+        question: 'Wie lange dauert ein Webseiten-Projekt?',
+        answer:
+            'Eine kleine bis mittlere Webseite ist typischerweise in 4–8 Wochen umgesetzt – vom Erstgespräch bis zum Live-Gang. Webshops und grössere Migrationen brauchen länger, oft 2–3 Monate. Den genauen Zeitrahmen halten wir im Angebot fest, sobald wir den Umfang kennen.',
+    },
+    {
+        question: 'Was kostet eine Webseite bei Swissly?',
+        answer:
+            'Pauschalpreise auf der Webseite würden nicht abbilden, was Sie tatsächlich brauchen – darum machen wir keine. Stattdessen klären wir im 30-minütigen Erstgespräch Ihren Bedarf und Sie erhalten ein konkretes, nachvollziehbares Angebot mit klarem Aufwand. Grobe Richtwerte nennen wir bereits im Erstgespräch, damit beide Seiten frühzeitig wissen, ob es passt.',
+    },
+    {
+        question: 'Was muss ich als Kunde beisteuern?',
+        answer:
+            'Im Idealfall: Texte, Bilder, Logo und eine Vorstellung davon, was Ihre Webseite leisten soll. Falls etwas fehlt, sagen wir das im Erstgespräch und finden eine Lösung – etwa eine Empfehlung für einen Texter oder Fotografen aus unserem Netzwerk. Wir bauen die Webseite, das Marketing-Konzept dahinter kommt von Ihnen.',
+    },
+    {
+        question: 'Brauche ich ein Content-Management-System?',
+        answer:
+            'Ein CMS lohnt sich, wenn Sie regelmässig selber Inhalte ändern wollen – Blog, News, Veranstaltungen oder Produkte. Wenn Ihre Webseite eher stabil bleibt und sich nur ein- oder zweimal im Jahr ändert, brauchen Sie keines. Das spart Komplexität und Kosten. Welche Variante besser passt, klären wir gemeinsam.',
+    },
+    {
+        question: 'Bietet ihr auch Logos, Apps oder Werbekampagnen an?',
+        answer:
+            'Nein. Wir konzentrieren uns auf das, was wir gut können: Webseiten, Webshops und alles, was technisch dazugehört. Für Logo-Design, native Mobile-Apps oder Marketing-Kampagnen empfehlen wir Sie gerne an Spezialisten weiter – das macht das Endresultat für Sie besser, als wenn wir es nebenbei mitmachen würden.',
+    },
+    {
+        question: 'Wer kümmert sich nach dem Launch um die Webseite?',
+        answer:
+            'Auf Wunsch wir – mit unserem Wartungspaket. Das umfasst regelmässige Updates, Sicherheits-Checks und kleine Anpassungen. Falls Sie selber pflegen möchten, übergeben wir die Webseite mit vollständiger Dokumentation, sodass Sie unabhängig sind. Welche Variante zu Ihnen passt, hängt von Ihrer technischen Affinität und Ihrer verfügbaren Zeit ab.',
+    },
+    {
+        question: 'Wo wird meine Webseite gehostet?',
+        answer:
+            'Bei Schweizer Anbietern, standardmässig bei Hostpoint. Damit bleiben Ihre Daten in der Schweiz und unter dem revidierten Datenschutzgesetz (revDSG). Falls Sie bereits einen Hosting-Vertrag haben, prüfen wir die Anbindung – ein Wechsel ist meistens nicht nötig.',
+    },
+    {
+        question: 'Was passiert mit meiner alten Webseite bei einer Migration?',
+        answer:
+            'Wir bauen die neue Webseite parallel auf einer Test-Umgebung auf. Erst wenn alles passt, schalten wir um – idealerweise an einem Wochenende, damit Ihre Besucher keine Ausfallzeit erleben. Bestehende URLs leiten wir per 301-Weiterleitung auf die neuen Seiten um, damit Suchmaschinen-Rankings und externe Verlinkungen erhalten bleiben.',
+    },
+    {
+        question: 'Bekomme ich am Ende den Code und alle Dateien?',
+        answer:
+            'Ja. Sie sind Eigentümer der Webseite – wir geben Ihnen Zugang zum Code-Repository, zu allen Dateien und zum Hosting-Account. Sie sind damit nicht an uns gebunden. Das ist für uns selbstverständlich, aber wir halten es gerne explizit fest.',
+    },
+    {
+        question: 'Was, wenn ich in ein paar Jahren wechseln möchte?',
+        answer:
+            'Dann wechseln Sie. Wir setzen auf offene Standards wie Astro, Next.js und WordPress – keine proprietären Systeme, an die Sie gebunden wären. Sämtliche Inhalte, der Code und die Domain gehören Ihnen. Wir finden es schade, wenn Sie gehen, aber wir bauen unsere Webseiten so, dass Sie es jederzeit können.',
+    },
+];
+---
+<BaseLayout
+    title="FAQ – Swissly IT Solutions"
+    description="Antworten auf die häufigsten Fragen zu Webseiten, Webshops, Hosting, Migration und Wartung bei Swissly IT Solutions."
+>
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// FAQ</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Häufige Fragen.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed max-w-3xl">
+                Hier beantworten wir die Fragen, die uns am häufigsten begegnen. Falls Ihre Frage nicht dabei ist, schreiben Sie uns – wir antworten persönlich.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
+            <div class="space-y-3">
+                {items.map((item, index) => (
+                    <details class="group bg-white border border-swissly-divider rounded-lg overflow-hidden hover:border-swissly-gold transition-colors">
+                        <summary class="flex items-start gap-4 cursor-pointer p-6 list-none">
+                            <span class="font-mono text-sm text-swissly-gold-dark mt-1 tabular-nums shrink-0">
+                                {String(index + 1).padStart(2, '0')}
+                            </span>
+                            <h2 class="flex-1 font-headline text-base md:text-lg font-bold text-swissly-navy leading-snug">
+                                {item.question}
+                            </h2>
+                            <span
+                                class="flex-shrink-0 w-6 h-6 mt-0.5 flex items-center justify-center text-swissly-gold-dark transition-transform group-open:rotate-45"
+                                aria-hidden="true"
+                            >
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </span>
+                        </summary>
+                        <div class="px-6 pb-6 pl-[calc(1.5rem+2.5rem)] -mt-2">
+                            <p class="font-body text-base text-swissly-text leading-relaxed">
+                                {item.answer}
+                            </p>
+                        </div>
+                    </details>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-24 text-center">
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Frage nicht beantwortet?
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-10 max-w-2xl mx-auto">
+                Schreiben Sie uns kurz, was Sie wissen möchten – wir antworten innerhalb von 24 Stunden an Werktagen.
+            </p>
+
+            <a
+                href="/kontakt"
+                class="inline-block bg-swissly-gold text-swissly-navy font-body font-medium px-8 py-4 rounded hover:bg-swissly-gold/90 transition text-base"
+            >
+                Direkt fragen
+            </a>
+        </div>
+    </section>
+</BaseLayout>

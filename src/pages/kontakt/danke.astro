@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+    title="Anfrage erhalten – Swissly IT Solutions"
+    description="Wir haben Ihre Anfrage erhalten und melden uns innerhalb eines Werktags."
+    noindex={true}
+>
+    <section class="bg-swissly-navy min-h-[70vh] flex items-center">
+        <div class="max-w-3xl mx-auto px-6 py-20 md:py-28 w-full">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Anfrage erhalten</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Danke für Ihre Nachricht.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/90 leading-relaxed mb-10 max-w-2xl">
+                Wir haben Ihre Anfrage erhalten und melden uns innerhalb eines Werktags – meistens deutlich schneller. Falls Sie in der Zwischenzeit etwas ergänzen möchten, schreiben Sie einfach an <a href="mailto:info@swisslyit.ch" class="text-swissly-gold underline">info@swisslyit.ch</a>.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+                <div class="bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-6">
+                    <p class="font-mono text-xs text-amber-300 mb-2 tracking-wide">// Antwortzeit</p>
+                    <p class="font-headline text-xl font-bold text-swissly-offwhite leading-tight mb-2">
+                        Innerhalb 24 Stunden
+                    </p>
+                    <p class="font-body text-sm text-swissly-offwhite/90 leading-relaxed">
+                        An Werktagen melden wir uns spätestens am nächsten Tag.
+                    </p>
+                </div>
+
+                <div class="bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-6">
+                    <p class="font-mono text-xs text-amber-300 mb-2 tracking-wide">// Nächster Schritt</p>
+                    <p class="font-headline text-xl font-bold text-swissly-offwhite leading-tight mb-2">
+                        30-Minuten-Erstgespräch
+                    </p>
+                    <p class="font-body text-sm text-swissly-offwhite/90 leading-relaxed">
+                        Wir schlagen Ihnen einen passenden Termin vor.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-4">
+                <a
+                    href="/"
+                    class="bg-swissly-gold text-swissly-navy font-body font-medium px-6 py-3 rounded hover:bg-swissly-gold/90 transition"
+                >
+                    Zur Startseite
+                </a>
+                <a
+                    href="/leistungen"
+                    class="text-swissly-offwhite font-body font-medium px-6 py-3 border border-swissly-offwhite/30 rounded hover:border-swissly-gold hover:text-swissly-gold transition"
+                >
+                    Leistungen ansehen
+                </a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

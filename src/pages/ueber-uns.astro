@@ -94,9 +94,9 @@ const paragraphs: Paragraph[] = [
         <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
             {paragraphs.map((paragraph) => (
                 <div>
-                    <h3 class="font-headline text-xl md:text-2xl font-bold text-swissly-navy mb-4">
+                    <h2 class="font-headline text-xl md:text-2xl font-bold text-swissly-navy mb-4">
                         {paragraph.heading}
-                    </h3>
+                    </h2>
                     <p class="font-body text-base md:text-lg text-swissly-text leading-relaxed mb-12 last:mb-0">
                         {paragraph.body}
                     </p>
@@ -131,7 +131,7 @@ const paragraphs: Paragraph[] = [
 
     <section class="bg-swissly-offwhite">
         <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
-            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Das Team</p>
+            <p class="font-mono text-sm text-swissly-gold-dark mb-4 tracking-wide">// Das Team</p>
 
             <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-16">
                 Georg & Taha.
@@ -141,19 +141,19 @@ const paragraphs: Paragraph[] = [
                 {bios.map((bio) => (
                     <div>
                         <div class="aspect-square bg-swissly-divider rounded-lg mb-6 flex items-center justify-center">
-                            <span class="font-mono text-xs text-swissly-text/40">// Foto folgt</span>
+                            <span class="font-mono text-xs text-swissly-text">// Foto folgt</span>
                         </div>
                         <h3 class="font-headline text-2xl font-bold text-swissly-navy mb-2">
                             {bio.name}
                         </h3>
-                        <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">
+                        <p class="font-mono text-sm text-swissly-gold-dark mb-6 tracking-wide">
                             {bio.role}
                         </p>
                         <p class="font-body text-base text-swissly-text leading-relaxed mb-4">
                             {bio.body}
                         </p>
-                        <div class="pt-4 border-t border-swissly-divider mt-4 italic text-sm text-swissly-text/70 leading-relaxed">
-                            <span class="font-mono text-xs text-swissly-gold mb-2 tracking-wide not-italic block">// Fun Fact</span>
+                        <div class="pt-4 border-t border-swissly-divider mt-4 italic text-sm text-swissly-text/85 leading-relaxed">
+                            <span class="font-mono text-xs text-swissly-gold-dark mb-2 tracking-wide not-italic block">// Fun Fact</span>
                             {bio.funFact}
                         </div>
                     </div>

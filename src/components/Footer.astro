@@ -7,9 +7,10 @@ const legalLinks: { href: string; label: string }[] = [
     { href: '/agb', label: 'AGB' },
 ];
 
-const moreLinks: { href: string; label: string }[] = [
+const moreLinks: { href: string; label: string; external?: boolean }[] = [
     { href: '/tech-stack', label: 'Tech-Stack' },
     { href: '/faq', label: 'FAQ' },
+    { href: 'https://github.com/SwisslyITSolutions/swissly-website', label: 'GitHub', external: true },
 ];
 ---
 <footer class="bg-swissly-navy pt-16 pb-8">
@@ -26,12 +27,12 @@ const moreLinks: { href: string; label: string }[] = [
             </div>
 
             <div>
-                <h3 class="font-headline text-swissly-offwhite text-sm font-semibold mb-3">Standort</h3>
+                <h2 class="font-headline text-swissly-offwhite text-sm font-semibold mb-3">Standort</h3>
                 <p class="font-body text-swissly-offwhite/70 text-sm">6030 Ebikon, Luzern</p>
             </div>
 
             <div>
-                <h3 class="font-headline text-swissly-offwhite text-sm font-semibold mb-3">Rechtliches</h3>
+                <h2 class="font-headline text-swissly-offwhite text-sm font-semibold mb-3">Rechtliches</h3>
                 <ul class="space-y-2">
                     {legalLinks.map((link) => (
                         <li>
@@ -47,15 +48,17 @@ const moreLinks: { href: string; label: string }[] = [
             </div>
 
             <div>
-                <h3 class="font-headline text-swissly-offwhite text-sm font-semibold mb-3">Mehr</h3>
+                <h2 class="font-headline text-swissly-offwhite text-sm font-semibold mb-3">Mehr</h3>
                 <ul class="space-y-2">
                     {moreLinks.map((link) => (
                         <li>
                             <a
                                 href={link.href}
+                                target={link.external ? '_blank' : undefined}
+                                rel={link.external ? 'noopener noreferrer' : undefined}
                                 class="font-body text-swissly-offwhite/70 text-sm hover:text-swissly-gold transition-colors"
                             >
-                                {link.label}
+                                {link.label}{link.external ? ' ↗' : ''}
                             </a>
                         </li>
                     ))}

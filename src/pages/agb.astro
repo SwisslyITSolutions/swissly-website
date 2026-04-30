@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Section {
+    id: string;
+    number: string;
+    title: string;
+}
+
+const sections: Section[] = [
+    { id: 'geltungsbereich', number: '1', title: 'Geltungsbereich' },
+    { id: 'vertragsschluss', number: '2', title: 'Angebot und Vertragsschluss' },
+    { id: 'preise', number: '3', title: 'Preise und Zahlungsbedingungen' },
+    { id: 'mitwirkung', number: '4', title: 'Mitwirkungspflichten des Kunden' },
+    { id: 'careplaene', number: '5', title: 'Care-Pläne (Wartungsverträge)' },
+    { id: 'haftung', number: '6', title: 'Gewährleistung und Haftung' },
+    { id: 'recht', number: '7', title: 'Gerichtsstand und anwendbares Recht' },
+];
+---
+<BaseLayout
+    title="AGB – Swissly IT Solutions"
+    description="Allgemeine Geschäftsbedingungen von Swissly IT Solutions KLG, Ebikon."
+>
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// AGB</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Allgemeine Geschäftsbedingungen.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed max-w-3xl">
+                Diese AGB regeln die Zusammenarbeit zwischen Swissly IT Solutions KLG und unseren Kundinnen und Kunden. Klar, verständlich und ohne juristische Spitzfindigkeiten.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <div class="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-12 lg:gap-16">
+                <aside class="hidden lg:block">
+                    <div class="sticky top-24">
+                        <p class="font-mono text-xs text-swissly-gold-dark mb-4 tracking-wide uppercase">// Inhalt</p>
+                        <ol class="space-y-2">
+                            {sections.map((section) => (
+                                <li>
+                                    <a
+                                        href={`#${section.id}`}
+                                        class="block font-body text-sm text-swissly-text hover:text-swissly-gold-dark transition-colors leading-snug"
+                                    >
+                                        <span class="font-mono text-xs text-swissly-text/85 mr-2 tabular-nums">
+                                            {section.number.padStart(2, '0')}
+                                        </span>
+                                        {section.title}
+                                    </a>
+                                </li>
+                            ))}
+                        </ol>
+                    </div>
+                </aside>
+
+                <div class="space-y-14 max-w-3xl">
+                    <article id="geltungsbereich">
+                        <p class="font-mono text-sm text-swissly-gold-dark mb-2 tabular-nums">// 01</p>
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Geltungsbereich
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Diese AGB gelten für alle Dienstleistungen und Produkte von Swissly IT Solutions KLG, Georg Ristic und Taha Afif. Das umfasst IT-Support, Hardware-Beschaffung, Webdesign, Care-Pläne sowie IT- und KI-Schulungen. Abweichende Vereinbarungen bedürfen der Schriftform.
+                        </p>
+                    </article>
+
+                    <article id="vertragsschluss" class="border-t border-swissly-divider pt-14">
+                        <p class="font-mono text-sm text-swissly-gold-dark mb-2 tabular-nums">// 02</p>
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Angebot und Vertragsschluss
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Ein Vertrag entsteht durch schriftliche Annahme einer Offerte, wobei E-Mail als Bestätigung ausreicht. Der genaue Leistungsumfang ergibt sich aus der jeweiligen Offerte.
+                        </p>
+                    </article>
+
+                    <article id="preise" class="border-t border-swissly-divider pt-14">
+                        <p class="font-mono text-sm text-swissly-gold-dark mb-2 tabular-nums">// 03</p>
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Preise und Zahlungsbedingungen
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed mb-6">
+                            Alle Preise sind in Schweizer Franken (CHF). Swissly IT ist aktuell nicht mehrwertsteuerpflichtig. Rechnungen sind ohne Abzüge innert 30 Tagen nach Rechnungsdatum zahlbar.
+                        </p>
+
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="font-headline text-base font-bold text-swissly-navy mb-2">Webdesign-Projekte</h3>
+                                <p class="font-body text-base text-swissly-text leading-relaxed">
+                                    50 % Akontozahlung bei Auftragserteilung erforderlich. Arbeiten beginnen nach Zahlungseingang. Restliche 50 % bei Projektabschluss fällig.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="font-headline text-base font-bold text-swissly-navy mb-2">IT-Support & Zusatzarbeiten</h3>
+                                <p class="font-body text-base text-swissly-text leading-relaxed">
+                                    Stundensatz von CHF 140.– (Abrechnung im 15-Minuten-Takt).
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="font-headline text-base font-bold text-swissly-navy mb-2">Schulungen & Hardware</h3>
+                                <p class="font-body text-base text-swissly-text leading-relaxed">
+                                    Hardware gegen Vorauskasse. Schulungen gemäss schriftlicher Offerte.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="mitwirkung" class="border-t border-swissly-divider pt-14">
+                        <p class="font-mono text-sm text-swissly-gold-dark mb-2 tabular-nums">// 04</p>
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Mitwirkungspflichten des Kunden
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Der Kunde stellt die notwendigen Daten, Texte, Bilder und Zugangsdaten zeitnah bereit. Verzögerungen durch fehlende Mitwirkung verlängern die Projektlaufzeit entsprechend.
+                        </p>
+                    </article>
+
+                    <article id="careplaene" class="border-t border-swissly-divider pt-14">
+                        <p class="font-mono text-sm text-swissly-gold-dark mb-2 tabular-nums">// 05</p>
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Care-Pläne (Wartungsverträge)
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Care-Pläne werden für eine vereinbarte Laufzeit abgeschlossen und jährlich im Voraus in Rechnung gestellt. Sie können transparent mit einer Frist von 30 Tagen auf das Ende der laufenden Rechnungsperiode gekündigt werden.
+                        </p>
+                    </article>
+
+                    <article id="haftung" class="border-t border-swissly-divider pt-14">
+                        <p class="font-mono text-sm text-swissly-gold-dark mb-2 tabular-nums">// 06</p>
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Gewährleistung und Haftung
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed mb-4">
+                            Swissly IT haftet nur für absichtlich oder grobfahrlässig verursachte Schäden. Die Haftung für leichte Fahrlässigkeit, indirekte Schäden, Datenverlust oder entgangenen Gewinn wird, soweit gesetzlich zulässig, vollumfänglich ausgeschlossen.
+                        </p>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Bei Hardware gelten ausschliesslich die Garantiebestimmungen der Hersteller. Der Kunde trägt die Verantwortung für die Rechtmässigkeit der Website-Inhalte.
+                        </p>
+                    </article>
+
+                    <article id="recht" class="border-t border-swissly-divider pt-14">
+                        <p class="font-mono text-sm text-swissly-gold-dark mb-2 tabular-nums">// 07</p>
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Gerichtsstand und anwendbares Recht
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Auf diese AGB und alle Rechtsbeziehungen zwischen Swissly IT und dem Kunden ist ausschliesslich Schweizer Recht anwendbar. Ausschliesslicher Gerichtsstand ist der Sitz von Swissly IT in Ebikon, Luzern.
+                        </p>
+                    </article>
+
+                    <div class="border-t border-swissly-divider pt-12">
+                        <p class="font-body text-sm text-swissly-text/85 leading-relaxed">
+                            Bei Fragen zu diesen AGB erreichen Sie uns unter <a href="mailto:info@swisslyit.ch" class="text-swissly-gold-dark underline">info@swisslyit.ch</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

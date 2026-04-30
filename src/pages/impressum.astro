@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface InfoBlock {
+    label: string;
+    lines: string[];
+}
+
+const verantwortlich: InfoBlock[] = [
+    {
+        label: 'Firma',
+        lines: ['Swissly IT Solutions KLG'],
+    },
+    {
+        label: 'Inhaber',
+        lines: ['Georg Ristic & Taha Afif'],
+    },
+    {
+        label: 'Adresse',
+        lines: ['Pilatusweg 23', '6030 Ebikon', 'Schweiz'],
+    },
+];
+
+const kontakt: InfoBlock[] = [
+    {
+        label: 'E-Mail',
+        lines: ['info@swisslyit.ch'],
+    },
+    {
+        label: 'Website',
+        lines: ['www.swisslyit.ch'],
+    },
+];
+
+const rechtlich: InfoBlock[] = [
+    {
+        label: 'Rechtsform',
+        lines: ['Kollektivgesellschaft'],
+    },
+    {
+        label: 'Handelsregister',
+        lines: ['CHE-288.328.570'],
+    },
+    {
+        label: 'Mehrwertsteuer (UID)',
+        lines: ['Aktuell nicht MWST-pflichtig'],
+    },
+];
+---
+<BaseLayout
+    title="Impressum – Swissly IT Solutions"
+    description="Impressum von Swissly IT Solutions KLG, Ebikon."
+>
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Impressum</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Wer hinter dieser Webseite steht.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed max-w-3xl">
+                Transparenz und Vertrauen sind die Basis unserer Arbeit. Hier finden Sie alle gesetzlich vorgeschriebenen Angaben zu Swissly IT Solutions.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <div class="space-y-16">
+                <div>
+                    <p class="font-mono text-sm text-swissly-gold-dark mb-4 tracking-wide">// Verantwortlich</p>
+                    <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-8">
+                        Verantwortlich für den Inhalt
+                    </h2>
+                    <dl class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {verantwortlich.map((item) => (
+                            <div>
+                                <dt class="font-mono text-xs text-swissly-text/85 uppercase tracking-wide mb-2">
+                                    {item.label}
+                                </dt>
+                                <dd class="font-body text-base text-swissly-navy leading-relaxed">
+                                    {item.lines.map((line) => (
+                                        <span class="block">{line}</span>
+                                    ))}
+                                </dd>
+                            </div>
+                        ))}
+                    </dl>
+                </div>
+
+                <div class="border-t border-swissly-divider pt-16">
+                    <p class="font-mono text-sm text-swissly-gold-dark mb-4 tracking-wide">// Kontakt</p>
+                    <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-8">
+                        Wie Sie uns erreichen
+                    </h2>
+                    <dl class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {kontakt.map((item) => (
+                            <div>
+                                <dt class="font-mono text-xs text-swissly-text/85 uppercase tracking-wide mb-2">
+                                    {item.label}
+                                </dt>
+                                <dd class="font-body text-base text-swissly-navy leading-relaxed">
+                                    {item.lines.map((line) => (
+                                        <span class="block">{line}</span>
+                                    ))}
+                                </dd>
+                            </div>
+                        ))}
+                    </dl>
+                </div>
+
+                <div class="border-t border-swissly-divider pt-16">
+                    <p class="font-mono text-sm text-swissly-gold-dark mb-4 tracking-wide">// Rechtliche Angaben</p>
+                    <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-8">
+                        Rechtliche Angaben
+                    </h2>
+                    <dl class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {rechtlich.map((item) => (
+                            <div>
+                                <dt class="font-mono text-xs text-swissly-text/85 uppercase tracking-wide mb-2">
+                                    {item.label}
+                                </dt>
+                                <dd class="font-body text-base text-swissly-navy leading-relaxed">
+                                    {item.lines.map((line) => (
+                                        <span class="block">{line}</span>
+                                    ))}
+                                </dd>
+                            </div>
+                        ))}
+                    </dl>
+                </div>
+
+                <div class="border-t border-swissly-divider pt-12">
+                    <p class="font-body text-sm text-swissly-text/85 leading-relaxed">
+                        Bei Fragen zu rechtlichen Themen oder zur Datenverarbeitung erreichen Sie uns jederzeit unter <a href="mailto:info@swisslyit.ch" class="text-swissly-gold-dark underline">info@swisslyit.ch</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

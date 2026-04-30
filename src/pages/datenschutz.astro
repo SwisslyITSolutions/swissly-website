@@ -1,0 +1,252 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Section {
+    id: string;
+    title: string;
+}
+
+const sections: Section[] = [
+    { id: 'verantwortlicher', title: 'Verantwortlicher' },
+    { id: 'uebersicht', title: 'Übersicht der Verarbeitungen' },
+    { id: 'rechtsgrundlagen', title: 'Massgebliche Rechtsgrundlagen' },
+    { id: 'sicherheit', title: 'Sicherheitsmassnahmen' },
+    { id: 'uebermittlung', title: 'Übermittlung personenbezogener Daten' },
+    { id: 'international', title: 'Internationale Datentransfers' },
+    { id: 'speicherung', title: 'Datenspeicherung und Löschung' },
+    { id: 'rechte', title: 'Rechte betroffener Personen' },
+    { id: 'hosting', title: 'Bereitstellung des Onlineangebots' },
+    { id: 'kontakt', title: 'Kontakt- und Anfrageverwaltung' },
+    { id: 'aenderung', title: 'Änderung und Aktualisierung' },
+    { id: 'begriffe', title: 'Begriffsdefinitionen' },
+];
+---
+<BaseLayout
+    title="Datenschutzerklärung – Swissly IT Solutions"
+    description="Wie Swissly IT Solutions personenbezogene Daten verarbeitet – nach Schweizer Datenschutzgesetz (revDSG)."
+>
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Datenschutzerklärung</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Wie wir mit Ihren Daten umgehen.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed max-w-3xl">
+                Diese Datenschutzerklärung informiert Sie darüber, welche Arten Ihrer personenbezogenen Daten wir zu welchen Zwecken und in welchem Umfang verarbeiten. Sie gilt für alle Verarbeitungen im Rahmen unserer Leistungserbringung und auf allen unseren Onlineplattformen.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <div class="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-12 lg:gap-16">
+                <aside class="hidden lg:block">
+                    <div class="sticky top-24">
+                        <p class="font-mono text-xs text-swissly-gold-dark mb-4 tracking-wide uppercase">// Inhalt</p>
+                        <ol class="space-y-2">
+                            {sections.map((section, index) => (
+                                <li>
+                                    <a
+                                        href={`#${section.id}`}
+                                        class="block font-body text-sm text-swissly-text hover:text-swissly-gold-dark transition-colors leading-snug"
+                                    >
+                                        <span class="font-mono text-xs text-swissly-text/85 mr-2 tabular-nums">
+                                            {String(index + 1).padStart(2, '0')}
+                                        </span>
+                                        {section.title}
+                                    </a>
+                                </li>
+                            ))}
+                        </ol>
+                    </div>
+                </aside>
+
+                <div class="prose-content space-y-14 max-w-3xl">
+                    <article id="verantwortlicher">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Verantwortlicher
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Swissly IT Solutions KLG<br />
+                            Georg Ristic & Taha Afif<br />
+                            Pilatusweg 23<br />
+                            6030 Ebikon
+                        </p>
+                        <p class="font-body text-base text-swissly-text leading-relaxed mt-4">
+                            E-Mail: <a href="mailto:info@swisslyit.ch" class="text-swissly-gold-dark underline">info@swisslyit.ch</a>
+                        </p>
+                    </article>
+
+                    <article id="uebersicht" class="border-t border-swissly-divider pt-14">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-6">
+                            Übersicht der Verarbeitungen
+                        </h2>
+
+                        <h3 class="font-headline text-base font-bold text-swissly-navy mb-3">Arten der verarbeiteten Daten</h3>
+                        <ul class="font-body text-base text-swissly-text leading-relaxed list-disc pl-5 space-y-1 mb-6">
+                            <li>Kontaktdaten</li>
+                            <li>Inhaltsdaten</li>
+                            <li>Nutzungsdaten</li>
+                            <li>Meta-, Kommunikations- und Verfahrensdaten</li>
+                            <li>Protokolldaten</li>
+                        </ul>
+
+                        <h3 class="font-headline text-base font-bold text-swissly-navy mb-3">Kategorien betroffener Personen</h3>
+                        <ul class="font-body text-base text-swissly-text leading-relaxed list-disc pl-5 space-y-1 mb-6">
+                            <li>Kommunikationspartner</li>
+                            <li>Nutzer</li>
+                        </ul>
+
+                        <h3 class="font-headline text-base font-bold text-swissly-navy mb-3">Zwecke der Verarbeitung</h3>
+                        <ul class="font-body text-base text-swissly-text leading-relaxed list-disc pl-5 space-y-1">
+                            <li>Kommunikation</li>
+                            <li>Sicherheitsmassnahmen</li>
+                            <li>Organisations- und Verwaltungsverfahren</li>
+                            <li>Feedback</li>
+                            <li>Bereitstellung des Onlineangebots und Nutzerfreundlichkeit</li>
+                            <li>Informationstechnische Infrastruktur</li>
+                        </ul>
+                    </article>
+
+                    <article id="rechtsgrundlagen" class="border-t border-swissly-divider pt-14">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Massgebliche Rechtsgrundlagen
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Nach Schweizer Datenschutzgesetz (revDSG) werden personenbezogene Daten nach Treu und Glauben, rechtmässig und verhältnismässig bearbeitet (Art. 6 Abs. 1 und 2 DSG). Daten werden nur zu einem bestimmten, für die betroffene Person erkennbaren Zweck beschafft und entsprechend verarbeitet (Art. 6 Abs. 3 DSG).
+                        </p>
+                    </article>
+
+                    <article id="sicherheit" class="border-t border-swissly-divider pt-14">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Sicherheitsmassnahmen
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Wir setzen geeignete technische und organisatorische Massnahmen um, um ein dem Risiko angemessenes Schutzniveau zu gewährleisten. Dies umfasst die Kontrolle des physischen und elektronischen Zugangs sowie TLS-/SSL-Verschlüsselung für alle Online-Verbindungen.
+                        </p>
+                    </article>
+
+                    <article id="uebermittlung" class="border-t border-swissly-divider pt-14">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Übermittlung personenbezogener Daten
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Bei Übermittlungen personenbezogener Daten an Dritte schliessen wir entsprechende Verträge ab, die dem Schutz Ihrer Daten dienen.
+                        </p>
+                    </article>
+
+                    <article id="international" class="border-t border-swissly-divider pt-14">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Internationale Datentransfers
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed mb-4">
+                            Gemäss Schweizer DSG werden Daten ins Ausland nur übermittelt, wenn ein angemessener Schutz der betroffenen Personen gewährleistet ist.
+                        </p>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Für Transfers in die USA nutzen wir das Data Privacy Framework (DPF) sowie Standarddatenschutzklauseln. Diese bieten zwei Schutzebenen: das DPF als primäre Sicherheit und die Klauseln als zusätzlichen Schutz.
+                        </p>
+                    </article>
+
+                    <article id="speicherung" class="border-t border-swissly-divider pt-14">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Datenspeicherung und Löschung
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed mb-4">
+                            Personenbezogene Daten werden gelöscht, sobald die zugrundeliegenden Einwilligungen widerrufen werden oder keine weiteren rechtlichen Grundlagen für die Verarbeitung bestehen.
+                        </p>
+                        <h3 class="font-headline text-base font-bold text-swissly-navy mb-3">Aufbewahrungsfristen nach Schweizer Recht</h3>
+                        <ul class="font-body text-base text-swissly-text leading-relaxed list-disc pl-5 space-y-1">
+                            <li><strong>10 Jahre:</strong> Bücher, Aufzeichnungen, Jahresabschlüsse, Rechnungen</li>
+                            <li><strong>10 Jahre:</strong> Daten für mögliche Schadenersatzansprüche (Verjährungsfrist)</li>
+                            <li><strong>5 Jahre:</strong> Forderungen für Zinse, Lieferungen, Berufsarbeiten und Arbeitsverhältnisse</li>
+                        </ul>
+                    </article>
+
+                    <article id="rechte" class="border-t border-swissly-divider pt-14">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Rechte betroffener Personen
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed mb-4">
+                            Nach Schweizer DSG haben Sie folgende Rechte:
+                        </p>
+                        <ul class="font-body text-base text-swissly-text leading-relaxed list-disc pl-5 space-y-2">
+                            <li><strong>Recht auf Auskunft:</strong> Bestätigung der Datenverarbeitung und Informationen zur Geltendmachung weiterer Rechte.</li>
+                            <li><strong>Recht auf Datenherausgabe oder -übertragung:</strong> Erhalt Ihrer Daten in gängigen elektronischen Formaten.</li>
+                            <li><strong>Recht auf Berichtigung:</strong> Korrektur unrichtiger Daten.</li>
+                            <li><strong>Recht auf Widerspruch, Löschung und Vernichtung:</strong> Einspruch gegen die Verarbeitung sowie Löschung oder Vernichtung Ihrer Daten.</li>
+                        </ul>
+                    </article>
+
+                    <article id="hosting" class="border-t border-swissly-divider pt-14">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Bereitstellung des Onlineangebots und Webhosting
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Wir verarbeiten Nutzungsdaten, IP-Adressen und Zugriffsinformationen zur Bereitstellung der Online-Dienste. Der Zugriff wird in Server-Logfiles protokolliert und maximal 30 Tage gespeichert und danach gelöscht oder anonymisiert. Unser Webhosting erfolgt bei Hostpoint AG in der Schweiz.
+                        </p>
+                    </article>
+
+                    <article id="kontakt" class="border-t border-swissly-divider pt-14">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Kontakt- und Anfrageverwaltung
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Bei Kontaktaufnahme verarbeiten wir die übermittelten Angaben zur Beantwortung Ihrer Anfragen. Dies umfasst Name, Kontaktinformationen und gegebenenfalls weitere Informationen, die zur angemessenen Bearbeitung erforderlich sind.
+                        </p>
+                    </article>
+
+                    <article id="aenderung" class="border-t border-swissly-divider pt-14">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-4">
+                            Änderung und Aktualisierung
+                        </h2>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            Wir passen diese Datenschutzerklärung an, wenn sich die Datenverarbeitungen ändern. Bei Änderungen, die eine Mitwirkung erforderlich machen, informieren wir Sie aktiv.
+                        </p>
+                    </article>
+
+                    <article id="begriffe" class="border-t border-swissly-divider pt-14">
+                        <h2 class="font-headline text-2xl md:text-3xl font-bold text-swissly-navy leading-tight mb-6">
+                            Begriffsdefinitionen
+                        </h2>
+                        <dl class="space-y-4">
+                            <div>
+                                <dt class="font-body font-semibold text-swissly-navy">Inhaltsdaten</dt>
+                                <dd class="font-body text-base text-swissly-text leading-relaxed">Informationen während Erstellung und Veröffentlichung von Inhalten.</dd>
+                            </div>
+                            <div>
+                                <dt class="font-body font-semibold text-swissly-navy">Kontaktdaten</dt>
+                                <dd class="font-body text-base text-swissly-text leading-relaxed">Essentielle Informationen für Kommunikation.</dd>
+                            </div>
+                            <div>
+                                <dt class="font-body font-semibold text-swissly-navy">Meta-, Kommunikations- und Verfahrensdaten</dt>
+                                <dd class="font-body text-base text-swissly-text leading-relaxed">Informationen über Art und Weise der Datenbearbeitung.</dd>
+                            </div>
+                            <div>
+                                <dt class="font-body font-semibold text-swissly-navy">Nutzungsdaten</dt>
+                                <dd class="font-body text-base text-swissly-text leading-relaxed">Informationen über Nutzer-Interaktionen mit digitalen Produkten.</dd>
+                            </div>
+                            <div>
+                                <dt class="font-body font-semibold text-swissly-navy">Personenbezogene Daten</dt>
+                                <dd class="font-body text-base text-swissly-text leading-relaxed">Alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen.</dd>
+                            </div>
+                            <div>
+                                <dt class="font-body font-semibold text-swissly-navy">Protokolldaten</dt>
+                                <dd class="font-body text-base text-swissly-text leading-relaxed">Informationen über protokollierte Ereignisse und Aktivitäten.</dd>
+                            </div>
+                            <div>
+                                <dt class="font-body font-semibold text-swissly-navy">Verantwortlicher</dt>
+                                <dd class="font-body text-base text-swissly-text leading-relaxed">Natürliche oder juristische Person, die über die Verarbeitung bestimmt.</dd>
+                            </div>
+                            <div>
+                                <dt class="font-body font-semibold text-swissly-navy">Verarbeitung</dt>
+                                <dd class="font-body text-base text-swissly-text leading-relaxed">Jeder mit oder ohne Hilfe automatisierter Verfahren ausgeführte Vorgang.</dd>
+                            </div>
+                        </dl>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

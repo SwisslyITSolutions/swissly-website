@@ -28,12 +28,74 @@ const navLinks: { href: string; label: string }[] = [
             ))}
         </nav>
 
-        <a
-            href="/kontakt"
-            class="font-body font-medium bg-swissly-gold text-swissly-navy px-5 py-2 rounded hover:bg-swissly-gold/90 transition-colors"
-        >
-            <span class="md:hidden">Anfragen</span>
-            <span class="hidden md:inline">Erstgespräch anfragen</span>
-        </a>
+        <div class="flex items-center gap-3">
+            <a
+                href="/kontakt"
+                class="hidden sm:inline-block font-body font-medium bg-swissly-gold text-swissly-navy px-5 py-2 rounded hover:bg-swissly-gold/90 transition-colors"
+            >
+                <span class="md:hidden">Anfragen</span>
+                <span class="hidden md:inline">Erstgespräch anfragen</span>
+            </a>
+
+            <button
+                type="button"
+                id="mobile-menu-toggle"
+                class="md:hidden flex items-center justify-center w-10 h-10 text-swissly-offwhite hover:text-swissly-gold transition-colors"
+                aria-label="Menü öffnen"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+            >
+                <svg class="w-6 h-6 block" data-icon="open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg class="w-6 h-6 hidden" data-icon="close" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M6 18L18 6" />
+                </svg>
+            </button>
+        </div>
     </div>
+
+    <nav
+        id="mobile-menu"
+        class="md:hidden hidden bg-swissly-navy border-t border-swissly-offwhite/10"
+        aria-label="Mobile Navigation"
+    >
+        <ul class="px-6 py-4 space-y-1">
+            {navLinks.map((link) => (
+                <li>
+                    <a
+                        href={link.href}
+                        class="block font-body text-swissly-offwhite/80 hover:text-swissly-gold py-3 transition-colors"
+                    >
+                        {link.label}
+                    </a>
+                </li>
+            ))}
+            <li class="pt-2 sm:hidden">
+                <a
+                    href="/kontakt"
+                    class="block text-center font-body font-medium bg-swissly-gold text-swissly-navy px-5 py-3 rounded hover:bg-swissly-gold/90 transition-colors"
+                >
+                    Erstgespräch anfragen
+                </a>
+            </li>
+        </ul>
+    </nav>
 </header>
+
+<script>
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = toggle?.querySelector<SVGElement>('[data-icon="open"]');
+    const iconClose = toggle?.querySelector<SVGElement>('[data-icon="close"]');
+
+    toggle?.addEventListener('click', () => {
+        const isOpen = menu?.classList.toggle('hidden') === false;
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.setAttribute('aria-label', isOpen ? 'Menü schliessen' : 'Menü öffnen');
+        iconOpen?.classList.toggle('hidden', isOpen);
+        iconOpen?.classList.toggle('block', !isOpen);
+        iconClose?.classList.toggle('hidden', !isOpen);
+        iconClose?.classList.toggle('block', isOpen);
+    });
+</script>

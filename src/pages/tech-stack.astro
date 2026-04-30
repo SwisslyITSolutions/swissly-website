@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface StackItem {
+    name: string;
+    role: string;
+    description: string;
+    url?: string;
+}
+
+interface Principle {
+    title: string;
+    description: string;
+}
+
+const frontend: StackItem[] = [
+    {
+        name: 'Astro',
+        role: 'Framework',
+        description:
+            'Statisches Site-Framework mit Fokus auf Performance. Lädt nur das JavaScript, das wirklich gebraucht wird – das Resultat sind sehr schnelle Seiten ohne unnötigen Ballast.',
+        url: 'https://astro.build',
+    },
+    {
+        name: 'TypeScript',
+        role: 'Sprache',
+        description:
+            'Strikt typisiert, damit Fehler beim Bauen statt im Live-Betrieb auffallen. Macht den Code wartbar, auch wenn später jemand anderes daran arbeitet.',
+        url: 'https://www.typescriptlang.org',
+    },
+    {
+        name: 'Tailwind CSS',
+        role: 'Styling',
+        description:
+            'Utility-basiertes CSS-Framework. Konsistente Designsysteme ohne den Wildwuchs eigener Stylesheets – und der nicht benötigte CSS-Code wird beim Build entfernt.',
+        url: 'https://tailwindcss.com',
+    },
+];
+
+const hosting: StackItem[] = [
+    {
+        name: 'Hostpoint',
+        role: 'Webhosting',
+        description:
+            'Schweizer Webhosting-Anbieter mit Rechenzentren in der Schweiz. revDSG-konform, deutschsprachiger Support, faire Preise.',
+        url: 'https://www.hostpoint.ch',
+    },
+    {
+        name: 'Statisches Hosting',
+        role: 'Auslieferung',
+        description:
+            'Webseiten werden vorgebaut und als statische HTML-Dateien ausgeliefert. Schnell, sicher und ohne Server-Side-Code, der ausfallen oder kompromittiert werden kann.',
+    },
+];
+
+const cms: StackItem[] = [
+    {
+        name: 'Statisch (kein CMS)',
+        role: 'Standard',
+        description:
+            'Wenn Inhalte selten ändern, bauen wir die Seite statisch. Sie sparen sich CMS-Kosten, Update-Aufwand und Sicherheitsrisiken.',
+    },
+    {
+        name: 'Headless CMS',
+        role: 'Auf Wunsch',
+        description:
+            'Falls Sie Inhalte selber pflegen wollen, binden wir ein modernes Headless-CMS an (z.B. Sanity, Storyblok, Decap). Sie pflegen Inhalte komfortabel, die Seite bleibt schnell und statisch.',
+    },
+    {
+        name: 'WordPress',
+        role: 'Bei Bedarf',
+        description:
+            'Wenn Sie bereits WordPress kennen oder eine sehr klassische CMS-Struktur brauchen, setzen wir auch das auf – sauber konfiguriert, gehärtet und mit Wartungsvertrag.',
+    },
+];
+
+const principles: Principle[] = [
+    {
+        title: 'Offene Standards, keine Lock-ins.',
+        description:
+            'Wir setzen auf offene Technologien, die Sie auch ohne uns weiterbetreiben können. Kein proprietärer Baukasten, aus dem Sie nicht mehr rauskommen.',
+    },
+    {
+        title: 'Performance ist nicht Nice-to-have.',
+        description:
+            'Schnelle Webseiten ranken besser, konvertieren besser und respektieren die Zeit Ihrer Besucher. Wir messen Lighthouse-Scores und halten sie hoch.',
+    },
+    {
+        title: 'Schweiz, wo möglich.',
+        description:
+            'Hosting in der Schweiz, deutschsprachige Anbieter, kurze Wege bei Problemen. Wir vermeiden US-Dienste in der Standard-Stack, wo es schweizerische Alternativen gibt.',
+    },
+    {
+        title: 'Sie bekommen den Code.',
+        description:
+            'Repository, Hosting-Account, Domain – alles auf Ihren Namen. Sie können jederzeit den Anbieter wechseln, auch wenn das selten passiert.',
+    },
+];
+---
+<BaseLayout
+    title="Tech-Stack – Swissly IT Solutions"
+    description="Transparenz darüber, mit welchen Technologien wir Ihre Webseite bauen – Astro, TypeScript, Tailwind CSS und Schweizer Hosting bei Hostpoint."
+>
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Tech-Stack</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Womit wir Ihre Webseite bauen.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed max-w-3xl">
+                Wir verstecken nicht, was unter der Haube steckt. Hier sehen Sie unsere Standard-Stack – warum wir genau diese Technologien einsetzen und wo wir flexibel sind.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold-dark mb-4 tracking-wide">// Frontend</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Frontend & Build.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                Was den Browser erreicht und wie wir es zusammenbauen.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {frontend.map((item) => (
+                    <div class="bg-white border border-swissly-divider rounded-lg p-8 hover:border-swissly-gold transition">
+                        <p class="font-mono text-xs text-swissly-gold-dark mb-3 tracking-wide uppercase">
+                            // {item.role}
+                        </p>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-3 leading-tight">
+                            {item.name}
+                        </h3>
+                        <p class="font-body text-base text-swissly-text leading-relaxed mb-4">
+                            {item.description}
+                        </p>
+                        {item.url && (
+                            <a
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="font-body text-sm font-medium text-swissly-gold-dark underline"
+                            >
+                                {item.url.replace(/^https?:\/\//, '')} →
+                            </a>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Hosting</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Hosting in der Schweiz.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-16 max-w-3xl">
+                Wo Ihre Webseite läuft und wie sie ausgeliefert wird.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {hosting.map((item) => (
+                    <div class="bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-8 hover:border-swissly-gold transition">
+                        <p class="font-mono text-xs text-amber-300 mb-3 tracking-wide uppercase">
+                            // {item.role}
+                        </p>
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {item.name}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/90 leading-relaxed mb-4">
+                            {item.description}
+                        </p>
+                        {item.url && (
+                            <a
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="font-body text-sm font-medium text-amber-300 underline"
+                            >
+                                {item.url.replace(/^https?:\/\//, '')} →
+                            </a>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold-dark mb-4 tracking-wide">// CMS</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Inhaltspflege – wenn Sie sie brauchen.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                Nicht jede Webseite braucht ein CMS. Wir entscheiden gemeinsam, was zu Ihnen passt.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {cms.map((item) => (
+                    <div class="bg-white border border-swissly-divider rounded-lg p-8 hover:border-swissly-gold transition">
+                        <p class="font-mono text-xs text-swissly-gold-dark mb-3 tracking-wide uppercase">
+                            // {item.role}
+                        </p>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-3 leading-tight">
+                            {item.name}
+                        </h3>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            {item.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Prinzipien</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Warum genau diese Stack.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-16 max-w-3xl">
+                Hinter der Auswahl stehen vier klare Prinzipien.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {principles.map((principle) => (
+                    <div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {principle.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {principle.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-24 text-center">
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6">
+                Fragen zur Technik?
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-10 max-w-2xl mx-auto">
+                Im Erstgespräch klären wir, welche Technologie zu Ihrem Projekt passt – und welche garantiert nicht. Ohne Buzzword-Bingo.
+            </p>
+
+            <a
+                href="/kontakt"
+                class="inline-block bg-swissly-navy text-swissly-offwhite font-body font-medium px-8 py-4 rounded hover:bg-swissly-navy/90 transition text-base"
+            >
+                Erstgespräch anfragen
+            </a>
+        </div>
+    </section>
+</BaseLayout>
