@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Paragraph {
+    heading: string;
+    body: string;
+}
+
+interface Value {
+    number: string;
+    title: string;
+    description: string;
+}
+
+interface Bio {
+    name: string;
+    role: string;
+    body: string;
+    funFact: string;
+}
+
+const values: Value[] = [
+    {
+        number: '// 01',
+        title: 'Verständlichkeit',
+        description:
+            'IT-Themen müssen so erklärt werden, dass Sie verstehen, was Sie kaufen. Wir sprechen mit Ihnen Klartext, nicht in Akronymen, und übergeben am Ende eine Lösung, die Sie auch ohne uns nachvollziehen können. Wenn Sie eine Erklärung nicht verstehen, liegt das nicht an Ihnen – sondern daran, dass wir noch eine bessere finden müssen.',
+    },
+    {
+        number: '// 02',
+        title: 'Verlässlichkeit',
+        description:
+            'Wir sagen, was wir tun, und wir tun, was wir sagen. Termine halten, Budgets einhalten, erreichbar sein, wenn etwas brennt. Diese Selbstverständlichkeiten sind in der IT-Branche keine Selbstverständlichkeit mehr – bei uns sind sie es.',
+    },
+    {
+        number: '// 03',
+        title: 'Praxisnähe',
+        description:
+            'Eine Webseite, die zwar technisch beeindruckt, aber im Geschäftsalltag nicht funktioniert, ist eine schlechte Webseite. Wir bauen Lösungen, die zu Ihrem Betrieb passen – nicht zu unserem letzten Projekt oder zum aktuellen Tech-Trend. Massstab ist, ob Sie damit produktiv werden, nicht ob es im Portfolio gut aussieht.',
+    },
+];
+
+const bios: Bio[] = [
+    {
+        name: 'Georg Ristic',
+        role: '// Cybersecurity & Organisation',
+        body: 'Georg Ristic kommt aus einer eher untypischen Tech-Laufbahn: gelernter Milchtechnologe EFZ, Berufsmatura, dann Studium in Information and Cybersecurity an der Hochschule Luzern. Technik begleitet ihn seit der Kindheit – als Kind hat er Geräte auseinandergenommen, heute baut er sichere Webseiten. Im Militär bekleidet er den Rang Hauptfeldweibel; das hat ihn gelehrt, in stressigen Situationen einen kühlen Kopf zu behalten. In Projekten ist er der Allrounder mit Adlerauge für Details – wenn etwas nicht stimmig ist, sieht er es. Wenn er nicht am Computer sitzt, ist er fast täglich im Fitness, auf dem Velo oder im Winter auf den Skiern.',
+        funFact:
+            'Sechs Jahre Pfadi Luzern, mit Leitungsfunktion. Das erklärt vielleicht, warum er auch im Chaos noch Pläne macht.',
+    },
+    {
+        name: 'Taha Afif',
+        role: '// Web & Kundenkommunikation',
+        body: 'Taha Afif hat zuerst eine Lehre als Montage-Elektriker EFZ gemacht und danach das Studium zum Dipl. Wirtschaftsinformatiker HF abgeschlossen. Anschliessend zwei Jahre als Softwareentwickler und IT-Consultant – genug, um zu merken, dass ihm vor allem die Verbindung aus Technik, Web und direktem Kundenkontakt liegt. Seine Stärke ist es, sich in Kunden hineinzuversetzen und technische Themen so zu erklären, dass sie verständlich werden – ohne abzuschrecken. Daneben hat er ein gutes Auge für Webdesign, Struktur und Benutzerfreundlichkeit. Was ihn antreibt: aus einer Idee Schritt für Schritt eine echte Lösung zu bauen und zu sehen, wie er Kundinnen und Kunden damit Zeit, Stress oder Unsicherheit abnehmen kann.',
+        funFact:
+            'Sechs Jahre nach seiner Elektriker-Zeit wird er von Freunden und Familie immer noch gefragt, ob er nicht mal eben die Lampen montieren könnte.',
+    },
+];
+
+const paragraphs: Paragraph[] = [
+    {
+        heading: 'Kindheitsfreunde',
+        body: 'Wir kennen uns seit der Kindheit. Was uns von Anfang an verbunden hat, war eine Begeisterung für Technik – Geräte auseinandernehmen, verstehen wie etwas funktioniert, selber etwas bauen. Aus dieser Faszination wurde mit den Jahren ein Berufswunsch, dann eine konkrete Idee: einmal etwas Eigenes aufbauen, gemeinsam.',
+    },
+    {
+        heading: 'Die Gründung',
+        body: 'Im Frühjahr 2026 war es so weit. Wir hatten beide unsere Ausbildungen abgeschlossen, mehrere Jahre in IT-Projekten gearbeitet und genug gesehen, um zu wissen: Es gibt Platz für eine kleine, ehrliche Tech-Boutique in der Zentralschweiz. Eine, die KMU praxisnahe Lösungen baut – ohne Konzern-Aufpreis, ohne Buzzword-Fassade.',
+    },
+    {
+        heading: 'Was uns stört (und antreibt)',
+        body: 'Wir haben in unseren bisherigen Stationen ein wiederkehrendes Muster gesehen: IT zieht oft brillante, aber introvertierte Köpfe an. Das Resultat sind Lösungen, die technisch sauber sind, aber an denen Kundinnen und Kunden ohne IT-Hintergrund verzweifeln. Genau das wollen wir anders machen. IT muss nicht einschüchternd sein – sie kann sogar Spass machen, wenn man sie richtig erklärt.',
+    },
+    {
+        heading: 'Wie wir uns ergänzen',
+        body: 'Wir sind beide ruhig, offen und in der Lage, im Zweifel auch einmal nachzugeben – das macht Entscheidungen einfacher als in vielen anderen Konstellationen. In den fachlichen Schwerpunkten ergänzen wir uns: Taha bringt das Web-Know-how und das Gespür für Kundenkommunikation mit, Georg die Stärke in Cybersecurity und das organisatorische Rückgrat. Beide packen wir bei jedem Projekt gemeinsam an.',
+    },
+];
+---
+<BaseLayout
+    title="Über uns – Swissly IT Solutions"
+    description="Hinter Swissly stehen zwei Personen, die IT erklären können. Lernen Sie Georg und Taha kennen – Tech-Boutique aus Ebikon, Zentralschweiz."
+>
+    <section class="bg-swissly-navy min-h-[50vh] flex items-center">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-32 w-full">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Über uns</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight max-w-4xl">
+                Hinter Swissly stehen zwei Personen, die IT erklären können.
+            </h1>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
+            {paragraphs.map((paragraph) => (
+                <div>
+                    <h3 class="font-headline text-xl md:text-2xl font-bold text-swissly-navy mb-4">
+                        {paragraph.heading}
+                    </h3>
+                    <p class="font-body text-base md:text-lg text-swissly-text leading-relaxed mb-12 last:mb-0">
+                        {paragraph.body}
+                    </p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Unsere Werte</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-16">
+                Wofür wir stehen.
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                {values.map((value) => (
+                    <div>
+                        <p class="font-mono text-xs text-swissly-gold mb-3 tracking-wide">{value.number}</p>
+                        <h3 class="font-headline text-2xl font-bold text-swissly-offwhite mb-4 leading-tight">
+                            {value.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {value.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Das Team</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-16">
+                Georg & Taha.
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+                {bios.map((bio) => (
+                    <div>
+                        <div class="aspect-square bg-swissly-divider rounded-lg mb-6 flex items-center justify-center">
+                            <span class="font-mono text-xs text-swissly-text/40">// Foto folgt</span>
+                        </div>
+                        <h3 class="font-headline text-2xl font-bold text-swissly-navy mb-2">
+                            {bio.name}
+                        </h3>
+                        <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">
+                            {bio.role}
+                        </p>
+                        <p class="font-body text-base text-swissly-text leading-relaxed mb-4">
+                            {bio.body}
+                        </p>
+                        <div class="pt-4 border-t border-swissly-divider mt-4 italic text-sm text-swissly-text/70 leading-relaxed">
+                            <span class="font-mono text-xs text-swissly-gold mb-2 tracking-wide not-italic block">// Fun Fact</span>
+                            {bio.funFact}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section id="standort" class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-24">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Standort</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-8">
+                Ebikon. Und überall in der Deutschschweiz.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-12 max-w-3xl">
+                Unser Sitz ist in Ebikon im Kanton Luzern – zentral gelegen zwischen Luzern, Zug und Zürich. Für die Zusammenarbeit spielt das aber meist keine Rolle: Wir arbeiten ortsunabhängig und betreuen Kundinnen und Kunden in der gesamten Deutschschweiz remote. Persönliche Treffen vor Ort organisieren wir gerne, wenn Sie sie wünschen – Kaffee oder Tee gibt es bei uns, oder wir kommen zu Ihnen.
+            </p>
+
+            <div class="pt-8 border-t border-swissly-offwhite/10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <p class="font-headline text-xl font-bold text-swissly-offwhite">
+                    Bereit für ein Erstgespräch?
+                </p>
+                <a
+                    href="/kontakt"
+                    class="inline-block bg-swissly-gold text-swissly-navy font-body font-medium px-6 py-3 rounded hover:bg-swissly-gold/90 transition"
+                >
+                    Erstgespräch anfragen
+                </a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

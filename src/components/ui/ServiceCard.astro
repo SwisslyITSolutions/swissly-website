@@ -1,0 +1,31 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    href: string;
+    class?: string;
+}
+
+const { title, description, href, class: className = '' } = Astro.props;
+---
+<a
+    href={href}
+    class:list={[
+        'group flex flex-col h-full bg-white border border-swissly-divider rounded-lg p-8 hover:border-swissly-gold hover:shadow-lg transition-all duration-200',
+        className,
+    ]}
+>
+    <p class="font-mono text-xs text-swissly-gold/70 mb-3 tracking-wide">// service</p>
+
+    <h3 class="font-headline text-xl font-bold text-swissly-navy mb-3 leading-tight">
+        {title}
+    </h3>
+
+    <p class="font-body text-base text-swissly-text leading-relaxed mb-6 flex-grow">
+        {description}
+    </p>
+
+    <span class="font-body text-sm font-medium text-swissly-gold group-hover:text-swissly-navy transition-colors mt-auto inline-flex items-center gap-1">
+        Mehr erfahren →
+    </span>
+</a>

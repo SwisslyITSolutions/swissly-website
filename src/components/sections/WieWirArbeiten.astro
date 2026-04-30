@@ -1,0 +1,55 @@
+---
+import ProcessStep from '../ui/ProcessStep.astro';
+
+interface Step {
+    number: string;
+    title: string;
+    description: string;
+}
+
+const steps: Step[] = [
+    {
+        number: '01',
+        title: 'Erstgespräch',
+        description:
+            'Wir nehmen uns 30 Minuten Zeit, um Ihr Vorhaben kennenzulernen: Wer sind Sie, was brauchen Sie, was nicht. Kostenlos und unverbindlich – am Ende wissen beide Seiten, ob es passt.',
+    },
+    {
+        number: '02',
+        title: 'Konzept & Angebot',
+        description:
+            'Wir analysieren Ihre Anforderungen, schlagen einen passenden Tech-Stack vor und legen einen klaren Aufwand fest. Sie erhalten ein nachvollziehbares Angebot – ohne Pauschalen, die später nachverhandelt werden müssen.',
+    },
+    {
+        number: '03',
+        title: 'Umsetzung',
+        description:
+            'Wir bauen Ihre Webseite oder Ihren Webshop in laufender Abstimmung mit Ihnen. Sie sehen Zwischenstände auf einer Staging-Umgebung und können jederzeit Feedback geben – ohne wochenlanges Funkstille-Warten.',
+    },
+    {
+        number: '04',
+        title: 'Launch & Betreuung',
+        description:
+            'Wir gehen mit Ihnen live, übergeben sauber dokumentiert und sind danach weiter ansprechbar. Auf Wunsch übernehmen wir die laufende Wartung – damit Ihre Webseite auch in zwei Jahren noch zuverlässig läuft.',
+    },
+];
+---
+<section id="wie-wir-arbeiten" class="bg-swissly-navy">
+    <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+        <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Wie wir arbeiten</p>
+
+        <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-16 max-w-3xl">
+            In vier Schritten von der Idee zur Webseite.
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {steps.map((step) => (
+                <ProcessStep
+                    number={step.number}
+                    title={step.title}
+                    description={step.description}
+                />
+            ))}
+        </div>
+    </div>
+</section>

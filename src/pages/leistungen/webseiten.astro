@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Block {
+    title: string;
+    description: string;
+}
+
+interface FitItem {
+    title: string;
+    description: string;
+}
+
+interface Phase {
+    number: string;
+    title: string;
+    weeks: string;
+    description: string;
+}
+
+interface CostBand {
+    title: string;
+    description: string;
+}
+
+interface RelatedService {
+    title: string;
+    description: string;
+    href: string;
+}
+
+const leistungsblocks: Block[] = [
+    {
+        title: 'Konzept & Struktur',
+        description:
+            'Wir analysieren Ihre Anforderungen, klären Zielgruppe und Inhalte und schlagen eine sinnvolle Seitenstruktur vor. Sie wissen vor dem Bau, was wo erscheint und warum.',
+    },
+    {
+        title: 'Design',
+        description:
+            'Wir gestalten Ihre Webseite passend zu Ihrer Marke und Ihrem Auftritt. Klar, modern, zeitlos – nicht modisch. Eine Webseite, die in fünf Jahren noch gut aussieht.',
+    },
+    {
+        title: 'Technische Umsetzung',
+        description:
+            'Wir entwickeln mit modernen, offenen Standards – standardmässig auf Astro mit TypeScript und Tailwind. Sauberer Code, schnelle Ladezeiten, keine proprietären Systeme.',
+    },
+    {
+        title: 'CMS auf Wunsch',
+        description:
+            'Falls Sie Inhalte selber pflegen möchten, binden wir ein passendes Content-Management-System an. Falls Ihre Webseite stabil bleibt, sparen wir uns die Komplexität – das entscheiden wir gemeinsam.',
+    },
+    {
+        title: 'Schweizer Hosting',
+        description:
+            'Ihre Webseite läuft standardmässig auf Hostpoint in der Schweiz. revDSG-konform, schnelle Ladezeiten in der DACH-Region, deutschsprachiger Support.',
+    },
+    {
+        title: 'Übergabe & Dokumentation',
+        description:
+            'Am Ende erhalten Sie nicht nur die Webseite, sondern auch Zugang zum Code-Repository, zum Hosting-Account und eine verständliche Dokumentation. Sie sind nicht an uns gebunden.',
+    },
+];
+
+const fitItems: FitItem[] = [
+    {
+        title: 'Sie sind ein KMU in der Deutschschweiz.',
+        description:
+            'Klein- oder Mittelbetrieb, lokal oder regional verankert, mit klarem Geschäftsmodell und realen Kundinnen und Kunden. Branche spielt keine Rolle.',
+    },
+    {
+        title: 'Sie wollen eine Webseite, die einfach funktioniert.',
+        description:
+            'Kein Schaufenster für Tech-Spielereien, sondern ein Werkzeug, das Ihnen Anfragen, Verkäufe oder Sichtbarkeit bringt.',
+    },
+    {
+        title: 'Sie schätzen klare Kommunikation.',
+        description:
+            'Sie möchten verstehen, was wir machen – und keine Akronym-Vorträge hören. Wir reden Klartext, Sie auch. So funktioniert Zusammenarbeit.',
+    },
+    {
+        title: 'Sie planen mittel- bis langfristig.',
+        description:
+            'Eine gute Webseite ist eine Investition, die ein paar Jahre tragen soll. Wenn Sie etwas Schnelles und Billiges für drei Monate suchen, sind wir nicht der richtige Partner.',
+    },
+];
+
+const phases: Phase[] = [
+    {
+        number: '01',
+        title: 'Erstgespräch & Konzept',
+        weeks: '(Woche 1–2)',
+        description:
+            'Wir lernen Ihr Geschäft kennen, klären Anforderungen und Inhalte und legen Struktur, Tech-Stack und Aufwand fest. Sie erhalten ein konkretes Angebot mit klaren Kosten.',
+    },
+    {
+        number: '02',
+        title: 'Design',
+        weeks: '(Woche 2–3)',
+        description:
+            'Wir entwickeln das Design Ihrer Webseite. Sie sehen Entwürfe der zentralen Seiten, geben Feedback, wir passen an. Erst wenn das Design steht, gehen wir an die Umsetzung.',
+    },
+    {
+        number: '03',
+        title: 'Umsetzung',
+        weeks: '(Woche 3–6)',
+        description:
+            'Wir bauen Ihre Webseite auf einer Test-Umgebung. Sie können laufend mitschauen und Rückmeldung geben. Wir testen auf verschiedenen Geräten und Browsern.',
+    },
+    {
+        number: '04',
+        title: 'Launch & Übergabe',
+        weeks: '(Woche 6–8)',
+        description:
+            'Wir gehen live, übergeben Ihnen alle Zugänge und dokumentieren, wie die Webseite gepflegt wird. Auf Wunsch übernehmen wir die laufende Wartung.',
+    },
+];
+
+const costBands: CostBand[] = [
+    {
+        title: 'Kompakt-Webseite',
+        description:
+            '3–5 Seiten, klassischer Auftritt für Dienstleistungs-KMU mit überschaubarem Inhalt. Ideal, wenn Sie eine professionelle Visitenkarte im Web brauchen.',
+    },
+    {
+        title: 'Standard-Webseite',
+        description:
+            '5–10 Seiten, mit Kontaktformular, Karten-Integration, eventuell einem einfachen CMS. Die typische Grösse für die meisten KMU-Aufträge.',
+    },
+    {
+        title: 'Erweiterte Webseite',
+        description:
+            'Mehrsprachig, mit CMS, Blog oder News-Bereich, individuellen Funktionen wie Buchungssystem oder Kunden-Login. Für Betriebe mit komplexerem Inhalt oder Workflow.',
+    },
+];
+
+const relatedServices: RelatedService[] = [
+    {
+        title: 'Webshops',
+        description: 'Online verkaufen, ohne im System zu versinken.',
+        href: '/leistungen/webshops',
+    },
+    {
+        title: 'Wartung & Support',
+        description: 'Damit Ihre Webseite zuverlässig läuft.',
+        href: '/leistungen/wartung',
+    },
+    {
+        title: 'Migrationen',
+        description: 'Veralteten Auftritt auf modernen Stack bringen.',
+        href: '/leistungen/migrationen',
+    },
+    {
+        title: 'SEO & Performance',
+        description: 'Schneller laden, besser gefunden werden.',
+        href: '/leistungen/seo-performance',
+    },
+];
+---
+<BaseLayout
+    title="Webseiten – Swissly IT Solutions"
+    description="Webseiten für KMU in der Deutschschweiz – modern, schnell und mit Schweizer Hosting. Ihr neuer Auftritt, sauber gebaut und einfach zu pflegen."
+>
+    <section class="bg-swissly-navy">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-6 tracking-wide">// Leistung · Webseiten</p>
+
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-swissly-offwhite leading-tight mb-6">
+                Webseiten, die zu Ihrem Geschäft passen.
+            </h1>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-10 max-w-3xl">
+                Wir entwickeln Webseiten für KMU in der Deutschschweiz – moderne, schnelle Auftritte, die im Alltag funktionieren und sich pflegen lassen, ohne dass Sie zum IT-Profi werden müssen.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+                <a
+                    href="/kontakt"
+                    class="bg-swissly-gold text-swissly-navy font-body font-medium px-6 py-3 rounded hover:bg-swissly-gold/90 transition"
+                >
+                    Erstgespräch anfragen
+                </a>
+                <a
+                    href="#leistungsumfang"
+                    class="text-swissly-offwhite font-body font-medium px-6 py-3 border border-swissly-offwhite/30 rounded hover:border-swissly-gold hover:text-swissly-gold transition"
+                >
+                    Was ist enthalten
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="leistungsumfang" class="bg-swissly-offwhite">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Leistungsumfang</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Was Sie bei uns bekommen.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                Eine Swissly-Webseite ist nicht von der Stange. Wir bauen sie auf Ihren konkreten Bedarf zugeschnitten – und liefern dabei einen klaren Standard, auf den Sie sich verlassen können.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {leistungsblocks.map((block) => (
+                    <div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-3 leading-tight">
+                            {block.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            {block.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Zielgruppe</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Wann eine Swissly-Webseite passt.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-12 max-w-3xl">
+                Wir arbeiten am liebsten mit Kundinnen und Kunden, bei denen wir wirklich Mehrwert schaffen können. Wenn Sie sich in einem der folgenden Punkte wiederfinden, sind Sie bei uns richtig:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {fitItems.map((item) => (
+                    <div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {item.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {item.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-swissly-offwhite/10">
+                <h3 class="font-headline text-lg font-bold text-swissly-offwhite/80 mb-3 leading-tight">
+                    Wofür wir nicht der richtige Partner sind:
+                </h3>
+                <p class="font-body text-base text-swissly-offwhite/60 leading-relaxed">
+                    Reine Spar-Aufträge unter unserer Mindestgrösse, sehr grosse Konzern-Projekte mit komplexer Compliance oder Webseiten, bei denen Logo, Texte und Bilder erst noch entstehen müssen und wir das Marketing dazu liefern sollen. Für solche Anliegen vermitteln wir Sie gerne weiter.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// So läuft das Projekt ab</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+                Vom Erstgespräch bis zum Live-Gang.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+                Wir arbeiten in vier klaren Phasen. Jede Phase hat ein konkretes Ergebnis, an dem Sie sehen, dass es vorangeht.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                {phases.map((phase) => (
+                    <div class="flex flex-col">
+                        <p class="font-mono text-5xl font-bold text-swissly-gold mb-4 leading-none tabular-nums">
+                            {phase.number}
+                        </p>
+                        <div class="h-px bg-swissly-divider mb-6"></div>
+                        <h3 class="font-headline text-xl font-bold text-swissly-navy mb-2 leading-tight">
+                            {phase.title}
+                        </h3>
+                        <p class="font-mono text-xs text-swissly-text/60 mb-3 tracking-wide">
+                            {phase.weeks}
+                        </p>
+                        <p class="font-body text-base text-swissly-text leading-relaxed">
+                            {phase.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <p class="font-body italic text-sm text-swissly-text/60 leading-relaxed mt-12 max-w-2xl">
+                Hinweis: Die Wochenangaben sind Richtwerte für eine kleine bis mittlere Webseite. Grössere Projekte dauern länger – das halten wir im Angebot fest.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Aufwand</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-offwhite leading-tight mb-6 max-w-3xl">
+                Was eine Webseite zeitlich bedeutet.
+            </h2>
+
+            <p class="font-body text-lg text-swissly-offwhite/80 leading-relaxed mb-16 max-w-3xl">
+                Wir arbeiten mit Stundenkontingenten, nicht mit Pauschalen. Damit Sie eine Vorstellung bekommen, was üblich ist, hier drei typische Grössenordnungen:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {costBands.map((band) => (
+                    <div class="bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-8 hover:border-swissly-gold transition">
+                        <h3 class="font-headline text-xl font-bold text-swissly-offwhite mb-4 leading-tight">
+                            {band.title}
+                        </h3>
+                        <p class="font-body text-base text-swissly-offwhite/70 leading-relaxed">
+                            {band.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-12 p-6 border-l-4 border-swissly-gold bg-swissly-offwhite/5">
+                <h3 class="font-headline text-lg font-bold text-swissly-offwhite mb-2 leading-tight">
+                    Konkrete Zahlen kommen im Erstgespräch.
+                </h3>
+                <p class="font-body text-base text-swissly-offwhite/80 leading-relaxed">
+                    Nach 30 Minuten Gespräch wissen wir, in welchem Band Ihr Projekt liegt – und Sie wissen, ob es zu Ihrem Budget passt. Ohne Verkaufsdruck.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-swissly-offwhite">
+        <div class="max-w-4xl mx-auto px-6 py-20 md:py-24 text-center">
+            <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6">
+                Klingt das nach Ihrem Projekt?
+            </h2>
+
+            <p class="font-body text-lg text-swissly-text leading-relaxed mb-10 max-w-2xl mx-auto">
+                Im 30-minütigen Erstgespräch klären wir Ihre Anforderungen, mögliche Lösungen und den realistischen Aufwand. Kostenlos, unverbindlich und ohne Verkaufsgespräch.
+            </p>
+
+            <a
+                href="/kontakt"
+                class="inline-block bg-swissly-navy text-swissly-offwhite font-body font-medium px-8 py-4 rounded hover:bg-swissly-navy/90 transition text-base"
+            >
+                Erstgespräch anfragen
+            </a>
+
+            <p class="font-mono text-xs text-swissly-text/60 tracking-wide mt-8">
+                // Antwort innerhalb 24 Stunden · Werktags
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-swissly-navy">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-24">
+            <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Auch interessant</p>
+
+            <h2 class="font-headline text-3xl md:text-4xl font-bold text-swissly-offwhite leading-tight mb-12">
+                Weitere Leistungen.
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {relatedServices.map((service) => (
+                    <a
+                        href={service.href}
+                        class="group flex flex-col bg-swissly-offwhite/5 border border-swissly-offwhite/10 rounded-lg p-6 hover:border-swissly-gold hover:bg-swissly-offwhite/10 transition"
+                    >
+                        <h3 class="font-headline text-lg font-bold text-swissly-offwhite mb-3 leading-tight">
+                            {service.title}
+                        </h3>
+                        <p class="font-body text-sm text-swissly-offwhite/70 leading-relaxed mb-4 flex-grow">
+                            {service.description}
+                        </p>
+                        <span class="font-body text-sm font-medium text-swissly-gold mt-auto">
+                            →
+                        </span>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+</BaseLayout>

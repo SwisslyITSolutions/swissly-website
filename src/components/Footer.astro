@@ -1,4 +1,70 @@
 ---
-// Footer content folgt
+const currentYear = new Date().getFullYear();
+
+const legalLinks: { href: string; label: string }[] = [
+    { href: '/impressum', label: 'Impressum' },
+    { href: '/datenschutz', label: 'Datenschutz' },
+    { href: '/agb', label: 'AGB' },
+];
+
+const moreLinks: { href: string; label: string }[] = [
+    { href: '/tech-stack', label: 'Tech-Stack' },
+    { href: '/faq', label: 'FAQ' },
+];
 ---
-<footer></footer>
+<footer class="bg-swissly-navy pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <p class="font-headline text-2xl font-bold tracking-wide text-swissly-offwhite leading-tight">
+                    SWISSLY IT SOLUTIONS
+                </p>
+                <p class="font-body text-xs text-swissly-gold mt-2 tracking-widest uppercase">
+                    Digital Innovation & Trust
+                </p>
+            </div>
+
+            <div>
+                <h3 class="font-headline text-swissly-offwhite text-sm font-semibold mb-3">Standort</h3>
+                <p class="font-body text-swissly-offwhite/70 text-sm">6030 Ebikon, Luzern</p>
+            </div>
+
+            <div>
+                <h3 class="font-headline text-swissly-offwhite text-sm font-semibold mb-3">Rechtliches</h3>
+                <ul class="space-y-2">
+                    {legalLinks.map((link) => (
+                        <li>
+                            <a
+                                href={link.href}
+                                class="font-body text-swissly-offwhite/70 text-sm hover:text-swissly-gold transition-colors"
+                            >
+                                {link.label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="font-headline text-swissly-offwhite text-sm font-semibold mb-3">Mehr</h3>
+                <ul class="space-y-2">
+                    {moreLinks.map((link) => (
+                        <li>
+                            <a
+                                href={link.href}
+                                class="font-body text-swissly-offwhite/70 text-sm hover:text-swissly-gold transition-colors"
+                            >
+                                {link.label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-12 pt-6 border-t border-swissly-offwhite/10 flex flex-col md:flex-row items-center md:justify-between gap-2">
+            <p class="font-mono text-swissly-offwhite/60 text-xs">// Available · Hosted in Switzerland 🇨🇭</p>
+            <p class="font-body text-swissly-offwhite/60 text-xs">© {currentYear} Swissly IT Solutions KLG</p>
+        </div>
+    </div>
+</footer>

@@ -1,4 +1,36 @@
 ---
-// Header content folgt
+const navLinks: { href: string; label: string }[] = [
+    { href: '/leistungen', label: 'Leistungen' },
+    { href: '/ueber-uns', label: 'Über uns' },
+    { href: '/kontakt', label: 'Kontakt' },
+];
 ---
-<header></header>
+<header class="sticky top-0 z-50 bg-swissly-navy h-18">
+    <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+        <a
+            href="/"
+            class="font-headline text-base md:text-lg font-bold tracking-wide text-swissly-offwhite leading-tight"
+        >
+            SWISSLY IT
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8" aria-label="Hauptnavigation">
+            {navLinks.map((link) => (
+                <a
+                    href={link.href}
+                    class="font-body text-swissly-offwhite/80 hover:text-swissly-gold transition-colors"
+                >
+                    {link.label}
+                </a>
+            ))}
+        </nav>
+
+        <a
+            href="/kontakt"
+            class="font-body font-medium bg-swissly-gold text-swissly-navy px-5 py-2 rounded hover:bg-swissly-gold/90 transition-colors"
+        >
+            <span class="md:hidden">Anfragen</span>
+            <span class="hidden md:inline">Erstgespräch anfragen</span>
+        </a>
+    </div>
+</header>

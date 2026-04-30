@@ -1,0 +1,72 @@
+---
+import ServiceCard from '../ui/ServiceCard.astro';
+
+interface Service {
+    title: string;
+    description: string;
+    href: string;
+    class?: string;
+}
+
+const services: Service[] = [
+    {
+        title: 'Webseiten & Redesign',
+        description:
+            'Neue Webseite oder ein Refresh für Ihren bestehenden Auftritt? Wir entwickeln moderne, schnelle Seiten – mit oder ohne CMS, je nachdem, was Sie tatsächlich pflegen wollen.',
+        href: '/leistungen/webseiten',
+        class: 'md:col-span-2 lg:col-span-2',
+    },
+    {
+        title: 'Webshops',
+        description:
+            'Online verkaufen, ohne in einem unübersichtlichen System zu versinken. Wir setzen Webshops auf, die für Sie im Backend und für Ihre Kundschaft im Kaufprozess einfach funktionieren.',
+        href: '/leistungen/webshops',
+        class: 'md:col-span-2 lg:col-span-2',
+    },
+    {
+        title: 'Wartung & Support',
+        description:
+            'Eine Webseite ist kein Möbelstück, sie braucht Pflege. Wir kümmern uns um Updates, Sicherheit und kleinere Anpassungen – und sind erreichbar, wenn doch einmal etwas klemmt.',
+        href: '/leistungen/wartung',
+        class: 'md:col-span-2 lg:col-span-2',
+    },
+    {
+        title: 'Migrationen',
+        description:
+            'Veraltete oder lahme Webseite? Wir bringen Ihren Auftritt auf einen modernen Tech-Stack – sauber migriert, ohne dass dabei Inhalte oder Suchmaschinen-Rankings verloren gehen.',
+        href: '/leistungen/migrationen',
+        class: 'md:col-span-2 lg:col-start-2 lg:col-span-2',
+    },
+    {
+        title: 'SEO-Optimierungen & Performance',
+        description:
+            'Schnelle Webseiten werden besser gefunden. Wir optimieren Ladezeiten und technisches SEO, damit Ihre Inhalte bei Google auffindbar bleiben – ohne Werbebudget-Diskussionen.',
+        href: '/leistungen/seo-performance',
+        class: 'md:col-start-2 md:col-span-2 lg:col-start-4 lg:col-span-2',
+    },
+];
+---
+<section id="was-wir-tun" class="bg-swissly-offwhite">
+    <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+        <p class="font-mono text-sm text-swissly-gold mb-4 tracking-wide">// Was wir tun</p>
+
+        <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-swissly-navy leading-tight mb-6 max-w-3xl">
+            Wir bauen, pflegen und verbessern Webseiten.
+        </h2>
+
+        <p class="font-body text-lg text-swissly-text leading-relaxed mb-16 max-w-3xl">
+            Unser Fokus liegt klar auf Webentwicklung – Webseiten und Webshops, die im Schweizer Geschäftsalltag funktionieren. Vom ersten Konzept bis zur laufenden Pflege betreuen wir alles aus einer Hand.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            {services.map((service) => (
+                <ServiceCard
+                    title={service.title}
+                    description={service.description}
+                    href={service.href}
+                    class={service.class}
+                />
+            ))}
+        </div>
+    </div>
+</section>

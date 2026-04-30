@@ -1,14 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import WasWirTun from '../components/sections/WasWirTun.astro';
+import WieWirArbeiten from '../components/sections/WieWirArbeiten.astro';
+import CtaBlock from '../components/sections/CtaBlock.astro';
+import HostingSwitzerland from '../components/sections/HostingSwitzerland.astro';
 ---
 <BaseLayout title="Swissly IT Solutions – Webdesign aus Ebikon">
-    <section class="min-h-screen flex items-center justify-center bg-swissly-navy text-white">
-        <div class="text-center px-4">
-            <h1 class="font-headline text-5xl md:text-7xl font-bold mb-4">Swissly IT Solutions</h1>
-            <p class="font-body text-xl md:text-2xl text-slate-300 mb-8">Webdesign aus Ebikon · Webseiten und Webshops für Schweizer KMU</p>
-            <div class="inline-block px-6 py-3 bg-swissly-gold text-swissly-navy hover:bg-swissly-gold/90 transition rounded-lg font-semibold cursor-pointer">
-                Coming Soon
-            </div>
-        </div>
-    </section>
+    <Hero />
+    <WasWirTun />
+    <WieWirArbeiten />
+    <CtaBlock />
+    <HostingSwitzerland />
 </BaseLayout>
