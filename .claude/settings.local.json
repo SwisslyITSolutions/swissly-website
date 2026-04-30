@@ -5,7 +5,10 @@
       "mcp__claude_ai_Notion__notion-search",
       "mcp__claude_ai_Notion__notion-fetch",
       "Bash(python3 *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(python)",
+      "Bash(npx --yes svgo --multipass --pretty public/images/logo/logo-mark.svg public/images/logo/logo-banner.svg public/favicon.svg)",
+      "Bash(git add *)"
     ]
   }
 }
