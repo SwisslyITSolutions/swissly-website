@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Swissly">
+  <defs>
+    <linearGradient id="swisslyGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B7448"/>
+      <stop offset="50%" stop-color="#B89968"/>
+      <stop offset="100%" stop-color="#C9B084"/>
+    </linearGradient>
+    <style>
+      .cross-stroke { fill: none; stroke: #1A2D45; stroke-width: 28; stroke-linejoin: miter; }
+      .star-fill    { fill: url(#swisslyGold); }
+    </style>
+  </defs>
+  <path class="star-fill"   d="M407 105q-160.8 151 0 302-151-160.8-302 0 160.8-151 0-302 151 160.8 302 0Z"/>
+  <path class="cross-stroke" d="M176 56h160v120h120v160H336v120H176V336H56V176h120Z"/>
+</svg>
