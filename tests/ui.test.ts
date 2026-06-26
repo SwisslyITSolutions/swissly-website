@@ -74,7 +74,7 @@ test('Accordion renders all questions with aria wiring', async () => {
   expect(html).toContain('aria-controls');
 });
 
-test('FormField renders a labelled required input', async () => {
+test('FormField renders a labelled required input (dark tone default)', async () => {
   const c = await AstroContainer.create();
   const html = await c.renderToString(FormField, {
     props: { name: 'email', label: 'E-Mail', type: 'email', required: true },
@@ -83,6 +83,22 @@ test('FormField renders a labelled required input', async () => {
   expect(html).toContain('name="email"');
   expect(html).toContain('type="email"');
   expect(html).toContain('required');
+  // Dark tone: label uses white text
+  expect(html).toContain('text-white/70');
+});
+
+test('FormField tone="light" uses dark ink label and white input background', async () => {
+  const c = await AstroContainer.create();
+  const html = await c.renderToString(FormField, {
+    props: { name: 'name', label: 'Name', required: true, tone: 'light' },
+  });
+  expect(html).toContain('for="field-name"');
+  expect(html).toContain('Name');
+  // Light tone: label uses ink (dark) text, input has white bg
+  expect(html).toContain('text-ink');
+  expect(html).toContain('bg-white');
+  // Light tone must NOT use white text (invisible on light backgrounds)
+  expect(html).not.toContain('text-white');
 });
 
 test('Eyebrow prefixes slot content with //', async () => {
