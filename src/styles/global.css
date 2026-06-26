@@ -1,2 +1,49 @@
 @import "tailwindcss";
-:root { --navy-700:#1A2D45; --gold:#B89968; }
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/geist";
+
+@theme {
+  --color-navy-900: #0C1828;
+  --color-navy-800: #14253A;
+  --color-navy-700: #1A2D45;
+  --color-offwhite: #FAFAF7;
+  --color-paper: #FFFFFF;
+  --color-gold: #B89968;
+  --color-gold-bright: #C9A96A;
+  --color-ink: #1A2D45;
+  --color-muted: #4A5568;
+  --color-line: #E8EAED;
+  --font-display: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+}
+
+@layer base {
+  html { scroll-behavior: smooth }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto }
+    * { animation-duration: .01ms !important; transition-duration: .01ms !important }
+  }
+  body {
+    background: var(--color-navy-900);
+    color: #E6EDF5;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold-bright);
+    outline-offset: 2px;
+  }
+}
+
+@utility container-x {
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+}
+
+@utility dot-grid {
+  background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
