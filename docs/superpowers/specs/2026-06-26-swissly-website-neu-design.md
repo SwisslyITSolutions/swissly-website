@@ -176,14 +176,16 @@ Daten, ist isoliert verständlich/testbar. Inhalte ≠ Darstellung (Daten in `sr
 - **Reihenfolge:** Websites → Care → IT → Schulungen.
 - **Bereinigungen ggü. Live:** „Content-Updates" → „Anpassungen"; keine MWST-Hinweise
   (nicht MWST-pflichtig); Kontakt info@ (nicht admin@); Preise/Care-Pläne öffentlich
-  (Live & Notion stimmen überein: Pakete 1'490 / 3'900 / 6'400; Care 59 / 149 / 289).
+  (Live & Notion stimmen überein: Pakete 1'490 / 3'900 / 6'400; Care 59 / 149 / 289);
+  Paketnamen vereinheitlicht auf Starter/Business/Commerce.
 - **Tonalität:** „Sie", warm-direkt, technisch fundiert ohne Jargon.
 - **Team:** Taha Afif (Web & Kundenkommunikation), Georg Ristic (Cybersecurity & Organisation).
 - **NAP:** Swissly IT Solutions KLG, Pilatusweg 23, 6030 Ebikon; info@swisslyit.ch;
   keine Telefonnummer; Karte via OpenStreetMap/Leaflet (kein Google Maps).
 
 ### Preise (öffentlich, CHF, netto/steuerbefreit)
-- Pakete: Starter **1'490** · Business/Corporate **3'900** · Commerce/E-Commerce **6'400**.
+- Pakete (verbindliche Namen = Notion): **Starter 1'490** · **Business 3'900** · **Commerce 6'400**
+  (Live-Labels „Corporate"/„E-Commerce" werden auf Business/Commerce vereinheitlicht).
 - Care-Pläne (Jahresabo): Foundation **59/Mt** · Growth **149/Mt** (Most Popular) · Scale **289/Mt**.
 - Stundensatz **140/h** (IT-Support 15-Min-Takt). Module/Schulungen auf Anfrage.
 
