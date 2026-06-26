@@ -89,7 +89,7 @@ const photos: Record<string, ImageMetadata> = {
                   alt={`${member.name} — ${member.role} bei Swissly IT Solutions`}
                   width={640}
                   format="webp"
-                  class="mb-5 aspect-[4/5] w-full rounded-xl border border-white/10 object-cover object-top"
+                  class={`mb-5 aspect-[4/5] w-full rounded-xl border border-white/10 object-cover ${member.name === 'Taha Afif' ? 'object-bottom' : 'object-top'}`}
                 />
               )}
               <h3 class="font-display text-xl font-bold text-white">{member.name}</h3>
