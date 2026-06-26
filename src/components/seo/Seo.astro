@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  ogImage = '/images/logo/og-default.png',
+  noindex = false,
+} = Astro.props;
+
+// Astro.site is set from astro.config during build; fall back to the canonical
+// production origin so the component also renders correctly inside unit tests
+// (Astro Container API does not populate Astro.site).
+const origin = Astro.site ?? new URL('https://swisslyit.ch');
+const canonical = new URL(path, origin).href;
+const ogUrl = new URL(ogImage, origin).href;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Swissly IT Solutions" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogUrl} />
+<meta property="og:locale" content="de_CH" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogUrl} />

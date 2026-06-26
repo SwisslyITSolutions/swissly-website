@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import Seo from '../components/seo/Seo.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import CookieBanner from '../components/ui/CookieBanner.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogImage?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
+const blocks = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+---
+
+<!doctype html>
+<html lang="de-CH">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0C1828" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <Seo title={title} description={description} path={path} ogImage={ogImage} noindex={noindex} />
+    {blocks.map((schema) => <JsonLd schema={schema} />)}
+  </head>
+  <body class="min-h-screen bg-navy-900 antialiased">
+    <a
+      href="#main"
+      class="sr-only rounded-md bg-gold px-4 py-2 font-medium text-navy-900 focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100]"
+      >Zum Inhalt springen</a
+    >
+    <Header />
+    <main id="main"><slot /></main>
+    <Footer />
+    <CookieBanner />
+  </body>
+</html>

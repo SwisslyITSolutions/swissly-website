@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Swissly IT">
+  <rect width="64" height="64" rx="14" fill="#0C1828"/>
+  <rect x="6" y="6" width="52" height="52" rx="11" fill="none" stroke="#1A2D45" stroke-width="1.5"/>
+  <text x="32" y="44" text-anchor="middle" font-family="Geist, 'Segoe UI', system-ui, sans-serif" font-size="36" font-weight="800" fill="#C9A96A">S</text>
+</svg>
