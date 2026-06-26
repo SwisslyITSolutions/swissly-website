@@ -9,7 +9,7 @@ interface Props {
 const { tone = 'dark', id, class: className = '', containerClass = '' } = Astro.props;
 
 const toneCls =
-  tone === 'light' ? 'bg-offwhite text-ink' : 'bg-navy-900 text-[#E6EDF5]';
+  tone === 'light' ? 'bg-offwhite text-ink' : 'bg-navy-900 text-surface-text';
 ---
 
 <section id={id} class={`py-20 md:py-28 ${toneCls} ${className}`}>

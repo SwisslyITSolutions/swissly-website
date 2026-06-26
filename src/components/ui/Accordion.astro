@@ -6,19 +6,24 @@ interface AccordionItem {
 
 interface Props {
   items: AccordionItem[];
+  id?: string;
   class?: string;
 }
 
-const { items, class: className = '' } = Astro.props;
-// Stable-ish unique id prefix for aria wiring.
-const uid = Math.random().toString(36).slice(2, 8);
+const { items, id, class: className = '' } = Astro.props;
+// Deterministic, render-stable id prefix for aria wiring. Each Accordion
+// instance gets a unique counter value (incremented in render order), or an
+// explicit `id` prop overrides it.
+const g = globalThis as typeof globalThis & { __swisslyAccId?: number };
+g.__swisslyAccId = (g.__swisslyAccId ?? 0) + 1;
+const uid = id ?? `acc-${g.__swisslyAccId}`;
 ---
 
 <div class={`divide-y divide-white/10 border-y border-white/10 ${className}`} data-accordion>
   {
     items.map((item, i) => {
-      const btnId = `acc-${uid}-${i}-btn`;
-      const panelId = `acc-${uid}-${i}-panel`;
+      const btnId = `${uid}-${i}-btn`;
+      const panelId = `${uid}-${i}-panel`;
       return (
         <div class="accordion-item">
           <h3 class="m-0">
