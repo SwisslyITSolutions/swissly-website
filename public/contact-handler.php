@@ -5,18 +5,18 @@
  * Receives the contact / Erstgespräch POST, validates, rate-limits, writes a
  * lead to the Notion Leads DB, sends a notification mail, then redirects.
  *
- * Notion DB property mapping (create these columns in your Notion DB):
- *   Property name  | Notion type   | Notes
+ * Notion "📨 Leads" DB property mapping (matches the existing Operations DB —
+ * database id b25acf93-9c56-40f9-b6d1-be29c7a26f44):
+ *   Property name  | Notion type   | Value sent
  *   ─────────────────────────────────────────────────────────────────
- *   Name           | Title         | Visitor's name (required)
+ *   Lead           | Title         | Visitor's name / company (required)
  *   E-Mail         | Email         | Visitor's email (required)
- *   Telefon        | Phone number  | Optional; stored as rich_text fallback
- *   Anliegen       | Rich text     | Free-text message (required)
- *   Betreff        | Rich text     | Subject line (from hidden field or auto)
- *   Status         | Select        | Options: Neu / In Bearbeitung / Erledigt
- *   Quelle         | Select        | Options: Website / Manuell
- *   Datum          | Date          | ISO-8601 timestamp of submission
- *   IP             | Rich text     | Submitter IP (internal; can be hidden)
+ *   Telefon        | Phone number  | Optional; only sent when provided
+ *   Nachricht      | Text          | Free-text message (required)
+ *   Quelle         | Select        | "Kontaktformular"
+ *   Status         | Select        | "Neu"
+ *   Eingangsdatum  | Date          | ISO-8601 timestamp of submission
+ *   Notizen        | Text          | "Betreff: … · IP: …" (metadata)
  *
  * ┌─────────────────────────────────────────────────────────────────┐
  * │                   MANUAL TEST CHECKLIST                         │
@@ -39,9 +39,9 @@
  * │    → Expected: 4th returns HTTP 429, body "Too many requests…"   │
  * │                                                                  │
  * │ 5. NOTION WRITE                                                  │
- * │    Submit a valid form. Check Notion DB "Leads" for new page:    │
- * │    - Name, E-Mail, Telefon, Anliegen, Betreff filled             │
- * │    - Status = "Neu", Quelle = "Website", Datum set               │
+ * │    Submit a valid form. Check Notion "📨 Leads" for new page:    │
+ * │    - Lead, E-Mail, Telefon, Nachricht filled                     │
+ * │    - Status = "Neu", Quelle = "Kontaktformular", Eingangsdatum   │
  * │                                                                  │
  * │ 6. NOTIFICATION MAIL                                             │
  * │    On success, check CONTACT_MAIL_TO inbox for mail with         │
@@ -170,47 +170,45 @@ $subject  = mb_substr($subject,  0, 200, 'UTF-8');
 // ─── Notion API ──────────────────────────────────────────────────────────────
 if ($notionToken !== '' && $notionDbId !== '') {
     /**
-     * POST a new page to the Notion Leads DB.
-     *
-     * Notion property types used:
-     *   title      → Name (required title column)
+     * POST a new page to the Notion "📨 Leads" DB. Property names/types below match
+     * the live Operations database exactly (see header mapping table).
+     *   title      → Lead (required title column = visitor name/company)
      *   email      → E-Mail
-     *   rich_text  → Telefon, Anliegen, Betreff, IP
-     *   select     → Status ("Neu"), Quelle ("Website")
-     *   date       → Datum (ISO 8601)
+     *   phone_number → Telefon (only added when provided)
+     *   rich_text  → Nachricht (message), Notizen (Betreff + IP metadata)
+     *   select     → Status ("Neu"), Quelle ("Kontaktformular")
+     *   date       → Eingangsdatum (ISO 8601)
      */
     $payload = [
         'parent'     => ['database_id' => $notionDbId],
         'properties' => [
-            'Name' => [
+            'Lead' => [
                 'title' => [['text' => ['content' => $name]]],
             ],
             'E-Mail' => [
                 'email' => $email,
             ],
-            'Telefon' => [
-                'rich_text' => [['text' => ['content' => $telefon]]],
-            ],
-            'Anliegen' => [
+            'Nachricht' => [
                 'rich_text' => [['text' => ['content' => $anliegen]]],
-            ],
-            'Betreff' => [
-                'rich_text' => [['text' => ['content' => $subject]]],
             ],
             'Status' => [
                 'select' => ['name' => 'Neu'],
             ],
             'Quelle' => [
-                'select' => ['name' => 'Website'],
+                'select' => ['name' => 'Kontaktformular'],
             ],
-            'Datum' => [
+            'Eingangsdatum' => [
                 'date' => ['start' => date('c')],
             ],
-            'IP' => [
-                'rich_text' => [['text' => ['content' => $ip]]],
+            'Notizen' => [
+                'rich_text' => [['text' => ['content' => 'Betreff: ' . $subject . ' · IP: ' . $ip]]],
             ],
         ],
     ];
+    // Telefon is a phone_number property — only send it when the visitor provided one.
+    if ($telefon !== '') {
+        $payload['properties']['Telefon'] = ['phone_number' => $telefon];
+    }
 
     $ch = curl_init('https://api.notion.com/v1/pages');
     curl_setopt_array($ch, [

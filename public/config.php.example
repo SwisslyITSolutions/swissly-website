@@ -14,15 +14,14 @@
  *   NOTION_TOKEN       — Notion integration token (starts with "secret_…")
  *                        https://www.notion.so/my-integrations
  *
- *   NOTION_LEADS_DB_ID — ID of the Notion database where leads are stored.
- *                        Copy from the database URL:
- *                        https://www.notion.so/<workspace>/<DATABASE_ID>?v=…
- *                        The DB must have the integration connected and the
- *                        following properties (see contact-handler.php header):
- *                          Name (title), E-Mail (email), Telefon (rich_text),
- *                          Anliegen (rich_text), Betreff (rich_text),
- *                          Status (select), Quelle (select),
- *                          Datum (date), IP (rich_text)
+ *   NOTION_LEADS_DB_ID — ID of the Notion "📨 Leads" database (already filled in
+ *                        below). The integration MUST be connected to this DB
+ *                        (open the DB in Notion → ••• menu → Connections → add
+ *                        your integration). Existing columns the handler writes:
+ *                          Lead (title), E-Mail (email), Telefon (phone_number),
+ *                          Nachricht (text), Quelle (select: "Kontaktformular"),
+ *                          Status (select: "Neu"), Eingangsdatum (date),
+ *                          Notizen (text)
  *
  *   CONTACT_MAIL_TO    — Email address that receives notification mails.
  *
@@ -36,6 +35,6 @@
  */
 
 define('NOTION_TOKEN',       'secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-define('NOTION_LEADS_DB_ID', 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+define('NOTION_LEADS_DB_ID', 'b25acf93-9c56-40f9-b6d1-be29c7a26f44'); // 📨 Leads
 define('CONTACT_MAIL_TO',    'info@swisslyit.ch');
 // define('TRUSTED_PROXY',   '');
