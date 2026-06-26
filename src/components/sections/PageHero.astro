@@ -25,7 +25,7 @@ const hasBreadcrumb = Astro.slots.has('breadcrumb');
   </div>
   <div class="container-x relative pb-16 pt-28 md:pb-20 md:pt-36">
     {hasBreadcrumb && <slot name="breadcrumb" />}
-    <div class="max-w-3xl">
+    <div class="max-w-3xl" data-reveal>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <h1
         class="mt-5 font-display font-extrabold tracking-tight text-white"

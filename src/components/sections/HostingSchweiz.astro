@@ -25,7 +25,7 @@ const points = [
   </div>
   <div class="container-x relative py-20 md:py-28">
     <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
-      <div>
+      <div data-reveal>
         <Eyebrow>swiss made</Eyebrow>
         <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
           Hosting in der Schweiz.<br />Vertrauen inklusive.
@@ -42,7 +42,7 @@ const points = [
         </div>
       </div>
 
-      <ul class="grid gap-5 sm:grid-cols-1">
+      <ul class="grid gap-5 sm:grid-cols-1" data-reveal>
         {
           points.map((point) => (
             <li class="flex gap-4 rounded-xl border border-white/10 bg-navy-900/60 p-5">

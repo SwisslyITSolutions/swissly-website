@@ -7,7 +7,7 @@ import ProcessStep from '../ui/ProcessStep.astro';
 
 <Section tone="dark" class="border-t border-white/5">
   <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-    <div>
+    <div data-reveal>
       <Eyebrow>wie wir arbeiten</Eyebrow>
       <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
         Klarer Ablauf, keine Überraschungen.
@@ -18,7 +18,7 @@ import ProcessStep from '../ui/ProcessStep.astro';
       </p>
     </div>
 
-    <ol class="grid gap-x-10 gap-y-9 sm:grid-cols-2">
+    <ol class="grid gap-x-10 gap-y-9 sm:grid-cols-2" data-reveal>
       {
         process.map((step) => (
           <li>
