@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import Section from '../components/ui/Section.astro';
+import ProcessStep from '../components/ui/ProcessStep.astro';
+import FormField from '../components/ui/FormField.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Kostenloses Erstgespräch — Swissly IT Solutions"
+  description="30 Minuten, unverbindlich. Wir hören zu und empfehlen ehrlich — auch wenn wir nicht die richtige Lösung für Sie sind."
+  path="/erstgespraech/"
+>
+  <PageHero
+    eyebrow="kostenloses erstgespräch"
+    title="Kostenloses Erstgespräch"
+    intro="30 Minuten, unverbindlich. Wir hören zu und empfehlen ehrlich — auch wenn wir nicht die richtige Lösung für Sie sind."
+  />
+
+  <Section tone="dark">
+    <div class="mx-auto max-w-4xl">
+      <div class="grid gap-12 md:grid-cols-2 md:gap-16">
+        <!-- Process steps -->
+        <div class="flex flex-col gap-8">
+          <h2 class="font-display text-2xl font-bold tracking-tight text-white">
+            Was Sie erwartet
+          </h2>
+          <div class="flex flex-col gap-8">
+            <ProcessStep
+              index={1}
+              title="Situationsanalyse"
+              text="Wir hören zu und verstehen Ihre aktuelle Lage — ohne vorgefasste Lösung."
+            />
+            <ProcessStep
+              index={2}
+              title="Engpässe identifizieren"
+              text="Gemeinsam schauen wir, wo die grössten Hebel für Ihren Betrieb liegen."
+            />
+            <ProcessStep
+              index={3}
+              title="Ehrliche Empfehlung"
+              text="Sie erhalten eine klare Einschätzung — ob mit oder ohne Swissly."
+            />
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div>
+          <h2 class="font-display text-2xl font-bold tracking-tight text-white">
+            Jetzt anfragen
+          </h2>
+          <form
+            method="POST"
+            action="/contact-handler.php"
+            class="mt-6 flex flex-col gap-6"
+            novalidate
+          >
+            <input type="hidden" name="betreff" value="Erstgespräch" />
+
+            <FormField name="name" label="Name / Firma" required={true} />
+            <FormField name="email" label="E-Mail" type="email" required={true} />
+            <FormField name="telefon" label="Telefon (optional)" />
+            <FormField name="anliegen" label="Ihr Anliegen / Fragen" as="textarea" rows={4} />
+
+            <!-- Honeypot anti-spam field -->
+            <input
+              type="text"
+              name="company_url"
+              value=""
+              class="hidden"
+              aria-hidden="true"
+              tabindex="-1"
+              autocomplete="off"
+              style="display:none"
+            />
+
+            <label class="flex items-start gap-3 text-sm text-white/70">
+              <input type="checkbox" name="consent" required class="mt-0.5 shrink-0" />
+              <span>
+                Ich habe die
+                <a href="/datenschutzerklaerung/" class="underline hover:text-white">
+                  Datenschutzerklärung
+                </a>
+                gelesen und stimme der Verarbeitung meiner Daten zu.
+              </span>
+            </label>
+
+            <Button variant="primary" type="submit" label="Erstgespräch anfragen" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
