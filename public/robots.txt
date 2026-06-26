@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://swisslyit.ch/sitemap-index.xml
