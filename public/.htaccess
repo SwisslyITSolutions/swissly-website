@@ -30,25 +30,19 @@ DirectoryIndex index.html
 # 2. CACHE CONTROL
 # ──────────────────────────────────────────────────────────────────────────────
 <IfModule mod_headers.c>
-  # Hashed / immutable Astro bundle output — 1 year, immutable
-  <LocationMatch "^/_astro/">
-    Header set Cache-Control "public, max-age=31536000, immutable"
-  </LocationMatch>
+  # NOTE: <Location>/<LocationMatch> are NOT permitted in .htaccess (Apache returns
+  # 500). Cache rules are therefore expressed by file extension via <FilesMatch>,
+  # which IS allowed in .htaccess and covers the hashed _astro/ + vendor/ + image assets.
 
-  # Vendored libraries (Leaflet) — 1 year, immutable
-  <LocationMatch "^/vendor/">
+  # Hashed / immutable build assets (Astro bundles, vendored JS/CSS, fonts) — 1 year
+  <FilesMatch "\.(js|mjs|css|woff2|woff|ttf|otf)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
-  </LocationMatch>
+  </FilesMatch>
 
-  # Images — 1 year (not immutable; filenames may be reused)
-  <LocationMatch "^/images/">
-    Header set Cache-Control "public, max-age=31536000"
-  </LocationMatch>
-
-  # Fonts (public/fonts/ if present) — 1 year, immutable
-  <LocationMatch "^/fonts/">
-    Header set Cache-Control "public, max-age=31536000, immutable"
-  </LocationMatch>
+  # Images — 30 days
+  <FilesMatch "\.(svg|webp|avif|png|jpg|jpeg|gif|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
 
   # HTML pages — no cache (always re-validate)
   <FilesMatch "\.html$">
