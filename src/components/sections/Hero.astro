@@ -1,0 +1,103 @@
+---
+import { site } from '../../data/site';
+import Button from '../ui/Button.astro';
+import StatusBar from '../layout/StatusBar.astro';
+---
+
+<section class="relative overflow-hidden bg-navy-900">
+  <!-- Depth layers: dot-grid + gold glow (decorative, no CLS) -->
+  <div class="dot-grid pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+  <div
+    class="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-gold/10 blur-[120px]"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute right-[-10%] top-1/3 h-[28rem] w-[28rem] rounded-full bg-gold-bright/5 blur-[120px]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-x relative pb-20 pt-28 md:pb-28 md:pt-36">
+    <div class="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      <!-- Left: message -->
+      <div>
+        <span class="font-mono text-xs font-medium tracking-wider text-gold-bright">
+          <span aria-hidden="true">// </span>digital innovation &amp; trust
+        </span>
+
+        <h1
+          class="mt-6 font-display font-extrabold tracking-tight text-white"
+          style="font-size:clamp(2.5rem,6vw,4.25rem);line-height:1.04;letter-spacing:-0.02em"
+        >
+          {site.claim}
+        </h1>
+
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
+          Wir bauen schnelle, sichere Websites und übernehmen Ihre IT — verständlich
+          erklärt, in der Schweiz gehostet, mit Eigentum bei Ihnen. Damit Sie sich
+          um Ihr Geschäft kümmern können, nicht um Technik.
+        </p>
+
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Button href={site.ctaHref} label={site.ctaLabel} variant="primary">
+            <span aria-hidden="true">→</span>
+          </Button>
+          <Button href="/leistungen/" label="Leistungen" variant="outline" />
+        </div>
+
+        <div class="mt-10">
+          <StatusBar />
+        </div>
+      </div>
+
+      <!-- Right: code-editor visual -->
+      <div class="relative">
+        <div
+          class="pointer-events-none absolute -inset-4 rounded-2xl bg-gold/10 opacity-60 blur-2xl"
+          aria-hidden="true"
+        >
+        </div>
+        <div
+          class="relative overflow-hidden rounded-xl border border-white/10 bg-navy-800/80 shadow-2xl shadow-black/40 backdrop-blur"
+        >
+          <!-- Window chrome -->
+          <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+            <span class="h-3 w-3 rounded-full bg-[#ff5f57]" aria-hidden="true"></span>
+            <span class="h-3 w-3 rounded-full bg-[#febc2e]" aria-hidden="true"></span>
+            <span class="h-3 w-3 rounded-full bg-[#28c840]" aria-hidden="true"></span>
+            <span class="ml-3 font-mono text-xs text-white/40">swissly.config.ts</span>
+          </div>
+          <!-- Code body -->
+          <pre class="overflow-x-auto px-5 py-5 font-mono text-[13px] leading-relaxed"><code><span class="text-white/30 select-none">1  </span><span class="text-gold-bright">const</span> <span class="text-white">stack</span> <span class="text-white/50">=</span> [<span class="text-emerald-300">'Astro'</span>, <span class="text-emerald-300">'Tailwind'</span>, <span class="text-emerald-300">'🇨🇭'</span>];
+<span class="text-white/30 select-none">2  </span>
+<span class="text-white/30 select-none">3  </span><span class="text-gold-bright">export const</span> <span class="text-white">swissly</span> <span class="text-white/50">=</span> {'{'}
+<span class="text-white/30 select-none">4  </span>  <span class="text-sky-300">hosting</span>:    <span class="text-emerald-300">'Switzerland 🇨🇭'</span>,
+<span class="text-white/30 select-none">5  </span>  <span class="text-sky-300">ownership</span>:  <span class="text-emerald-300">'you'</span>,
+<span class="text-white/30 select-none">6  </span>  <span class="text-sky-300">performance</span>: <span class="text-emerald-300">'lighthouse 90+'</span>,
+<span class="text-white/30 select-none">7  </span>  <span class="text-sky-300">support</span>:    <span class="text-emerald-300">'Klartext'</span>,
+<span class="text-white/30 select-none">8  </span>{'}'};
+<span class="text-white/30 select-none">9  </span>
+<span class="text-white/30 select-none">10 </span><span class="text-white/40">// → läuft. einfach.</span>
+<span class="text-white/30 select-none">11 </span><span class="text-white">deploy</span>(<span class="text-emerald-300">'zentralschweiz'</span>);<span class="cursor-blink text-gold-bright">▋</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .cursor-blink {
+      animation: cursor-blink 1.1s step-end infinite;
+    }
+    @keyframes cursor-blink {
+      50% {
+        opacity: 0;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cursor-blink {
+        animation: none;
+      }
+    }
+  </style>
+</section>

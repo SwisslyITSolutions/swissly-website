@@ -1,0 +1,31 @@
+---
+import { process } from '../../data/process';
+import Section from '../ui/Section.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import ProcessStep from '../ui/ProcessStep.astro';
+---
+
+<Section tone="dark" class="border-t border-white/5">
+  <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+    <div>
+      <Eyebrow>wie wir arbeiten</Eyebrow>
+      <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
+        Klarer Ablauf, keine Überraschungen.
+      </h2>
+      <p class="mt-5 text-lg leading-relaxed text-white/70">
+        Vier Schritte vom ersten Gespräch bis zum laufenden Betrieb — transparent,
+        zum Festpreis und in Ihrem Tempo.
+      </p>
+    </div>
+
+    <ol class="grid gap-x-10 gap-y-9 sm:grid-cols-2">
+      {
+        process.map((step) => (
+          <li>
+            <ProcessStep index={step.index} title={step.title} text={step.text} />
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</Section>
