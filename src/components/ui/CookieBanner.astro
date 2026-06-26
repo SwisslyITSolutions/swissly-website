@@ -1,0 +1,89 @@
+---
+// Cookie consent banner.
+//
+// SSG note: the user's choice lives in localStorage, which is not available at
+// build time, so the markup is always emitted and the client script reveals it
+// only when getConsent() === null. It is a fixed bottom overlay, so showing it
+// causes no layout shift (CLS). The footer "Cookie-Einstellungen" button can
+// re-open it via window.swisslyConsent.open().
+---
+
+<div
+  id="cookie-banner"
+  hidden
+  class="fixed inset-x-0 bottom-0 z-[70] hidden"
+  role="dialog"
+  aria-modal="false"
+  aria-label="Cookie-Hinweis"
+  aria-live="polite"
+  data-cookie-banner
+>
+  <div class="container-x py-4">
+    <div
+      class="flex flex-col gap-4 rounded-xl border border-gold/20 bg-navy-800/95 p-5 shadow-2xl shadow-black/40 backdrop-blur md:flex-row md:items-center md:justify-between md:p-6"
+    >
+      <p class="max-w-2xl text-sm leading-relaxed text-white/80">
+        Wir nutzen Cookies für anonymisierte Statistik (Google Analytics), um diese Website zu
+        verbessern. Sie entscheiden selbst.
+        <a href="/datenschutzerklaerung/" class="text-gold-bright underline underline-offset-2 hover:text-gold">
+          Mehr in der Datenschutzerklärung</a
+        >.
+      </p>
+      <div class="flex flex-wrap items-center gap-3">
+        <button
+          type="button"
+          data-consent-reject
+          class="rounded-lg border border-white/25 px-5 py-2.5 text-sm font-medium text-white transition hover:border-gold hover:text-gold-bright"
+        >
+          Ablehnen
+        </button>
+        <button
+          type="button"
+          data-consent-accept
+          class="rounded-lg bg-gold px-5 py-2.5 text-sm font-medium text-navy-900 transition hover:-translate-y-px hover:bg-gold-bright"
+        >
+          Akzeptieren
+        </button>
+        <a
+          href="/datenschutzerklaerung/"
+          data-consent-settings
+          class="text-sm font-mono text-white/60 underline underline-offset-2 transition hover:text-white"
+        >
+          Einstellungen
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { getConsent, setConsent, OPEN_EVENT } from '../../lib/consent';
+
+  const banner = document.getElementById('cookie-banner');
+  if (banner) {
+    const show = () => {
+      banner.hidden = false;
+      banner.classList.remove('hidden');
+    };
+    const hide = () => {
+      banner.hidden = true;
+      banner.classList.add('hidden');
+    };
+
+    if (getConsent() === null) show();
+    else hide();
+
+    window.addEventListener(OPEN_EVENT, show);
+
+    banner.querySelector('[data-consent-accept]')?.addEventListener('click', () => {
+      setConsent('granted');
+      hide();
+    });
+    banner.querySelector('[data-consent-reject]')?.addEventListener('click', () => {
+      setConsent('denied');
+      hide();
+    });
+    // "Einstellungen" is a real anchor to the privacy policy — no JS needed,
+    // but we keep the banner open behaviour consistent if used without nav.
+  }
+</script>
