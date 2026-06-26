@@ -4,6 +4,7 @@ import PageHero from '../../components/sections/PageHero.astro';
 import Section from '../../components/ui/Section.astro';
 import FormField from '../../components/ui/FormField.astro';
 import Button from '../../components/ui/Button.astro';
+import Map from '../../components/ui/Map.astro';
 import { site } from '../../data/site';
 ---
 
@@ -63,5 +64,14 @@ import { site } from '../../data/site';
         <p>{site.hours}</p>
       </address>
     </div>
+  </Section>
+
+  <Section tone="dark">
+    <Map
+      lat={47.0788}
+      lng={8.3419}
+      label={`${site.legalName}, ${site.address.street}, ${site.address.zip} ${site.address.city}`}
+      height="22rem"
+    />
   </Section>
 </BaseLayout>

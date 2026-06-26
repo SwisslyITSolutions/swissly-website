@@ -1,0 +1,100 @@
+---
+/**
+ * Map.astro — OpenStreetMap / Leaflet embed.
+ *
+ * Leaflet JS + CSS are served from /vendor/leaflet/ (vendored, no CDN).
+ * Tile images come from tile.openstreetmap.org (documented in DSV).
+ * Lazy-initialised via IntersectionObserver so it only loads when visible.
+ */
+
+interface Props {
+  lat: number;
+  lng: number;
+  label: string;
+  height?: string;
+}
+
+const { lat, lng, label, height = '18rem' } = Astro.props;
+const mapId = 'swissly-leaflet-map';
+---
+
+<link rel="stylesheet" href="/vendor/leaflet/leaflet.css" />
+
+<div
+  id={mapId}
+  data-lat={lat}
+  data-lng={lng}
+  data-label={label}
+  aria-label={`Karte: ${label}`}
+  role="application"
+  style={`height:${height};`}
+  class="w-full overflow-hidden rounded-xl border border-line/20"
+>
+  <!-- Placeholder shown before Leaflet loads -->
+  <div class="flex h-full items-center justify-center bg-navy-800 text-sm text-white/40">
+    Karte wird geladen …
+  </div>
+</div>
+
+<script>
+  const el = document.getElementById('swissly-leaflet-map');
+  if (!el) throw new Error('[Map] #swissly-leaflet-map not found');
+
+  /** Load leaflet.js and initialise the map. */
+  function mountMap(container: HTMLElement): void {
+    const lat = parseFloat(container.dataset.lat ?? '0');
+    const lng = parseFloat(container.dataset.lng ?? '0');
+    const label = container.dataset.label ?? '';
+
+    // Leaflet is loaded as a global (window.L) from /vendor/leaflet/leaflet.js.
+    const script = document.createElement('script');
+    script.src = '/vendor/leaflet/leaflet.js';
+    script.onload = () => {
+      // Clear the placeholder text.
+      container.innerHTML = '';
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const L = (window as any).L;
+
+      const map = L.map(container, { scrollWheelZoom: false }).setView([lat, lng], 16);
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
+        maxZoom: 19,
+      }).addTo(map);
+
+      // Fix marker icon paths for vendored setup.
+      const icon = L.icon({
+        iconUrl: '/vendor/leaflet/images/marker-icon.png',
+        iconRetinaUrl: '/vendor/leaflet/images/marker-icon-2x.png',
+        shadowUrl: '/vendor/leaflet/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41],
+      });
+
+      L.marker([lat, lng], { icon }).addTo(map).bindPopup(label).openPopup();
+    };
+    document.head.appendChild(script);
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            observer.disconnect();
+            mountMap(el as HTMLElement);
+          }
+        }
+      },
+      { threshold: 0.1 },
+    );
+    observer.observe(el);
+  } else {
+    // Fallback: immediate load for old browsers.
+    mountMap(el as HTMLElement);
+  }
+</script>
