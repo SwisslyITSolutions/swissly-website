@@ -1,0 +1,71 @@
+---
+interface AccordionItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: AccordionItem[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+// Stable-ish unique id prefix for aria wiring.
+const uid = Math.random().toString(36).slice(2, 8);
+---
+
+<div class={`divide-y divide-white/10 border-y border-white/10 ${className}`} data-accordion>
+  {
+    items.map((item, i) => {
+      const btnId = `acc-${uid}-${i}-btn`;
+      const panelId = `acc-${uid}-${i}-panel`;
+      return (
+        <div class="accordion-item">
+          <h3 class="m-0">
+            <button
+              type="button"
+              id={btnId}
+              class="accordion-trigger flex w-full items-center justify-between gap-4 py-5 text-left font-medium text-white transition hover:text-gold-bright"
+              aria-expanded="false"
+              aria-controls={panelId}
+            >
+              <span>{item.q}</span>
+              <span
+                class="accordion-icon shrink-0 font-mono text-xl leading-none text-gold-bright transition-transform duration-200"
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </button>
+          </h3>
+          <div
+            id={panelId}
+            role="region"
+            aria-labelledby={btnId}
+            class="accordion-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out"
+          >
+            <div class="overflow-hidden">
+              <p class="pb-5 text-sm leading-relaxed text-white/70">{item.a}</p>
+            </div>
+          </div>
+        </div>
+      );
+    })
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-accordion]').forEach((root) => {
+    root.querySelectorAll<HTMLButtonElement>('.accordion-trigger').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        const item = btn.closest('.accordion-item');
+        const panel = item?.querySelector<HTMLElement>('.accordion-panel');
+        const icon = btn.querySelector<HTMLElement>('.accordion-icon');
+        if (panel) panel.style.gridTemplateRows = expanded ? '0fr' : '1fr';
+        if (icon) icon.style.transform = expanded ? '' : 'rotate(45deg)';
+      });
+    });
+  });
+</script>

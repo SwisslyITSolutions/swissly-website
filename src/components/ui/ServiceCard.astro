@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  teaser: string;
+  href: string;
+  eyebrow?: string;
+  icon?: string;
+}
+
+const { title, teaser, href, eyebrow } = Astro.props;
+---
+
+<a
+  href={href}
+  class="group relative flex flex-col rounded-xl border border-white/10 bg-navy-800 p-6 transition duration-200 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_0_30px_-10px_rgba(201,169,106,0.55)] md:p-8"
+>
+  {eyebrow && <span class="font-mono text-xs tracking-wider text-gold-bright">// {eyebrow}</span>}
+  <h3 class="mt-2 font-display text-lg font-bold tracking-tight text-white">{title}</h3>
+  <p class="mt-2 flex-1 text-sm leading-relaxed text-white/70">{teaser}</p>
+  <span class="mt-5 inline-flex items-center gap-1.5 font-mono text-xs text-gold-bright">
+    Mehr erfahren
+    <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+  </span>
+</a>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  tone?: 'dark' | 'light';
+  id?: string;
+  class?: string;
+  containerClass?: string;
+}
+
+const { tone = 'dark', id, class: className = '', containerClass = '' } = Astro.props;
+
+const toneCls =
+  tone === 'light' ? 'bg-offwhite text-ink' : 'bg-navy-900 text-[#E6EDF5]';
+---
+
+<section id={id} class={`py-20 md:py-28 ${toneCls} ${className}`}>
+  <div class={`container-x ${containerClass}`}>
+    <slot />
+  </div>
+</section>

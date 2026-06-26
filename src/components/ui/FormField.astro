@@ -1,0 +1,62 @@
+---
+interface Props {
+  name: string;
+  label: string;
+  type?: string;
+  required?: boolean;
+  as?: 'input' | 'textarea';
+  placeholder?: string;
+  autocomplete?: string;
+  rows?: number;
+  value?: string;
+  hidden?: boolean;
+}
+
+const {
+  name,
+  label,
+  type = 'text',
+  required = false,
+  as = 'input',
+  placeholder,
+  autocomplete,
+  rows = 5,
+  value,
+  hidden = false,
+} = Astro.props;
+
+const id = `field-${name}`;
+const controlCls =
+  'mt-2 w-full rounded-md border border-white/15 bg-navy-800 px-4 py-3 text-sm text-white placeholder-white/40 transition focus:border-gold focus:outline-none';
+---
+
+<div class={hidden ? 'hidden' : 'flex flex-col'} aria-hidden={hidden ? 'true' : undefined}>
+  <label for={id} class="font-mono text-xs uppercase tracking-wider text-white/70">
+    {label}{required && <span class="text-gold-bright" aria-hidden="true"> *</span>}
+  </label>
+  {
+    as === 'textarea' ? (
+      <textarea
+        id={id}
+        name={name}
+        required={required}
+        placeholder={placeholder}
+        rows={rows}
+        class={controlCls}
+        set:text={value}
+      />
+    ) : (
+      <input
+        id={id}
+        name={name}
+        type={type}
+        required={required}
+        placeholder={placeholder}
+        autocomplete={autocomplete}
+        value={value}
+        class={controlCls}
+        tabindex={hidden ? -1 : undefined}
+      />
+    )
+  }
+</div>
