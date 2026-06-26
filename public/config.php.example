@@ -1,0 +1,32 @@
+<?php
+/**
+ * Swissly IT — Server-side secrets
+ * ==================================
+ * Copy this file to config.php in the same directory and fill in real values.
+ *
+ * IMPORTANT: config.php is listed in .gitignore — NEVER commit it.
+ * On Hostpoint you can alternatively set these as environment variables
+ * (SetEnv in .htaccess or via the hosting panel) — the handler reads
+ * both getenv() and defined constants, whichever is available.
+ *
+ * Keys used by public/contact-handler.php:
+ *
+ *   NOTION_TOKEN       — Notion integration token (starts with "secret_…")
+ *                        https://www.notion.so/my-integrations
+ *
+ *   NOTION_LEADS_DB_ID — ID of the Notion database where leads are stored.
+ *                        Copy from the database URL:
+ *                        https://www.notion.so/<workspace>/<DATABASE_ID>?v=…
+ *                        The DB must have the integration connected and the
+ *                        following properties (see contact-handler.php header):
+ *                          Name (title), E-Mail (email), Telefon (rich_text),
+ *                          Anliegen (rich_text), Betreff (rich_text),
+ *                          Status (select), Quelle (select),
+ *                          Datum (date), IP (rich_text)
+ *
+ *   CONTACT_MAIL_TO    — Email address that receives notification mails.
+ */
+
+define('NOTION_TOKEN',       'secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+define('NOTION_LEADS_DB_ID', 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+define('CONTACT_MAIL_TO',    'info@swisslyit.ch');
