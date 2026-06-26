@@ -155,6 +155,11 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     swissly_error('validation');
 }
 
+// Enforce consent checkbox — must be present and non-empty (browsers send the value when checked).
+if (empty($_POST['consent'])) {
+    swissly_error('validation');
+}
+
 // Truncate inputs to reasonable limits
 $name     = mb_substr($name,     0, 200, 'UTF-8');
 $email    = mb_substr($email,    0, 254, 'UTF-8');
@@ -219,8 +224,16 @@ if ($notionToken !== '' && $notionDbId !== '') {
         ],
         CURLOPT_POSTFIELDS     => (string) json_encode($payload),
     ]);
-    curl_exec($ch);
+    $notionResponse = curl_exec($ch);
     // We do not block on Notion errors — the visitor still receives a redirect.
+    if ($notionResponse === false) {
+        error_log('[contact-handler] Notion curl_exec failed: ' . curl_error($ch));
+    } else {
+        $notionHttpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if ($notionHttpCode < 200 || $notionHttpCode >= 300) {
+            error_log('[contact-handler] Notion API returned HTTP ' . $notionHttpCode . ': ' . $notionResponse);
+        }
+    }
     curl_close($ch);
 }
 
