@@ -1,11 +1,15 @@
 ---
 interface Props {
   class?: string;
+  /** Set to true when the eyebrow appears on a light/offwhite background.
+   *  Uses --color-gold-ink (≈6.95:1 on #FAFAF7) instead of gold-bright for WCAG AA. */
+  onLight?: boolean;
 }
 
-const { class: className = '' } = Astro.props;
+const { class: className = '', onLight = false } = Astro.props;
+const colorCls = onLight ? 'text-gold-ink' : 'text-gold-bright';
 ---
 
-<span class={`font-mono text-xs font-medium tracking-wider text-gold-bright ${className}`}>
+<span class={`font-mono text-xs font-medium tracking-wider ${colorCls} ${className}`}>
   <span aria-hidden="true">// </span><slot />
 </span>

@@ -68,42 +68,46 @@ export const datenschutzData: LegalPage = {
     },
     {
       heading: '4. Google Analytics (GA4)',
-      body: 'Diese Website nutzt Google Analytics 4 (GA4), einen Webanalysedienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics verwendet Cookies, die eine Analyse der Benutzung der Website durch Sie ermöglichen. Die durch das Cookie erzeugten Informationen über Ihre Benutzung dieser Website werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Wir haben die IP-Anonymisierung aktiviert. Google ist unter dem EU-U.S. Data Privacy Framework zertifiziert, sodass ein angemessenes Datenschutzniveau gewährleistet ist. Sie können die Erfassung durch Google Analytics verhindern, indem Sie auf unseren Cookie-Banner klicken und Analytics ablehnen. Weitere Informationen zu Google Analytics und dem Datenschutz finden Sie unter: https://policies.google.com/privacy',
+      body: 'Diese Website nutzt Google Analytics 4 (GA4), einen Webanalysedienst der Google Ireland Limited (Muttergesellschaft: Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA), Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics verwendet Cookies, die eine Analyse der Benutzung der Website durch Sie ermöglichen. Die durch das Cookie erzeugten Informationen über Ihre Benutzung dieser Website werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Wir haben die IP-Anonymisierung aktiviert. Für Übermittlungen in die USA stützen wir uns auf das EU-U.S. Data Privacy Framework (DPF) sowie ergänzend auf Standarddatenschutzklauseln (SCC) nach Art. 46 DSGVO. Google Ireland Limited ist unter dem EU-U.S. DPF zertifiziert. Sie können die Erfassung durch Google Analytics verhindern, indem Sie auf unseren Cookie-Banner klicken und Analytics ablehnen. Weitere Informationen: https://policies.google.com/privacy',
     },
     {
-      heading: '5. Cookies',
+      heading: '5. Einwilligung und Cookie-Verwaltung',
+      body: 'Ihre Cookie-Einwilligung wird im Browser-Speicher (localStorage) gespeichert und gilt ausschliesslich für das aktuelle Gerät und diesen Browser. Sie können Ihre Einwilligung jederzeit widerrufen: Klicken Sie dazu auf den Link «Cookie-Einstellungen» in der Fusszeile dieser Website. Der Cookie-Banner öffnet sich erneut und Sie können Ihre Wahl anpassen. Ohne Einwilligung wird kein Google Analytics geladen.',
+    },
+    {
+      heading: '6. Cookies',
       body: 'Unsere Website verwendet Cookies. Dabei handelt es sich um kleine Textdateien, die Ihr Webbrowser auf Ihrem Endgerät speichert. Wir unterscheiden zwischen technisch notwendigen Cookies (für den Betrieb der Website erforderlich) und optionalen Analyse-Cookies (Google Analytics). Sie können der Nutzung von Analyse-Cookies über unseren Cookie-Banner widersprechen. Technisch notwendige Cookies können nicht deaktiviert werden.',
     },
     {
-      heading: '6. Data Privacy Framework',
-      body: 'Für die Übermittlung von Daten in die USA stützen wir uns auf das EU-U.S. Data Privacy Framework (DPF), soweit die jeweiligen Empfänger darunter zertifiziert sind. Google LLC ist unter dem Data Privacy Framework zertifiziert. Dies stellt ein angemessenes Schutzniveau für die übermittelten Daten sicher.',
+      heading: '7. Data Privacy Framework und Standarddatenschutzklauseln',
+      body: 'Für die Übermittlung von Daten in die USA stützen wir uns auf das EU-U.S. Data Privacy Framework (DPF) sowie auf Standarddatenschutzklauseln (SCC) nach Art. 46 DSGVO als ergänzende Garantien. Google Ireland Limited (Muttergesellschaft Google LLC) ist unter dem EU-U.S. Data Privacy Framework zertifiziert. Dies stellt ein angemessenes Schutzniveau für die übermittelten Daten sicher.',
     },
     {
-      heading: '7. Notion',
-      body: 'Wir nutzen Notion (Notion Labs, Inc., 2300 Harrison St., San Francisco, CA 94110, USA) intern für die Organisation unserer Arbeitsprozesse und Kundenkommunikation. Personenbezogene Daten, die Sie uns übermitteln, können in Notion gespeichert werden. Die Datenübertragung in die USA erfolgt auf Grundlage des EU-U.S. Data Privacy Framework, unter dem Notion zertifiziert ist. Weitere Informationen: https://www.notion.so/privacy',
+      heading: '8. Notion',
+      body: 'Wir nutzen Notion (Notion Labs, Inc., 2300 Harrison St., San Francisco, CA 94110, USA) intern für die Organisation unserer Arbeitsprozesse und Kundenkommunikation. Personenbezogene Daten, die Sie uns übermitteln, können in Notion gespeichert werden. Die Datenübertragung in die USA erfolgt auf Grundlage des EU-U.S. Data Privacy Framework sowie Standarddatenschutzklauseln (SCC), unter denen Notion zertifiziert ist. Weitere Informationen: https://www.notion.so/privacy',
     },
     {
-      heading: '8. OpenStreetMap',
+      heading: '9. OpenStreetMap',
       body: 'Wir binden Karten des Dienstes OpenStreetMap ein (Openstreetmap Foundation, St John\'s Innovation Centre, Cowley Road, Cambridge, CB4 0WS, UK). Bei Nutzung von OpenStreetMap werden Daten an Server der OpenStreetMap Foundation übertragen. OpenStreetMap speichert für jeden Zugriff auf das Kartenmaterial Ihre IP-Adresse. Rechtsgrundlage ist unser berechtigtes Interesse an der Darstellung des Unternehmensstandortes (Art. 6 Abs. 1 lit. f DSGVO / Art. 31 DSG).',
     },
     {
-      heading: '9. Hosting',
+      heading: '10. Hosting',
       body: 'Diese Website wird auf Servern in der Schweiz gehostet. Alle Daten, die Sie an uns übermitteln, verbleiben in der Schweiz. Unser Hosting-Anbieter verarbeitet Verbindungsdaten (IP-Adresse, Datum/Uhrzeit, abgerufene Seite) aus technischen Gründen und zur Sicherheit.',
     },
     {
-      heading: '10. Ihre Rechte',
+      heading: '11. Ihre Rechte',
       body: 'Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten. Ausserdem haben Sie das Recht auf Datenübertragbarkeit. Zur Geltendmachung Ihrer Rechte wenden Sie sich bitte an: info@swisslyit.ch',
     },
     {
-      heading: '11. Beschwerderecht',
+      heading: '12. Beschwerderecht',
       body: 'Sie haben das Recht, sich bei der zuständigen Datenschutzbehörde zu beschweren. In der Schweiz ist dies der Eidgenössische Datenschutz- und Öffentlichkeitsbeauftragte (EDÖB), Feldeggweg 1, 3003 Bern.',
     },
     {
-      heading: '12. Datensicherheit',
+      heading: '13. Datensicherheit',
       body: 'Wir setzen technische und organisatorische Massnahmen ein, um Ihre Daten gegen Verlust, Missbrauch und unberechtigten Zugriff zu schützen. Unsere Website wird über eine verschlüsselte HTTPS-Verbindung übertragen.',
     },
     {
-      heading: '13. Aktualität',
+      heading: '14. Aktualität',
       body: 'Stand: 26. Juni 2026. Wir behalten uns vor, diese Datenschutzerklärung jederzeit zu aktualisieren.',
     },
   ],

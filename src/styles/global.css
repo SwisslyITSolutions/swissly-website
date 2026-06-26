@@ -11,6 +11,8 @@
   --color-paper: #FFFFFF;
   --color-gold: #B89968;
   --color-gold-bright: #C9A96A;
+  /* Darker gold for text on light/offwhite backgrounds — WCAG AA ≥4.5:1 on #FAFAF7 (measured: ≈6.95:1) */
+  --color-gold-ink: #6B5320;
   --color-ink: #1A2D45;
   --color-muted: #4A5568;
   --color-line: #E8EAED;
