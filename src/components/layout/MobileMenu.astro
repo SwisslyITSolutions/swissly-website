@@ -1,0 +1,137 @@
+---
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  nav: NavItem[];
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { nav, ctaLabel, ctaHref } = Astro.props;
+---
+
+<div class="lg:hidden">
+  <button
+    type="button"
+    id="menu-toggle"
+    class="inline-flex h-10 w-10 items-center justify-center rounded-md text-white transition hover:text-gold-bright"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+    aria-label="Menü öffnen"
+    data-menu-toggle
+  >
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
+</div>
+
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-[80] hidden lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Navigation"
+  data-menu-panel
+  hidden
+>
+  <div class="absolute inset-0 bg-navy-900/80 backdrop-blur-sm" data-menu-overlay></div>
+  <div class="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-navy-800 p-6 shadow-2xl">
+    <div class="flex items-center justify-between">
+      <span class="font-display text-base font-extrabold tracking-wide text-white">
+        SWISSLY<span class="text-gold-bright"> IT</span>
+      </span>
+      <button
+        type="button"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md text-white transition hover:text-gold-bright"
+        aria-label="Menü schliessen"
+        data-menu-close
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <nav class="mt-10 flex flex-col gap-1" aria-label="Mobile Navigation">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-md px-2 py-3 font-display text-lg font-semibold text-white/90 transition hover:bg-white/5 hover:text-gold-bright"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <a
+      href={ctaHref}
+      class="mt-auto rounded-lg bg-gold px-5 py-3 text-center text-sm font-medium text-navy-900 transition hover:bg-gold-bright"
+    >
+      {ctaLabel}
+    </a>
+  </div>
+</div>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const panel = document.querySelector<HTMLElement>('[data-menu-panel]');
+  const overlay = panel?.querySelector<HTMLElement>('[data-menu-overlay]');
+  const closeBtn = panel?.querySelector<HTMLButtonElement>('[data-menu-close]');
+
+  if (toggle && panel) {
+    const focusable = () =>
+      Array.from(
+        panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'),
+      ).filter((el) => el.offsetParent !== null);
+
+    const open = () => {
+      panel.hidden = false;
+      panel.classList.remove('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      focusable()[0]?.focus();
+      document.addEventListener('keydown', onKeydown);
+    };
+
+    const close = () => {
+      panel.hidden = true;
+      panel.classList.add('hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKeydown);
+      toggle.focus();
+    };
+
+    function onKeydown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        close();
+        return;
+      }
+      if (e.key === 'Tab') {
+        const items = focusable();
+        if (items.length === 0) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    toggle.addEventListener('click', open);
+    closeBtn?.addEventListener('click', close);
+    overlay?.addEventListener('click', close);
+    panel.querySelectorAll('nav a').forEach((link) => link.addEventListener('click', close));
+  }
+</script>
