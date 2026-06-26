@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import Section from '../../components/ui/Section.astro';
+import FormField from '../../components/ui/FormField.astro';
+import Button from '../../components/ui/Button.astro';
+import { site } from '../../data/site';
+---
+
+<BaseLayout
+  title="Kontakt — Swissly IT Solutions"
+  description="Nehmen Sie Kontakt auf mit Swissly IT Solutions."
+  path="/kontakt/"
+>
+  <PageHero
+    eyebrow="kontakt"
+    title="Sprechen wir miteinander."
+    intro="Ob Website, IT-Frage oder Care-Plan — schreiben Sie uns, wir melden uns innert 24 Stunden."
+  />
+
+  <Section tone="light">
+    <div class="mx-auto max-w-2xl">
+      <form method="POST" action="/contact-handler.php" class="flex flex-col gap-6" novalidate>
+        <FormField name="name" label="Name / Firma" required={true} />
+        <FormField name="email" label="E-Mail" type="email" required={true} />
+        <FormField name="telefon" label="Telefon (optional)" />
+        <FormField name="anliegen" label="Ihr Anliegen" as="textarea" required={true} rows={6} />
+
+        <!-- Honeypot anti-spam field — must be invisible to humans -->
+        <input
+          type="text"
+          name="company_url"
+          value=""
+          class="hidden"
+          aria-hidden="true"
+          tabindex="-1"
+          autocomplete="off"
+          style="display:none"
+        />
+
+        <label class="flex items-start gap-3 text-sm text-ink/70">
+          <input type="checkbox" name="consent" required class="mt-0.5 shrink-0" />
+          <span>
+            Ich habe die
+            <a href="/datenschutzerklaerung/" class="underline hover:text-ink">
+              Datenschutzerklärung
+            </a>
+            gelesen und stimme der Verarbeitung meiner Daten zu.
+          </span>
+        </label>
+
+        <Button variant="primary" type="submit" label="Nachricht senden" />
+      </form>
+
+      <!-- NAP block -->
+      <address class="mt-16 not-italic border-t border-ink/10 pt-10 text-sm leading-relaxed text-ink/60">
+        <p class="font-semibold text-ink">{site.legalName}</p>
+        <p>{site.address.street}</p>
+        <p>{site.address.zip} {site.address.city}</p>
+        <p class="mt-2">
+          <a href={`mailto:${site.email}`} class="underline hover:text-ink">{site.email}</a>
+        </p>
+        <p>{site.hours}</p>
+      </address>
+    </div>
+  </Section>
+</BaseLayout>

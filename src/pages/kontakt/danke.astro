@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import Section from '../../components/ui/Section.astro';
+import Button from '../../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Danke — Swissly IT Solutions"
+  description="Vielen Dank für Ihre Nachricht. Wir melden uns bald."
+  path="/kontakt/danke/"
+  noindex={true}
+>
+  <PageHero
+    title="Vielen Dank!"
+    intro="Wir haben Ihre Nachricht erhalten und melden uns innerhalb von 24 Stunden."
+  />
+
+  <Section tone="dark">
+    <div class="flex flex-col items-center gap-6 text-center">
+      <p class="text-lg text-white/70">
+        In der Zwischenzeit können Sie sich gerne auf unserer Website umsehen.
+      </p>
+      <Button href="/" label="Zurück zur Startseite" variant="primary" />
+    </div>
+  </Section>
+</BaseLayout>
