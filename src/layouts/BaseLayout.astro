@@ -17,6 +17,7 @@ interface Props {
 
 const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
 const blocks = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 ---
 
 <!doctype html>
@@ -28,6 +29,21 @@ const blocks = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <Seo title={title} description={description} path={path} ogImage={ogImage} noindex={noindex} />
     {blocks.map((schema) => <JsonLd schema={schema} />)}
+    {/* Consent Mode v2 — set defaults BEFORE any GA script can fire */}
+    {gaId && (
+      <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        window.gtag = window.gtag || gtag;
+        gtag('consent', 'default', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          wait_for_update: 500
+        });
+      </script>
+    )}
   </head>
   <body class="min-h-screen bg-navy-900 antialiased">
     <a
@@ -40,4 +56,14 @@ const blocks = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
     <Footer />
     <CookieBanner />
   </body>
+  {/* Consent-gated GA4 init — subscribes via onConsent, no-op without id */}
+  <script>
+    import { initAnalytics } from '../lib/analytics';
+    initAnalytics();
+  </script>
+  {/* Scroll-reveal — IntersectionObserver, respects prefers-reduced-motion */}
+  <script>
+    import { initScrollReveal } from '../lib/scroll-reveal';
+    initScrollReveal();
+  </script>
 </html>
