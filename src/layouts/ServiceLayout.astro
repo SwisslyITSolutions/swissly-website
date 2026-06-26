@@ -1,7 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import Eyebrow from '../components/ui/Eyebrow.astro';
 import Button from '../components/ui/Button.astro';
+import PageHero from '../components/sections/PageHero.astro';
 import CtaBlock from '../components/sections/CtaBlock.astro';
 import { services, type Service } from '../data/services';
 import { site } from '../data/site';
@@ -55,37 +55,19 @@ const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
   jsonLd={[serviceSchema, breadcrumb]}
 >
   <!-- Header -->
-  <section class="relative overflow-hidden bg-navy-900">
-    <div class="dot-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden="true"></div>
-    <div
-      class="pointer-events-none absolute -top-40 right-1/4 h-[30rem] w-[30rem] rounded-full bg-gold/10 blur-[120px]"
-      aria-hidden="true"
-    >
+  <PageHero eyebrow={service.eyebrow} title={service.title} intro={service.intro}>
+    <nav slot="breadcrumb" class="mb-8 font-mono text-xs text-white/40" aria-label="Brotkrumen">
+      <a href="/leistungen/" class="transition hover:text-gold-bright">Leistungen</a>
+      <span aria-hidden="true" class="mx-2">/</span>
+      <span class="text-white/70">{service.title}</span>
+    </nav>
+    <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+      <Button href={site.ctaHref} label={site.ctaLabel} variant="primary">
+        <span aria-hidden="true">→</span>
+      </Button>
+      <Button href="/leistungen/" label="Alle Leistungen" variant="outline" />
     </div>
-    <div class="container-x relative pb-16 pt-28 md:pb-20 md:pt-36">
-      <nav class="mb-8 font-mono text-xs text-white/40" aria-label="Brotkrumen">
-        <a href="/leistungen/" class="transition hover:text-gold-bright">Leistungen</a>
-        <span aria-hidden="true" class="mx-2">/</span>
-        <span class="text-white/70">{service.title}</span>
-      </nav>
-      <div class="max-w-3xl">
-        <Eyebrow>{service.eyebrow}</Eyebrow>
-        <h1
-          class="mt-5 font-display font-extrabold tracking-tight text-white"
-          style="font-size:clamp(2.25rem,5vw,3.5rem);line-height:1.05;letter-spacing:-0.02em"
-        >
-          {service.title}
-        </h1>
-        <p class="mt-6 text-lg leading-relaxed text-white/70">{service.intro}</p>
-        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-          <Button href={site.ctaHref} label={site.ctaLabel} variant="primary">
-            <span aria-hidden="true">→</span>
-          </Button>
-          <Button href="/leistungen/" label="Alle Leistungen" variant="outline" />
-        </div>
-      </div>
-    </div>
-  </section>
+  </PageHero>
 
   <!-- Body: bullets + content sections -->
   <section class="bg-navy-900 pb-20 md:pb-28">
@@ -116,7 +98,7 @@ const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
         <div class="flex flex-col gap-10">
           {
             service.sections.map((section) => (
-              <div class="border-l border-white/10 pl-6">
+              <div class="border-l border-gold/30 pl-6">
                 <h2 class="font-display text-xl font-bold tracking-tight text-white md:text-2xl">
                   {section.h}
                 </h2>

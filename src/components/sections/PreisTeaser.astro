@@ -1,5 +1,6 @@
 ---
 import { packages } from '../../data/pricing';
+import Button from '../ui/Button.astro';
 ---
 
 <section class="bg-offwhite text-ink">
@@ -16,13 +17,9 @@ import { packages } from '../../data/pricing';
           Klare Pakete vom One-Pager bis zum Online-Shop — netto, ohne versteckte Kosten.
           Laufende Betreuung ab CHF 59/Monat.
         </p>
-        <a
-          href="/leistungen/"
-          class="mt-8 inline-flex items-center gap-2 rounded-lg bg-navy-900 px-5 py-3 text-sm font-medium text-white transition duration-200 hover:-translate-y-px hover:bg-navy-800"
-        >
-          Alle Preise &amp; Leistungen
+        <Button href="/leistungen/" label="Alle Preise & Leistungen" variant="solid" class="mt-8">
           <span aria-hidden="true">→</span>
-        </a>
+        </Button>
       </div>
 
       <div class="grid gap-3 sm:grid-cols-3">
