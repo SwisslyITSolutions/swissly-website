@@ -42,6 +42,12 @@
     outline: 2px solid var(--color-gold-bright);
     outline-offset: 2px;
   }
+  /* Long German compound words (e.g. "Datenschutzerklärung") must wrap/hyphenate
+     instead of being clipped by overflow-hidden ancestors on narrow viewports. */
+  h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
 }
 
 /* ─── Scroll-reveal ─────────────────────────────────────────────────────── */

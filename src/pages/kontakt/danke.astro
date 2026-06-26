@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/sections/PageHero.astro';
-import Section from '../../components/ui/Section.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
 import Button from '../../components/ui/Button.astro';
 ---
 
@@ -11,17 +10,28 @@ import Button from '../../components/ui/Button.astro';
   path="/kontakt/danke/"
   noindex={true}
 >
-  <PageHero
-    title="Vielen Dank!"
-    intro="Wir haben Ihre Nachricht erhalten und melden uns innerhalb von 24 Stunden."
-  />
-
-  <Section tone="dark">
-    <div class="flex flex-col items-center gap-6 text-center">
-      <p class="text-lg text-white/70">
+  <section class="relative overflow-hidden bg-navy-900">
+    <div class="dot-grid pointer-events-none absolute inset-0 opacity-[0.4]" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute left-1/2 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-gold/10 blur-[120px]"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="container-x relative flex min-h-[70vh] flex-col items-center justify-center py-20 text-center">
+      <Eyebrow>nachricht gesendet</Eyebrow>
+      <h1 class="mt-5 font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+        Vielen Dank!
+      </h1>
+      <p class="mt-5 max-w-xl text-lg text-surface-text/80">
+        Wir haben Ihre Nachricht erhalten und melden uns innerhalb von 24 Stunden — werktags.
+      </p>
+      <p class="mt-2 max-w-xl text-surface-text/60">
         In der Zwischenzeit können Sie sich gerne auf unserer Website umsehen.
       </p>
-      <Button href="/" label="Zurück zur Startseite" variant="primary" />
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <Button href="/" label="Zurück zur Startseite" variant="primary" />
+        <Button href="/leistungen/" label="Unsere Leistungen" variant="outline" />
+      </div>
     </div>
-  </Section>
+  </section>
 </BaseLayout>

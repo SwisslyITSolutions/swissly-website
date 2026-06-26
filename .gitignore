@@ -23,3 +23,7 @@ npm-debug.log*
 
 # superpowers scratch
 .superpowers/
+
+# local QA tooling (not part of the site)
+qa.mjs
+.qa-shots/

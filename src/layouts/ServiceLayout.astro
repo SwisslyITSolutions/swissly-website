@@ -115,7 +115,7 @@ const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
   <section class="border-t border-white/5 bg-navy-800 py-20 md:py-24">
     <div class="container-x">
       <h2 class="font-display text-2xl font-bold tracking-tight text-white">Weitere Leistungen</h2>
-      <div class="mt-8 grid gap-5 sm:grid-cols-3">
+      <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           related.map((rel) => (
             <a
