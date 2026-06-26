@@ -25,8 +25,17 @@
  *                          Datum (date), IP (rich_text)
  *
  *   CONTACT_MAIL_TO    — Email address that receives notification mails.
+ *
+ *   TRUSTED_PROXY      — (Optional) Comma-separated list of trusted reverse-proxy
+ *                        IPs (the REMOTE_ADDR values your proxy connects from).
+ *                        Leave empty (or omit) to IGNORE X-Forwarded-For and use
+ *                        REMOTE_ADDR directly — this is the safe default and
+ *                        prevents rate-limit bypass via a forged XFF header.
+ *                        Only set this if the site sits behind a known proxy/CDN
+ *                        and you need the real client IP for rate-limiting.
  */
 
 define('NOTION_TOKEN',       'secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 define('NOTION_LEADS_DB_ID', 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 define('CONTACT_MAIL_TO',    'info@swisslyit.ch');
+// define('TRUSTED_PROXY',   '');

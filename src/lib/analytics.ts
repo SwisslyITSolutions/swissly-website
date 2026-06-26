@@ -70,8 +70,6 @@ export function initAnalytics(
 ): void {
   if (!id || typeof window === 'undefined') return;
 
-  _scriptInjected = false; // reset in case module is re-used across HMR
-
   ensureGtagStub();
 
   // Consent Mode v2 default — denied for all signals.

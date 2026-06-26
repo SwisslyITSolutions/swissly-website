@@ -63,9 +63,12 @@ if (is_file($configFile)) {
     require $configFile;
 }
 
-$notionToken = getenv('NOTION_TOKEN')       ?: (defined('NOTION_TOKEN')       ? NOTION_TOKEN       : '');
-$notionDbId  = getenv('NOTION_LEADS_DB_ID') ?: (defined('NOTION_LEADS_DB_ID') ? NOTION_LEADS_DB_ID : '');
-$mailTo      = getenv('CONTACT_MAIL_TO')    ?: (defined('CONTACT_MAIL_TO')    ? CONTACT_MAIL_TO    : '');
+$notionToken  = getenv('NOTION_TOKEN')       ?: (defined('NOTION_TOKEN')       ? NOTION_TOKEN       : '');
+$notionDbId   = getenv('NOTION_LEADS_DB_ID') ?: (defined('NOTION_LEADS_DB_ID') ? NOTION_LEADS_DB_ID : '');
+$mailTo       = getenv('CONTACT_MAIL_TO')    ?: (defined('CONTACT_MAIL_TO')    ? CONTACT_MAIL_TO    : '');
+// Comma-separated list of trusted reverse-proxy IPs (REMOTE_ADDR values).
+// Empty by default ⇒ X-Forwarded-For is ignored entirely.
+$trustedProxy = getenv('TRUSTED_PROXY')      ?: (defined('TRUSTED_PROXY')      ? TRUSTED_PROXY      : '');
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -92,9 +95,26 @@ if (!empty($_POST['company_url'])) {
     swissly_redirect('/kontakt/danke/');
 }
 
+// ─── Client IP resolution ────────────────────────────────────────────────────
+// Threat model: X-Forwarded-For is a client-supplied header. Trusting it lets an
+// attacker forge a new IP per request and bypass the rate-limit (and poison the
+// IP we store to Notion). So we ONLY honour the first XFF entry when the direct
+// peer (REMOTE_ADDR) is a configured trusted proxy. Otherwise we use REMOTE_ADDR.
+$remoteAddr = (string) ($_SERVER['REMOTE_ADDR'] ?? '0.0.0.0');
+$clientIp   = $remoteAddr;
+if ($trustedProxy !== '') {
+    $trusted = array_map('trim', explode(',', $trustedProxy));
+    if (in_array($remoteAddr, $trusted, true) && !empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        // First entry in XFF is the originating client (proxy appends itself last).
+        $clientIp = trim((string) explode(',', (string) $_SERVER['HTTP_X_FORWARDED_FOR'])[0]);
+    }
+}
+$ip = preg_replace('/[^0-9a-fA-F.:_-]/', '', $clientIp);
+if ($ip === '') {
+    $ip = '0.0.0.0';
+}
+
 // ─── Rate-limit (file-based; per IP; max 3 requests per 60 s) ───────────────
-$rawIp  = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
-$ip     = preg_replace('/[^0-9a-fA-F.:_-]/', '', (string) explode(',', $rawIp)[0]);
 $rlDir  = rtrim(sys_get_temp_dir(), '/\\') . DIRECTORY_SEPARATOR . 'swissly_rl';
 if (!is_dir($rlDir)) {
     @mkdir($rlDir, 0700, true);
@@ -229,7 +249,10 @@ if ($mailTo !== '') {
         'Content-Transfer-Encoding: 8bit',
         'X-Mailer: PHP/' . PHP_VERSION,
     ]);
-    @mail($mailTo, '=?UTF-8?B?' . base64_encode($mailSubject) . '?=', $mailBody, $headers);
+    $mailOk = mail($mailTo, '=?UTF-8?B?' . base64_encode($mailSubject) . '?=', $mailBody, $headers);
+    if ($mailOk === false) {
+        error_log('[contact-handler] mail() failed for recipient ' . $mailTo);
+    }
 }
 
 // ─── Success ─────────────────────────────────────────────────────────────────

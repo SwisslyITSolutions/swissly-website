@@ -55,15 +55,15 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
     <main id="main"><slot /></main>
     <Footer />
     <CookieBanner />
+    {/* Consent-gated GA4 init — subscribes via onConsent, no-op without id */}
+    <script>
+      import { initAnalytics } from '../lib/analytics';
+      initAnalytics();
+    </script>
+    {/* Scroll-reveal — IntersectionObserver, respects prefers-reduced-motion */}
+    <script>
+      import { initScrollReveal } from '../lib/scroll-reveal';
+      initScrollReveal();
+    </script>
   </body>
-  {/* Consent-gated GA4 init — subscribes via onConsent, no-op without id */}
-  <script>
-    import { initAnalytics } from '../lib/analytics';
-    initAnalytics();
-  </script>
-  {/* Scroll-reveal — IntersectionObserver, respects prefers-reduced-motion */}
-  <script>
-    import { initScrollReveal } from '../lib/scroll-reveal';
-    initScrollReveal();
-  </script>
 </html>

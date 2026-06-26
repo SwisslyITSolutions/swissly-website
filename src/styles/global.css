@@ -40,25 +40,27 @@
 
 /* ─── Scroll-reveal ─────────────────────────────────────────────────────── */
 /*
- * Elements marked [data-reveal] fade + slide up into view.
- * The JS (src/lib/scroll-reveal.ts) adds .is-visible via IntersectionObserver.
- * Under prefers-reduced-motion the JS immediately adds .is-visible and the
- * CSS below ensures no transform is ever applied.
+ * Progressive enhancement: the hidden-initial-state is scoped to
+ * `.js-reveal [data-reveal]`. scroll-reveal.ts adds `js-reveal` to <html> on
+ * load, so users WITHOUT JS see all sections (no opacity:0 trap).
+ * The JS then adds .is-visible via IntersectionObserver to fade + slide in.
+ * Under prefers-reduced-motion the JS adds .is-visible immediately and the
+ * media-query below ensures no transform is ever applied.
  */
-[data-reveal] {
+.js-reveal [data-reveal] {
   opacity: 0;
   transform: translateY(1.5rem);
   transition:
     opacity 0.55s ease,
     transform 0.55s ease;
 }
-[data-reveal].is-visible {
+.js-reveal [data-reveal].is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal],
-  [data-reveal].is-visible {
+  .js-reveal [data-reveal],
+  .js-reveal [data-reveal].is-visible {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
