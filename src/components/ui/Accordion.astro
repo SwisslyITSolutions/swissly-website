@@ -8,18 +8,31 @@ interface Props {
   items: AccordionItem[];
   id?: string;
   class?: string;
+  /** Visual tone. `light` (default) = dark text for offwhite sections;
+   *  `dark` = light text for navy sections. */
+  tone?: 'light' | 'dark';
 }
 
-const { items, id, class: className = '' } = Astro.props;
+const { items, id, class: className = '', tone = 'light' } = Astro.props;
 // Deterministic, render-stable id prefix for aria wiring. Each Accordion
 // instance gets a unique counter value (incremented in render order), or an
 // explicit `id` prop overrides it.
 const g = globalThis as typeof globalThis & { __swisslyAccId?: number };
 g.__swisslyAccId = (g.__swisslyAccId ?? 0) + 1;
 const uid = id ?? `acc-${g.__swisslyAccId}`;
+
+const isLight = tone === 'light';
+// WCAG AA contrast on each background. Light: ink text / gold-ink icon on
+// offwhite. Dark: white text / gold-bright icon on navy.
+const dividerCls = isLight ? 'divide-ink/15 border-ink/15' : 'divide-white/10 border-white/10';
+const triggerCls = isLight
+  ? 'text-ink hover:text-gold-ink'
+  : 'text-white hover:text-gold-bright';
+const iconCls = isLight ? 'text-gold-ink' : 'text-gold-bright';
+const answerCls = isLight ? 'text-ink/70' : 'text-white/70';
 ---
 
-<div class={`divide-y divide-white/10 border-y border-white/10 ${className}`} data-accordion>
+<div class={`divide-y border-y ${dividerCls} ${className}`} data-accordion>
   {
     items.map((item, i) => {
       const btnId = `${uid}-${i}-btn`;
@@ -30,13 +43,13 @@ const uid = id ?? `acc-${g.__swisslyAccId}`;
             <button
               type="button"
               id={btnId}
-              class="accordion-trigger flex w-full items-center justify-between gap-4 py-5 text-left font-medium text-white transition hover:text-gold-bright"
+              class={`accordion-trigger flex w-full items-center justify-between gap-4 py-5 text-left font-medium transition ${triggerCls}`}
               aria-expanded="false"
               aria-controls={panelId}
             >
               <span>{item.q}</span>
               <span
-                class="accordion-icon shrink-0 font-mono text-xl leading-none text-gold-bright transition-transform duration-200"
+                class={`accordion-icon shrink-0 font-mono text-xl leading-none transition-transform duration-200 ${iconCls}`}
                 aria-hidden="true"
               >
                 +
@@ -50,7 +63,7 @@ const uid = id ?? `acc-${g.__swisslyAccId}`;
             class="accordion-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out"
           >
             <div class="overflow-hidden">
-              <p class="pb-5 text-sm leading-relaxed text-white/70">{item.a}</p>
+              <p class={`pb-5 text-sm leading-relaxed ${answerCls}`}>{item.a}</p>
             </div>
           </div>
         </div>

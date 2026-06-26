@@ -1,24 +1,24 @@
 ---
+import { Image } from 'astro:assets';
 import { site } from '../../data/site';
+import ecsShot from '../../assets/projekte/ecs-luzern.png';
 
 const { ecs } = site;
 ---
 
-<section class="bg-navy-900">
+<section class="relative overflow-hidden bg-navy-900">
   <div class="container-x py-16 md:py-20">
-    <a
-      href={ecs.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="group relative block overflow-hidden rounded-2xl border border-white/10 bg-navy-800 p-8 transition duration-200 hover:border-gold/40 hover:shadow-[0_0_40px_-12px_rgba(201,169,106,0.45)] md:p-10"
+    <div
+      class="relative overflow-hidden rounded-2xl border border-white/10 bg-navy-800 p-8 md:p-10"
     >
       <div
         class="pointer-events-none absolute right-0 top-0 h-40 w-40 rounded-full bg-gold/10 blur-3xl"
         aria-hidden="true"
       >
       </div>
-      <div class="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-        <div class="max-w-2xl">
+      <div class="relative grid items-center gap-8 md:grid-cols-2 md:gap-12">
+        <!-- Text -->
+        <div class="min-w-0">
           <span class="font-mono text-xs font-medium tracking-wider text-gold-bright">
             <span aria-hidden="true">// </span>{ecs.label.toLowerCase()}
           </span>
@@ -26,16 +26,43 @@ const { ecs } = site;
             {ecs.name}
           </h2>
           <p class="mt-3 text-sm leading-relaxed text-white/70">{ecs.text}</p>
+          <a
+            href={ecs.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group mt-6 inline-flex items-center gap-2 font-mono text-sm text-gold-bright transition hover:text-gold"
+          >
+            Projekt ansehen
+            <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">
+              ↗
+            </span>
+          </a>
         </div>
-        <span
-          class="inline-flex shrink-0 items-center gap-2 font-mono text-sm text-gold-bright"
+
+        <!-- Framed screenshot (links to live site) -->
+        <a
+          href={ecs.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group block min-w-0 overflow-hidden rounded-lg border border-white/15 bg-navy-900 shadow-xl shadow-black/30 transition duration-200 hover:border-gold/40 hover:shadow-[0_0_40px_-12px_rgba(201,169,106,0.45)]"
+          aria-label="ECS – Errante Car Solutions Website öffnen"
         >
-          Projekt ansehen
-          <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">
-            ↗
-          </span>
-        </span>
+          <!-- Minimal browser chrome -->
+          <div class="flex items-center gap-1.5 border-b border-white/10 bg-navy-800 px-3 py-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-red-500/80" aria-hidden="true"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-amber-400/80" aria-hidden="true"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-green-500/80" aria-hidden="true"></span>
+            <span class="ml-2 truncate font-mono text-[11px] text-white/40">ecs-luzern.ch</span>
+          </div>
+          <Image
+            src={ecsShot}
+            alt="ECS – Errante Car Solutions Website"
+            width={900}
+            format="webp"
+            class="block h-auto w-full"
+          />
+        </a>
       </div>
-    </a>
+    </div>
   </div>
 </section>

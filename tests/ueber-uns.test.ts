@@ -9,6 +9,14 @@ test('renders team members', async () => {
   expect(html).toContain('Georg');
 });
 
+test('renders team portraits with descriptive alt text', async () => {
+  const c = await AstroContainer.create();
+  const html = await c.renderToString(UeberUns);
+  expect(html).toContain('Taha Afif —');
+  expect(html).toContain('Georg Ristic —');
+  expect(html).toMatch(/<img[^>]+alt="Taha Afif/);
+});
+
 test('renders 3 value names', async () => {
   const c = await AstroContainer.create();
   const html = await c.renderToString(UeberUns);

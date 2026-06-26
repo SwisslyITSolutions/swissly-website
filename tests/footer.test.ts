@@ -20,6 +20,13 @@ test('Footer renders legal links, tagline, cookie trigger and copyright', async 
   expect(html).toContain('© 2026');
 });
 
+test('Footer shows the real Swissly emblem', async () => {
+  const c = await AstroContainer.create();
+  const html = decode(await c.renderToString(Footer));
+  expect(html).toContain('/images/logo/swisslyit-logo.png');
+  expect(html).toContain('alt="Swissly IT Solutions"');
+});
+
 test('Footer exposes NAP and mail link', async () => {
   const c = await AstroContainer.create();
   const html = decode(await c.renderToString(Footer));
