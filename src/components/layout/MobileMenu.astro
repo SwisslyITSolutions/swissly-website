@@ -33,18 +33,28 @@ const { nav, ctaLabel, ctaHref } = Astro.props;
 
 <div
   id="mobile-menu"
-  class="fixed inset-0 z-[80] hidden lg:hidden"
+  class="fixed inset-0 z-[80] hidden bg-navy-900 lg:hidden"
   role="dialog"
   aria-modal="true"
   aria-label="Navigation"
   data-menu-panel
   hidden
 >
-  <div class="absolute inset-0 bg-navy-900/80 backdrop-blur-sm" data-menu-overlay></div>
-  <div class="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-navy-800 p-6 shadow-2xl">
+  <div class="flex h-full w-full flex-col overflow-y-auto p-6">
     <div class="flex items-center justify-between">
-      <span class="font-display text-base font-extrabold tracking-wide text-white">
-        SWISSLY<span class="text-gold-bright"> IT</span>
+      <span class="flex items-center gap-2.5">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white p-1 shadow-sm ring-1 ring-black/5">
+          <img
+            src="/images/logo/swisslyit-logo.png"
+            alt="Swissly IT Solutions"
+            width="36"
+            height="36"
+            class="h-full w-full object-contain"
+          />
+        </span>
+        <span class="font-display text-base font-extrabold tracking-wide text-white">
+          SWISSLY<span class="text-gold-bright"> IT</span>
+        </span>
       </span>
       <button
         type="button"
@@ -82,7 +92,6 @@ const { nav, ctaLabel, ctaHref } = Astro.props;
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const panel = document.querySelector<HTMLElement>('[data-menu-panel]');
-  const overlay = panel?.querySelector<HTMLElement>('[data-menu-overlay]');
   const closeBtn = panel?.querySelector<HTMLButtonElement>('[data-menu-close]');
 
   if (toggle && panel) {
@@ -131,7 +140,6 @@ const { nav, ctaLabel, ctaHref } = Astro.props;
 
     toggle.addEventListener('click', open);
     closeBtn?.addEventListener('click', close);
-    overlay?.addEventListener('click', close);
     panel.querySelectorAll('nav a').forEach((link) => link.addEventListener('click', close));
   }
 </script>

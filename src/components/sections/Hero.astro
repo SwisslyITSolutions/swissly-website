@@ -19,7 +19,7 @@ import StatusBar from '../layout/StatusBar.astro';
   </div>
 
   <div class="container-x relative pb-20 pt-28 md:pb-28 md:pt-36">
-    <div class="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+    <div class="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
       <!-- Left: message -->
       <div>
         <span class="font-mono text-xs font-medium tracking-wider text-gold-bright">
@@ -40,10 +40,10 @@ import StatusBar from '../layout/StatusBar.astro';
         </p>
 
         <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Button href={site.ctaHref} label={site.ctaLabel} variant="primary">
+          <Button href={site.ctaHref} label={site.ctaLabel} variant="primary" class="w-full sm:w-auto">
             <span aria-hidden="true">→</span>
           </Button>
-          <Button href="/leistungen/" label="Leistungen" variant="outline" />
+          <Button href="/leistungen/" label="Leistungen" variant="outline" class="w-full sm:w-auto" />
         </div>
 
         <div class="mt-10">
@@ -52,14 +52,14 @@ import StatusBar from '../layout/StatusBar.astro';
       </div>
 
       <!-- Right: code-editor visual -->
-      <div class="relative">
+      <div class="relative min-w-0">
         <div
           class="pointer-events-none absolute -inset-4 rounded-2xl bg-gold/10 opacity-60 blur-2xl"
           aria-hidden="true"
         >
         </div>
         <div
-          class="relative overflow-hidden rounded-xl border border-white/10 bg-navy-800/80 shadow-2xl shadow-black/40 backdrop-blur"
+          class="relative w-full min-w-0 max-w-full overflow-hidden rounded-xl border border-white/10 bg-navy-800/80 shadow-2xl shadow-black/40 backdrop-blur"
         >
           <!-- Window chrome -->
           <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3">

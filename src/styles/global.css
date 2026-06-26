@@ -24,6 +24,10 @@
 
 @layer base {
   html { scroll-behavior: smooth }
+  /* Safety net against horizontal overflow from decorative glows / wide blocks.
+     `overflow-x: clip` clips the X axis WITHOUT turning the element into a
+     scroll container, so it never breaks the sticky header (unlike `hidden`). */
+  html, body { overflow-x: clip; max-width: 100%; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto }
     * { animation-duration: .01ms !important; transition-duration: .01ms !important }
