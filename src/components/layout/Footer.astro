@@ -66,7 +66,6 @@ const legalLinks = [
         <h2 class="font-mono text-xs uppercase tracking-wider text-white/40">Kontakt</h2>
         <address class="mt-4 flex flex-col gap-2.5 text-sm not-italic leading-relaxed">
           <span>{site.legalName}</span>
-          <span>{site.address.street}</span>
           <span>{site.address.zip} {site.address.city}, {site.address.region}</span>
           <a href={`mailto:${site.email}`} class="text-gold-bright transition hover:text-gold">
             {site.email}

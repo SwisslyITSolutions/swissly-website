@@ -72,8 +72,7 @@ import { site } from '../../data/site';
       <!-- NAP block -->
       <address class="mt-16 not-italic border-t border-ink/10 pt-10 text-sm leading-relaxed text-ink/60">
         <p class="font-semibold text-ink">{site.legalName}</p>
-        <p>{site.address.street}</p>
-        <p>{site.address.zip} {site.address.city}</p>
+        <p>{site.address.zip} {site.address.city}, {site.address.region}</p>
         <p class="mt-2">
           <a href={`mailto:${site.email}`} class="underline hover:text-ink">{site.email}</a>
         </p>
@@ -86,7 +85,7 @@ import { site } from '../../data/site';
     <Map
       lat={47.0788}
       lng={8.3419}
-      label={`${site.legalName}, ${site.address.street}, ${site.address.zip} ${site.address.city}`}
+      label={`${site.legalName} · ${site.address.zip} ${site.address.city}`}
       height="22rem"
     />
   </Section>
