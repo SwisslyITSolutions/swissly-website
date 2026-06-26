@@ -1,0 +1,41 @@
+---
+import { site } from '../../data/site';
+
+const { ecs } = site;
+---
+
+<section class="bg-navy-900">
+  <div class="container-x py-16 md:py-20">
+    <a
+      href={ecs.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group relative block overflow-hidden rounded-2xl border border-white/10 bg-navy-800 p-8 transition duration-200 hover:border-gold/40 hover:shadow-[0_0_40px_-12px_rgba(201,169,106,0.45)] md:p-10"
+    >
+      <div
+        class="pointer-events-none absolute right-0 top-0 h-40 w-40 rounded-full bg-gold/10 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+      <div class="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div class="max-w-2xl">
+          <span class="font-mono text-xs font-medium tracking-wider text-gold-bright">
+            <span aria-hidden="true">// </span>{ecs.label.toLowerCase()}
+          </span>
+          <h2 class="mt-3 font-display text-2xl font-bold tracking-tight text-white">
+            {ecs.name}
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-white/70">{ecs.text}</p>
+        </div>
+        <span
+          class="inline-flex shrink-0 items-center gap-2 font-mono text-sm text-gold-bright"
+        >
+          Projekt ansehen
+          <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">
+            ↗
+          </span>
+        </span>
+      </div>
+    </a>
+  </div>
+</section>

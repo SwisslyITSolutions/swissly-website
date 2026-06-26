@@ -1,0 +1,141 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import CtaBlock from '../components/sections/CtaBlock.astro';
+import { services, type Service } from '../data/services';
+import { site } from '../data/site';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+
+const origin = 'https://swisslyit.ch';
+const url = `${origin}/leistungen/${service.slug}/`;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: service.title,
+  description: service.teaser,
+  url,
+  serviceType: service.title,
+  areaServed: {
+    '@type': 'AdministrativeArea',
+    name: site.areaServed,
+  },
+  provider: {
+    '@type': 'ProfessionalService',
+    name: site.legalName,
+    url: `${origin}/`,
+    email: site.email,
+  },
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Start', item: `${origin}/` },
+    { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${origin}/leistungen/` },
+    { '@type': 'ListItem', position: 3, name: service.title, item: url },
+  ],
+};
+
+// Up to three other services for cross-linking at the foot of the page.
+const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+---
+
+<BaseLayout
+  title={service.metaTitle}
+  description={service.metaDescription}
+  path={`/leistungen/${service.slug}/`}
+  jsonLd={[serviceSchema, breadcrumb]}
+>
+  <!-- Header -->
+  <PageHero eyebrow={service.eyebrow} title={service.title} intro={service.intro}>
+    <nav slot="breadcrumb" class="mb-8 font-mono text-xs text-white/40" aria-label="Brotkrumen">
+      <a href="/leistungen/" class="transition hover:text-gold-bright">Leistungen</a>
+      <span aria-hidden="true" class="mx-2">/</span>
+      <span class="text-white/70">{service.title}</span>
+    </nav>
+    <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+      <Button href={site.ctaHref} label={site.ctaLabel} variant="primary">
+        <span aria-hidden="true">→</span>
+      </Button>
+      <Button href="/leistungen/" label="Alle Leistungen" variant="outline" />
+    </div>
+  </PageHero>
+
+  <!-- Body: bullets + content sections -->
+  <section class="bg-navy-900 pb-20 md:pb-28">
+    <div class="container-x">
+      <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <!-- Highlights -->
+        <aside class="lg:sticky lg:top-28 lg:self-start">
+          <div class="rounded-2xl border border-white/10 bg-navy-800 p-7">
+            <span class="font-mono text-xs font-medium tracking-wider text-gold-bright">
+              <span aria-hidden="true">// </span>im überblick
+            </span>
+            <ul class="mt-5 flex flex-col gap-3.5 text-sm text-white/80">
+              {
+                service.bullets.map((bullet) => (
+                  <li class="flex gap-2.5">
+                    <span aria-hidden="true" class="mt-0.5 text-gold-bright">
+                      ✓
+                    </span>
+                    <span>{bullet}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </aside>
+
+        <!-- Content sections -->
+        <div class="flex flex-col gap-10">
+          {
+            service.sections.map((section) => (
+              <div class="border-l border-gold/30 pl-6">
+                <h2 class="font-display text-xl font-bold tracking-tight text-white md:text-2xl">
+                  {section.h}
+                </h2>
+                <p class="mt-3 text-base leading-relaxed text-white/70">{section.p}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related services -->
+  <section class="border-t border-white/5 bg-navy-800 py-20 md:py-24">
+    <div class="container-x">
+      <h2 class="font-display text-2xl font-bold tracking-tight text-white">Weitere Leistungen</h2>
+      <div class="mt-8 grid gap-5 sm:grid-cols-3">
+        {
+          related.map((rel) => (
+            <a
+              href={`/leistungen/${rel.slug}/`}
+              class="group flex flex-col rounded-xl border border-white/10 bg-navy-900/60 p-6 transition duration-200 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_0_30px_-10px_rgba(201,169,106,0.5)]"
+            >
+              <h3 class="font-display text-base font-bold text-white">{rel.title}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-white/70">{rel.teaser}</p>
+              <span class="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-gold-bright">
+                Mehr erfahren
+                <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">
+                  →
+                </span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBlock title="Klingt das nach Ihrem Projekt?" />
+</BaseLayout>

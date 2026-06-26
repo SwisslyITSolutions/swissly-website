@@ -1,0 +1,35 @@
+---
+import { site } from '../../data/site';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`inline-flex items-center gap-2.5 font-mono text-xs text-white/60 ${className}`}>
+  <span class="status-dot relative inline-flex h-2 w-2" aria-hidden="true">
+    <span class="status-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400/70"></span>
+    <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+  </span>
+  <span>{site.statusBar}</span>
+</div>
+
+<style>
+  .status-ping {
+    animation: status-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  @keyframes status-ping {
+    75%,
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .status-ping {
+      animation: none;
+    }
+  }
+</style>

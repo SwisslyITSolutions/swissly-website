@@ -1,0 +1,40 @@
+---
+import Eyebrow from '../ui/Eyebrow.astro';
+
+interface Props {
+  /** Mono eyebrow label (rendered with the `// ` prefix by Eyebrow). */
+  eyebrow?: string;
+  /** Page H1. */
+  title: string;
+  /** Supporting lead paragraph below the H1. */
+  intro?: string;
+}
+
+const { eyebrow, title, intro } = Astro.props;
+
+// Optional named slot rendered ABOVE the title block (e.g. breadcrumb nav).
+const hasBreadcrumb = Astro.slots.has('breadcrumb');
+---
+
+<section class="relative overflow-hidden bg-navy-900">
+  <div class="dot-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden="true"></div>
+  <div
+    class="pointer-events-none absolute -top-40 right-1/4 h-[30rem] w-[30rem] rounded-full bg-gold/10 blur-[120px]"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="container-x relative pb-16 pt-28 md:pb-20 md:pt-36">
+    {hasBreadcrumb && <slot name="breadcrumb" />}
+    <div class="max-w-3xl" data-reveal>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      <h1
+        class="mt-5 font-display font-extrabold tracking-tight text-white"
+        style="font-size:clamp(2.25rem,5vw,3.5rem);line-height:1.05;letter-spacing:-0.02em"
+      >
+        {title}
+      </h1>
+      {intro && <p class="mt-6 text-lg leading-relaxed text-white/70">{intro}</p>}
+      <slot />
+    </div>
+  </div>
+</section>

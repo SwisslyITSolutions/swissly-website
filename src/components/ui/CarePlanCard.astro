@@ -1,0 +1,63 @@
+---
+interface Props {
+  name: string;
+  monthly: number;
+  features: string[];
+  popular?: boolean;
+  href?: string;
+  cta?: string;
+}
+
+const {
+  name,
+  monthly,
+  features,
+  popular = false,
+  href,
+  cta = 'Plan anfragen',
+} = Astro.props;
+
+const cardCls = popular
+  ? 'border-gold bg-navy-800 shadow-[0_0_45px_-12px_rgba(201,169,106,0.55)]'
+  : 'border-white/10 bg-navy-800 transition duration-200 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_0_30px_-10px_rgba(201,169,106,0.5)]';
+---
+
+<div class={`relative flex flex-col rounded-xl border p-8 ${cardCls}`}>
+  {
+    popular && (
+      <span class="absolute -top-3 left-8 inline-flex items-center rounded-full bg-gold px-3 py-1 font-mono text-xs font-medium text-navy-900">
+        Most Popular
+      </span>
+    )
+  }
+  <h3 class="font-display text-xl font-bold text-white">{name}</h3>
+  <div class="mt-5 flex items-baseline gap-1.5">
+    <span class="font-mono text-sm text-gold-bright">CHF</span>
+    <span class="font-display text-4xl font-extrabold tracking-tight text-white">{monthly}</span>
+    <span class="text-sm text-white/60">/Mt.</span>
+  </div>
+  <ul class="mt-6 flex flex-1 flex-col gap-3 text-sm text-white/80">
+    {
+      features.map((feature) => (
+        <li class="flex gap-2.5">
+          <span aria-hidden="true" class="mt-0.5 text-gold-bright">✓</span>
+          <span>{feature}</span>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    href && (
+      <a
+        href={href}
+        class={`mt-8 block rounded-lg px-5 py-3 text-center text-sm font-medium transition duration-200 ${
+          popular
+            ? 'bg-gold text-navy-900 hover:-translate-y-px hover:bg-gold-bright'
+            : 'border border-white/25 text-white hover:border-gold hover:text-gold-bright'
+        }`}
+      >
+        {cta}
+      </a>
+    )
+  }
+</div>

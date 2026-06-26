@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+import Seo from '../components/seo/Seo.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import CookieBanner from '../components/ui/CookieBanner.astro';
+import geistFontUrl from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogImage?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
+const blocks = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+---
+
+<!doctype html>
+<html lang="de-CH">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0C1828" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="font" type="font/woff2" href={geistFontUrl} crossorigin />
+    <Seo title={title} description={description} path={path} ogImage={ogImage} noindex={noindex} />
+    {blocks.map((schema) => <JsonLd schema={schema} />)}
+    {/* Consent Mode v2 — set defaults BEFORE any GA script can fire */}
+    {gaId && (
+      <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        window.gtag = window.gtag || gtag;
+        gtag('consent', 'default', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          wait_for_update: 500
+        });
+      </script>
+    )}
+  </head>
+  <body class="min-h-screen bg-navy-900 antialiased">
+    <a
+      href="#main"
+      class="sr-only rounded-md bg-gold px-4 py-2 font-medium text-navy-900 focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100]"
+      >Zum Inhalt springen</a
+    >
+    <Header />
+    <main id="main"><slot /></main>
+    <Footer />
+    <CookieBanner />
+    {/* Consent-gated GA4 init — subscribes via onConsent, no-op without id */}
+    <script>
+      import { initAnalytics } from '../lib/analytics';
+      initAnalytics();
+    </script>
+    {/* Scroll-reveal — IntersectionObserver, respects prefers-reduced-motion */}
+    <script>
+      import { initScrollReveal } from '../lib/scroll-reveal';
+      initScrollReveal();
+    </script>
+  </body>
+</html>

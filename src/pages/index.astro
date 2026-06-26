@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+import Hero from '../components/sections/Hero.astro';
+import WasWirTun from '../components/sections/WasWirTun.astro';
+import WieWirArbeiten from '../components/sections/WieWirArbeiten.astro';
+import HostingSchweiz from '../components/sections/HostingSchweiz.astro';
+import PreisTeaser from '../components/sections/PreisTeaser.astro';
+import EcsTeaser from '../components/sections/EcsTeaser.astro';
+import CtaBlock from '../components/sections/CtaBlock.astro';
+
+const origin = 'https://swisslyit.ch';
+const logo = `${origin}/images/logo/logo-banner.svg`;
+
+const postalAddress = {
+  '@type': 'PostalAddress',
+  streetAddress: site.address.street,
+  postalCode: site.address.zip,
+  addressLocality: site.address.city,
+  addressRegion: site.address.region,
+  addressCountry: site.address.country,
+};
+
+const professionalService = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${origin}/#business`,
+  name: site.legalName,
+  alternateName: site.name,
+  url: `${origin}/`,
+  email: site.email,
+  image: logo,
+  logo,
+  slogan: site.claim,
+  description:
+    'Swissly IT Solutions baut schnelle, sichere Websites und betreut die IT von KMU in der Zentralschweiz — verständlich, in der Schweiz gehostet, mit Eigentum beim Kunden.',
+  address: postalAddress,
+  areaServed: {
+    '@type': 'AdministrativeArea',
+    name: site.areaServed,
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '17:00',
+  },
+  priceRange: 'CHF',
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 47.0788,
+    longitude: 8.3419,
+  },
+  sameAs: [site.social.github],
+};
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${origin}/#organization`,
+  name: site.legalName,
+  alternateName: site.name,
+  url: `${origin}/`,
+  email: site.email,
+  logo,
+  description: site.tagline,
+  address: postalAddress,
+  sameAs: [site.social.github],
+};
+---
+
+<BaseLayout
+  title="Swissly IT Solutions — Webseiten, IT & KI in der Zentralschweiz"
+  description="Schnelle, sichere Websites und persönlicher IT-Support für KMU in der Zentralschweiz. In der Schweiz gehostet, DSG-konform, Eigentum beim Kunden. Jetzt kostenloses Erstgespräch anfragen."
+  path="/"
+  jsonLd={[professionalService, organization]}
+>
+  <Hero />
+  <WasWirTun />
+  <WieWirArbeiten />
+  <HostingSchweiz />
+  <PreisTeaser />
+  <EcsTeaser />
+  <CtaBlock />
+</BaseLayout>

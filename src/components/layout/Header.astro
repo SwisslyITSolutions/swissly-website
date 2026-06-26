@@ -1,0 +1,55 @@
+---
+import { site } from '../../data/site';
+import MobileMenu from './MobileMenu.astro';
+import Button from '../ui/Button.astro';
+
+const { nav, ctaLabel, ctaHref } = site;
+---
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 transition-colors duration-300"
+  data-header
+>
+  <div class="container-x flex h-16 items-center justify-between md:h-20">
+    <a href="/" class="flex items-center gap-2.5" aria-label="Swissly IT — Startseite">
+      <img src="/images/logo/logo-mark.svg" alt="" width="32" height="32" class="h-8 w-8" />
+      <span class="font-display text-base font-extrabold tracking-wide text-white">
+        SWISSLY<span class="text-gold-bright"> IT</span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex" aria-label="Hauptnavigation">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="group relative font-mono text-sm text-white/80 transition hover:text-white"
+          >
+            {item.label}
+            <span class="absolute -bottom-1 left-0 h-px w-0 bg-gold-bright transition-all duration-200 group-hover:w-full" />
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="hidden lg:block">
+      <Button href={ctaHref} label={ctaLabel} variant="primary" class="!px-4 !py-2.5 !text-xs" />
+    </div>
+
+    <MobileMenu nav={nav} ctaLabel={ctaLabel} ctaHref={ctaHref} />
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('[data-header]');
+  if (header) {
+    const solid = ['bg-navy-900/90', 'backdrop-blur', 'border-b', 'border-white/10', 'shadow-lg', 'shadow-black/20'];
+    const update = () => {
+      if (window.scrollY > 12) header.classList.add(...solid);
+      else header.classList.remove(...solid);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>

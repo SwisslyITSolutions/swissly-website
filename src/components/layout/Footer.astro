@@ -1,0 +1,107 @@
+---
+import { site } from '../../data/site';
+import StatusBar from './StatusBar.astro';
+
+const year = 2026;
+
+const navLinks = [
+  { label: 'Über uns', href: '/ueber-uns/' },
+  { label: 'Alle Leistungen', href: '/leistungen/' },
+  { label: 'Schulungen', href: '/leistungen/schulungen/' },
+  { label: 'FAQ', href: '/faq/' },
+  { label: 'Kontakt', href: '/kontakt/' },
+];
+
+const legalLinks = [
+  { label: 'Impressum', href: '/impressum/' },
+  { label: 'Datenschutzerklärung', href: '/datenschutzerklaerung/' },
+  { label: 'AGB', href: '/agb/' },
+];
+---
+
+<footer class="border-t border-white/10 bg-navy-900 text-white/70">
+  <div class="container-x py-16 md:py-20">
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
+      <!-- Brand -->
+      <div class="lg:col-span-5">
+        <img
+          src="/images/logo/logo-banner.svg"
+          alt="Swissly IT Solutions"
+          width="180"
+          height="40"
+          class="h-10 w-auto"
+        />
+        <p class="mt-4 max-w-xs font-mono text-sm text-gold-bright">{site.tagline}</p>
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/60">{site.claim}</p>
+        <div class="mt-6">
+          <StatusBar />
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="lg:col-span-3" aria-label="Footer-Navigation">
+        <h2 class="font-mono text-xs uppercase tracking-wider text-white/40">Navigation</h2>
+        <ul class="mt-4 flex flex-col gap-2.5 text-sm">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a href={link.href} class="transition hover:text-gold-bright">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <!-- Kontakt / NAP -->
+      <div class="lg:col-span-4">
+        <h2 class="font-mono text-xs uppercase tracking-wider text-white/40">Kontakt</h2>
+        <address class="mt-4 flex flex-col gap-2.5 text-sm not-italic leading-relaxed">
+          <span>{site.legalName}</span>
+          <span>{site.address.street}</span>
+          <span>{site.address.zip} {site.address.city}, {site.address.region}</span>
+          <a href={`mailto:${site.email}`} class="text-gold-bright transition hover:text-gold">
+            {site.email}
+          </a>
+          <span class="text-white/50">{site.hours}</span>
+        </address>
+      </div>
+    </div>
+
+    <!-- Legal row -->
+    <div
+      class="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm md:flex-row md:items-center md:justify-between"
+    >
+      <ul class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        {
+          legalLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-white/60 transition hover:text-gold-bright">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <button
+            id="cookie-settings"
+            type="button"
+            class="text-white/60 transition hover:text-gold-bright"
+          >
+            Cookie-Einstellungen
+          </button>
+        </li>
+      </ul>
+      <p class="text-xs text-white/40">
+        © {year} {site.name}. Alle Rechte vorbehalten.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('cookie-settings')?.addEventListener('click', () => {
+    window.swisslyConsent?.open();
+  });
+</script>
