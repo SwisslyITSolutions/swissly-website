@@ -7,7 +7,7 @@ The site is a fully static Astro 6 build with:
 - Self-hosted fonts via @fontsource-variable/* (woff2, latin subset, variable)
 - Font preload for critical Geist variable font (display text)
 - All assets hashed and served from /_astro/ with 1-year immutable cache
-- No raster images (logos are SVG)
+- No raster images rendered on pages (logos are SVG; `og-default.png` is OG meta only)
 - Vendor scripts (Leaflet) loaded lazily on intersection
 
 ## Expected Lighthouse Scores

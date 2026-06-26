@@ -34,23 +34,26 @@ test('keyboard nav: header menu opens and closes', async ({ page }) => {
 
 test('keyboard nav: FAQ accordion opens with Enter', async ({ page }) => {
   await page.goto('/faq/');
-  const firstAccordion = page.locator('[data-accordion-trigger]').first();
-  if (await firstAccordion.count() > 0) {
-    await firstAccordion.focus();
-    await page.keyboard.press('Enter');
-  }
-  // No assertion needed — just verify no crash
+  // The accordion trigger uses class .accordion-trigger (not data-accordion-trigger)
+  const firstAccordion = page.locator('.accordion-trigger').first();
+  await expect(firstAccordion).toHaveCount(1);
+  await firstAccordion.focus();
+  await page.keyboard.press('Enter');
+  // Verify the accordion expanded
+  await expect(firstAccordion).toHaveAttribute('aria-expanded', 'true');
 });
 
 test('cookie banner: accept button visible and works', async ({ page }) => {
   await page.goto('/');
-  // Cookie banner appears when consent is null (first visit)
-  const banner = page.locator('[role="dialog"][aria-label]');
-  if (await banner.count() > 0) {
-    const acceptBtn = banner.locator('button').filter({ hasText: /akzeptier/i });
-    if (await acceptBtn.count() > 0) {
-      await acceptBtn.click();
-    }
+  // Cookie banner uses role="region" with aria-label="Cookie-Hinweis" (not role="dialog")
+  // The mobile menu uses role="dialog" — we must not confuse them
+  const banner = page.locator('[role="region"][aria-label*="Cookie"]');
+  await expect(banner).toHaveCount(1);
+  // Banner is hidden on first load until JS reveals it; wait for it to appear
+  const acceptBtn = banner.locator('button').filter({ hasText: /akzeptier/i });
+  if (await acceptBtn.isVisible()) {
+    await acceptBtn.click();
+    // After accepting, banner should be hidden
+    await expect(banner).toBeHidden();
   }
-  // No error = pass
 });

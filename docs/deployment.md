@@ -33,7 +33,7 @@ npm run dev      # Dev-Server auf http://localhost:4321
 ```bash
 npm run build    # Erzeugt dist/
 npm run preview  # Testet dist/ lokal auf http://localhost:4321
-npm test         # 74 Unit-Tests (Vitest)
+npm test         # 134 Unit-Tests (Vitest)
 ```
 
 ---
@@ -76,34 +76,38 @@ Hostpoint bietet Git-Deployment an:
 
 ### config.php (NICHT committen)
 
-Erstelle auf dem Server (ausserhalb von `httpdocs/`!) eine Datei `config.php`:
+Erstelle auf dem Server im selben Verzeichnis wie `contact-handler.php` (also `httpdocs/` oder `public_html/`) eine Datei `config.php`.
+Verwende `config.php.example` als Vorlage (`cp public/config.php.example public/config.php`):
 
 ```php
 <?php
-define('NOTION_TOKEN',        'secret_xxx');
-define('NOTION_LEADS_DB_ID',  'abc123...');
-define('CONTACT_MAIL_TO',     'info@swisslyit.ch');
-define('TRUSTED_PROXY',       '127.0.0.1');
+define('NOTION_TOKEN',       'secret_xxx');
+define('NOTION_LEADS_DB_ID', 'abc123...');
+define('CONTACT_MAIL_TO',    'info@swisslyit.ch');
+// define('TRUSTED_PROXY',   '');
 ```
 
 Der PHP-Handler (`contact-handler.php`) liest diese Datei via:
 ```php
-require_once dirname(__DIR__) . '/config.php';
+$configFile = __DIR__ . '/config.php';
+if (is_file($configFile)) { require $configFile; }
 ```
 
 ### Notion Leads-Datenbank
 
-Erstelle in Notion eine Datenbank mit diesen Properties:
-| Property | Typ |
-|---|---|
-| Name | Title |
-| Firma | Text |
-| E-Mail | Email |
-| Telefon | Phone |
-| Anliegen | Text |
-| Quelle | Select (Werte: Kontaktformular, Erstgespräch) |
-| Datum | Date |
-| IP-Hash | Text |
+Erstelle in Notion eine Datenbank mit diesen Properties (exakte Namen; stimmt mit `contact-handler.php` überein):
+
+| Property | Notion-Typ | Hinweis |
+|---|---|---|
+| Name | Title | Name des Absenders (Pflichtfeld) |
+| E-Mail | Email | E-Mail-Adresse |
+| Telefon | Rich text | Telefonnummer (optional) |
+| Anliegen | Rich text | Freitext-Nachricht |
+| Betreff | Rich text | Betreff (aus Hidden-Feld oder «Neue Kontaktanfrage») |
+| Status | Select | Werte: Neu / In Bearbeitung / Erledigt |
+| Quelle | Select | Werte: Website / Manuell |
+| Datum | Date | ISO-8601 Zeitstempel der Übermittlung |
+| IP | Rich text | IP-Adresse (intern; kann in Notion ausgeblendet werden) |
 
 Gib der Notion Integration (Token) Zugriff auf die Datenbank.
 

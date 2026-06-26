@@ -18,7 +18,7 @@ npm run preview  # dist/ lokal testen
 ## Tests
 
 ```bash
-npm test           # Vitest unit tests (74 Tests)
+npm test           # Vitest unit tests (134 Tests)
 npm run e2e        # Playwright a11y + E2E (benötigt Browser)
 ```
 
