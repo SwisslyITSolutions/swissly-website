@@ -14,6 +14,13 @@ test('Header renders nav labels, CTA and accessible nav landmark', async () => {
   expect(html).toContain('aria-label="Hauptnavigation"');
 });
 
+test('Header shows the real Swissly emblem with accessible alt', async () => {
+  const c = await AstroContainer.create();
+  const html = await c.renderToString(Header);
+  expect(html).toContain('/images/logo/swisslyit-logo.png');
+  expect(html).toContain('alt="Swissly IT Solutions"');
+});
+
 test('Header mobile menu toggle exposes aria-expanded', async () => {
   const c = await AstroContainer.create();
   const html = await c.renderToString(Header);

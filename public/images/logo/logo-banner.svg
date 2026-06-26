@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" role="img" aria-label="SWISSLY IT">
-  <!-- PLACEHOLDER wordmark — replace with final brand asset -->
-  <rect x="2" y="14" width="36" height="36" rx="9" fill="#0C1828" stroke="#1A2D45" stroke-width="1.5"/>
-  <text x="20" y="42" text-anchor="middle" font-family="Geist, 'Segoe UI', system-ui, sans-serif" font-size="24" font-weight="800" fill="#C9A96A">S</text>
-  <text x="52" y="41" font-family="Geist, 'Segoe UI', system-ui, sans-serif" font-size="26" font-weight="800" letter-spacing="1.5" fill="#FAFAF7">SWISSLY</text>
-  <text x="232" y="41" font-family="Geist, 'Segoe UI', system-ui, sans-serif" font-size="26" font-weight="800" letter-spacing="1.5" fill="#C9A96A">IT</text>
-</svg>
