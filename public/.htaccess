@@ -9,6 +9,10 @@ DirectoryIndex index.html
 # ──────────────────────────────────────────────────────────────────────────────
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # Per-directory base: required in .htaccess so the trailing-slash redirect
+  # (rule 1c) resolves against URL root "/" and does NOT leak the server
+  # filesystem path (/home/<user>/www/...) into the 301 Location header.
+  RewriteBase /
 
   # 1a. Force HTTPS
   RewriteCond %{HTTPS} off
