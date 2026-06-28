@@ -1,16 +1,34 @@
 ---
 import { site } from '../../data/site';
 import Button from '../ui/Button.astro';
+import { getLang, localizedPath, type Lang } from '../../i18n/utils';
+import { t } from '../../i18n/ui';
 
 interface Props {
   title?: string;
   text?: string;
+  lang?: Lang;
 }
 
-const {
-  title = 'Bereit für stressfreie IT?',
-  text = 'Lassen Sie uns in einem kostenlosen Erstgespräch herausfinden, was für Ihren Betrieb wirklich sinnvoll ist — unverbindlich und ohne Verkaufsdruck.',
-} = Astro.props;
+const { lang = getLang(Astro), title, text } = Astro.props;
+const ctaHref = localizedPath(lang, '/erstgespraech/');
+const kontaktHref = localizedPath(lang, '/kontakt/');
+
+const copy = {
+  de: {
+    title: 'Bereit für stressfreie IT?',
+    text: 'Lassen Sie uns in einem kostenlosen Erstgespräch herausfinden, was für Ihren Betrieb wirklich sinnvoll ist. Unverbindlich und ohne Verkaufsdruck.',
+    kontakt: 'Kontakt aufnehmen',
+  },
+  en: {
+    title: 'Ready for stress-free IT?',
+    text: "Let's find out in a free intro call what really makes sense for your business. No obligation, no sales pressure.",
+    kontakt: 'Get in touch',
+  },
+}[lang];
+
+const finalTitle = title ?? copy.title;
+const finalText = text ?? copy.text;
 ---
 
 <section class="relative overflow-hidden bg-navy-900">
@@ -29,14 +47,14 @@ const {
         <span aria-hidden="true">// </span>let's talk
       </span>
       <h2 class="mt-5 font-display text-3xl font-extrabold tracking-tight text-white md:text-5xl">
-        {title}
+        {finalTitle}
       </h2>
-      <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/70">{text}</p>
+      <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/70">{finalText}</p>
       <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <Button href={site.ctaHref} label={site.ctaLabel} variant="primary">
+        <Button href={ctaHref} label={t(lang, 'cta.label')} variant="primary">
           <span aria-hidden="true">→</span>
         </Button>
-        <Button href="/kontakt/" label="Kontakt aufnehmen" variant="outline" />
+        <Button href={kontaktHref} label={copy.kontakt} variant="outline" />
       </div>
       <p class="mt-8 font-mono text-xs text-white/40">
         {site.email} · {site.address.zip}

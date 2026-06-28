@@ -1,24 +1,50 @@
 ---
-import { services } from '../../data/services';
 import Section from '../ui/Section.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import { getLang, localizedPath, type Lang } from '../../i18n/utils';
+import { getContent } from '../../i18n/content';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = getLang(Astro) } = Astro.props;
+const { services } = getContent(lang);
+const leistungenHref = localizedPath(lang, '/leistungen/');
 
 // The four positioning pillars: Websites → Care → IT → Schulungen.
 const pillarSlugs = ['webseiten', 'wartung-care', 'it-support', 'schulungen'];
 const pillars = pillarSlugs
   .map((slug) => services.find((s) => s.slug === slug))
   .filter((s): s is NonNullable<typeof s> => Boolean(s));
+
+const copy = {
+  de: {
+    eyebrow: 'was wir tun',
+    heading: 'Vier Bereiche, ein Anspruch: dass es einfach läuft.',
+    intro:
+      'Von der Website über die laufende Pflege bis zu IT-Support und KI-Schulungen. Alles aus einer Hand, in verständlicher Sprache.',
+    more: 'Mehr erfahren',
+    all: 'Alle Leistungen ansehen',
+  },
+  en: {
+    eyebrow: 'what we do',
+    heading: 'Four areas, one standard: that it just works.',
+    intro:
+      'From the website through ongoing care to IT support and AI training. All from one team, in plain language.',
+    more: 'Learn more',
+    all: 'See all services',
+  },
+}[lang];
 ---
 
 <Section id="leistungen" tone="dark">
   <div class="max-w-2xl" data-reveal>
-    <Eyebrow>was wir tun</Eyebrow>
+    <Eyebrow>{copy.eyebrow}</Eyebrow>
     <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
-      Vier Bereiche, ein Anspruch: dass es einfach läuft.
+      {copy.heading}
     </h2>
     <p class="mt-5 text-lg leading-relaxed text-white/70">
-      Von der ersten Website über die laufende Pflege bis zum IT-Support und KI-Schulungen —
-      alles aus einer Hand, in verständlicher Sprache.
+      {copy.intro}
     </p>
   </div>
 
@@ -26,7 +52,7 @@ const pillars = pillarSlugs
     {
       pillars.map((pillar, i) => (
         <a
-          href={`/leistungen/${pillar.slug}/`}
+          href={localizedPath(lang, `/leistungen/${pillar.slug}/`)}
           class="group relative flex flex-col rounded-xl border border-white/10 bg-navy-800 p-6 transition duration-200 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_0_30px_-10px_rgba(201,169,106,0.55)]"
         >
           <span class="font-mono text-xs text-gold-bright/50">{String(i + 1).padStart(2, '0')}</span>
@@ -35,7 +61,7 @@ const pillars = pillarSlugs
           </h3>
           <p class="mt-2 flex-1 text-sm leading-relaxed text-white/70">{pillar.teaser}</p>
           <span class="mt-5 inline-flex items-center gap-1.5 font-mono text-xs text-gold-bright">
-            Mehr erfahren
+            {copy.more}
             <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">
               →
             </span>
@@ -47,10 +73,10 @@ const pillars = pillarSlugs
 
   <div class="mt-10">
     <a
-      href="/leistungen/"
+      href={leistungenHref}
       class="inline-flex items-center gap-2 font-mono text-sm text-white/70 transition hover:text-gold-bright"
     >
-      Alle Leistungen ansehen
+      {copy.all}
       <span aria-hidden="true">→</span>
     </a>
   </div>

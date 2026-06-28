@@ -1,9 +1,24 @@
 ---
-import { site } from '../../data/site';
 import MobileMenu from './MobileMenu.astro';
 import Button from '../ui/Button.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getLang, localizedPath, type Lang } from '../../i18n/utils';
+import { t } from '../../i18n/ui';
 
-const { nav, ctaLabel, ctaHref } = site;
+interface Props {
+  lang?: Lang;
+}
+const { lang = getLang(Astro) } = Astro.props;
+
+const nav = [
+  { label: t(lang, 'nav.leistungen'), href: localizedPath(lang, '/leistungen/') },
+  { label: t(lang, 'nav.ueberUns'), href: localizedPath(lang, '/ueber-uns/') },
+  { label: t(lang, 'nav.faq'), href: localizedPath(lang, '/faq/') },
+  { label: t(lang, 'nav.kontakt'), href: localizedPath(lang, '/kontakt/') },
+];
+const ctaLabel = t(lang, 'cta.label');
+const ctaHref = localizedPath(lang, '/erstgespraech/');
+const homeHref = lang === 'en' ? '/en/' : '/';
 ---
 
 <header
@@ -12,7 +27,7 @@ const { nav, ctaLabel, ctaHref } = site;
   data-header
 >
   <div class="container-x flex h-16 items-center justify-between md:h-20">
-    <a href="/" class="flex items-center gap-2.5" aria-label="Swissly IT — Startseite">
+    <a href={homeHref} class="flex items-center gap-2.5" aria-label={t(lang, 'logo.ariaHome')}>
       <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white p-1 shadow-sm ring-1 ring-black/5">
         <img
           src="/images/logo/swisslyit-logo.png"
@@ -27,7 +42,7 @@ const { nav, ctaLabel, ctaHref } = site;
       </span>
     </a>
 
-    <nav class="hidden items-center gap-8 lg:flex" aria-label="Hauptnavigation">
+    <nav class="hidden items-center gap-8 lg:flex" aria-label={t(lang, 'nav.aria.main')}>
       {
         nav.map((item) => (
           <a
@@ -41,11 +56,12 @@ const { nav, ctaLabel, ctaHref } = site;
       }
     </nav>
 
-    <div class="hidden lg:block">
+    <div class="hidden items-center gap-5 lg:flex">
+      <LanguageSwitcher lang={lang} />
       <Button href={ctaHref} label={ctaLabel} variant="primary" class="!px-4 !py-2.5 !text-xs" />
     </div>
 
-    <MobileMenu nav={nav} ctaLabel={ctaLabel} ctaHref={ctaHref} />
+    <MobileMenu nav={nav} ctaLabel={ctaLabel} ctaHref={ctaHref} lang={lang} />
   </div>
 </header>
 

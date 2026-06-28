@@ -1,6 +1,31 @@
 ---
-import { packages } from '../../data/pricing';
 import Button from '../ui/Button.astro';
+import { getLang, localizedPath, type Lang } from '../../i18n/utils';
+import { getContent } from '../../i18n/content';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = getLang(Astro) } = Astro.props;
+const { packages } = getContent(lang);
+const leistungenHref = localizedPath(lang, '/leistungen/');
+
+const copy = {
+  de: {
+    eyebrow: 'transparente preise',
+    heading: 'Festpreise statt Überraschungen.',
+    intro:
+      'Klare Pakete vom One-Pager bis zum Online-Shop, netto und ohne versteckte Kosten. Laufende Betreuung ab CHF 59/Monat.',
+    cta: 'Alle Preise & Leistungen',
+  },
+  en: {
+    eyebrow: 'transparent pricing',
+    heading: 'Fixed prices, no surprises.',
+    intro:
+      'Clear packages from a one-pager to an online shop, net and with no hidden costs. Ongoing care from CHF 59/month.',
+    cta: 'All prices & services',
+  },
+}[lang];
 ---
 
 <section class="bg-offwhite text-ink">
@@ -8,16 +33,15 @@ import Button from '../ui/Button.astro';
     <div class="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
       <div>
         <span class="font-mono text-xs font-medium tracking-wider text-gold-ink">
-          <span aria-hidden="true">// </span>transparente preise
+          <span aria-hidden="true">// </span>{copy.eyebrow}
         </span>
         <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
-          Festpreise statt Überraschungen.
+          {copy.heading}
         </h2>
         <p class="mt-5 max-w-md text-lg leading-relaxed text-muted">
-          Klare Pakete vom One-Pager bis zum Online-Shop — netto, ohne versteckte Kosten.
-          Laufende Betreuung ab CHF 59/Monat.
+          {copy.intro}
         </p>
-        <Button href="/leistungen/" label="Alle Preise & Leistungen" variant="solid" class="mt-8">
+        <Button href={leistungenHref} label={copy.cta} variant="solid" class="mt-8">
           <span aria-hidden="true">→</span>
         </Button>
       </div>

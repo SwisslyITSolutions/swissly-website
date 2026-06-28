@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/sections/PageHero.astro';
+import Section from '../../../components/ui/Section.astro';
+import FormField from '../../../components/ui/FormField.astro';
+import Button from '../../../components/ui/Button.astro';
+import Map from '../../../components/ui/Map.astro';
+import { site } from '../../../data/site';
+---
+
+<BaseLayout
+  title="Contact | Swissly IT Solutions"
+  description="Get in touch with Swissly IT Solutions."
+  path="/en/kontakt/"
+  lang="en"
+>
+  <PageHero
+    eyebrow="contact"
+    title="Let's talk."
+    intro="Whether it is a website, an IT question or a Care plan: drop us a line and we will get back to you within 24 hours."
+  />
+
+  <Section tone="light">
+    <div class="mx-auto max-w-2xl">
+      <!-- Validation error notice — shown by client script when ?error= is in the URL -->
+      <div
+        id="form-notice"
+        role="alert"
+        aria-live="assertive"
+        class="mb-6 hidden rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+      >
+        Please fill in all required fields correctly and agree to the privacy policy.
+      </div>
+      <script>
+        const notice = document.getElementById('form-notice');
+        if (notice && new URLSearchParams(location.search).has('error')) {
+          notice.classList.remove('hidden');
+        }
+      </script>
+
+      <form method="POST" action="/contact-handler.php" class="flex flex-col gap-6">
+        <input type="hidden" name="lang" value="en" />
+        <FormField name="name" label="Name / Company" required={true} tone="light" />
+        <FormField name="email" label="Email" type="email" required={true} tone="light" />
+        <FormField name="telefon" label="Phone (optional)" tone="light" />
+        <FormField name="anliegen" label="Your enquiry" as="textarea" required={true} rows={6} tone="light" />
+
+        <!-- Honeypot anti-spam field — must be invisible to humans -->
+        <input
+          type="text"
+          name="company_url"
+          value=""
+          class="hidden"
+          aria-hidden="true"
+          tabindex="-1"
+          autocomplete="off"
+          style="display:none"
+        />
+
+        <label class="flex items-start gap-3 text-sm text-ink/70">
+          <input type="checkbox" name="consent" required class="mt-0.5 shrink-0 accent-gold-ink" />
+          <span>
+            I have read the
+            <a href="/datenschutzerklaerung/" class="underline hover:text-ink">
+              privacy policy
+            </a>
+            and agree to my data being processed.
+          </span>
+        </label>
+
+        <Button variant="primary" type="submit" label="Send message" />
+      </form>
+
+      <!-- NAP block -->
+      <address class="mt-16 not-italic border-t border-ink/10 pt-10 text-sm leading-relaxed text-ink/60">
+        <p class="font-semibold text-ink">{site.legalName}</p>
+        <p>{site.address.zip} {site.address.city}, {site.address.region}</p>
+        <p class="mt-2">
+          <a href={`mailto:${site.email}`} class="underline hover:text-ink">{site.email}</a>
+        </p>
+        <p>Mon–Fri 09:00–17:00</p>
+      </address>
+    </div>
+  </Section>
+
+  <Section tone="dark">
+    <Map
+      lat={47.0788}
+      lng={8.3419}
+      label={`${site.legalName} · ${site.address.zip} ${site.address.city}`}
+      height="22rem"
+    />
+  </Section>
+</BaseLayout>

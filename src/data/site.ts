@@ -63,13 +63,13 @@ export const site = {
   ecs: {
     label: 'Aktuelles Projekt',
     name: 'ECS – Errante Car Solutions',
-    text: 'Autohandel & Occasionen in Ebikon — eine moderne, schnelle Website (Astro, zweisprachig), umgesetzt von Swissly.',
+    text: 'Autohandel und Occasionen in Ebikon. Eine moderne, schnelle Website (Astro, zweisprachig), umgesetzt von Swissly.',
     url: 'https://ecs-luzern.ch',
   } satisfies EcsTeaser,
   values: [
     {
       title: 'Verständlichkeit',
-      text: 'Wir erklären IT so, dass Sie sie verstehen — ohne Fachjargon, ohne Abkürzungen, die niemand kennt. Klartext statt Kauderwelsch.',
+      text: 'Wir erklären IT so, dass Sie sie verstehen. Kein Fachjargon, keine kryptischen Abkürzungen. Klartext statt Kauderwelsch.',
     },
     {
       title: 'Verlässlichkeit',
@@ -77,7 +77,7 @@ export const site = {
     },
     {
       title: 'Praxisnähe',
-      text: 'Keine Theoriegebäude, keine überdimensionierten Lösungen. Wir bauen das, was in Ihrem echten Geschäftsalltag tatsächlich funktioniert.',
+      text: 'Keine Theoriegebäude, keine überdimensionierten Lösungen. Wir bauen, was in Ihrem Geschäftsalltag wirklich funktioniert.',
     },
   ] satisfies Value[],
 } as const;

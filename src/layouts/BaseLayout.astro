@@ -6,6 +6,8 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import CookieBanner from '../components/ui/CookieBanner.astro';
 import geistFontUrl from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
+import { getLang, localizedPath, type Lang } from '../i18n/utils';
+import { t } from '../i18n/ui';
 
 interface Props {
   title: string;
@@ -14,24 +16,27 @@ interface Props {
   ogImage?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  lang?: Lang;
 }
 
-const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
+const { title, description, path, ogImage, noindex, jsonLd, lang = getLang(Astro) } = Astro.props;
 const blocks = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 // Staging builds (test.swisslyit.ch) must never be indexed — force noindex site-wide.
 const staging = import.meta.env.PUBLIC_STAGING === '1';
+const htmlLang = lang === 'en' ? 'en' : 'de-CH';
+const alternates = { de: localizedPath('de', path), en: localizedPath('en', path) };
 ---
 
 <!doctype html>
-<html lang="de-CH">
+<html lang={htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0C1828" />
     <link rel="icon" type="image/png" href="/images/logo/swisslyit-logo.png" />
     <link rel="preload" as="font" type="font/woff2" href={geistFontUrl} crossorigin />
-    <Seo title={title} description={description} path={path} ogImage={ogImage} noindex={noindex || staging} />
+    <Seo title={title} description={description} path={path} ogImage={ogImage} noindex={noindex || staging} lang={lang} alternates={alternates} />
     {blocks.map((schema) => <JsonLd schema={schema} />)}
     {/* Consent Mode v2 — set defaults BEFORE any GA script can fire */}
     {gaId && (
@@ -53,12 +58,12 @@ const staging = import.meta.env.PUBLIC_STAGING === '1';
     <a
       href="#main"
       class="sr-only rounded-md bg-gold px-4 py-2 font-medium text-navy-900 focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100]"
-      >Zum Inhalt springen</a
+      >{t(lang, 'skip.toContent')}</a
     >
-    <Header />
+    <Header lang={lang} />
     <main id="main"><slot /></main>
-    <Footer />
-    <CookieBanner />
+    <Footer lang={lang} />
+    <CookieBanner lang={lang} />
     {/* Consent-gated GA4 init — subscribes via onConsent, no-op without id */}
     <script>
       import { initAnalytics } from '../lib/analytics';

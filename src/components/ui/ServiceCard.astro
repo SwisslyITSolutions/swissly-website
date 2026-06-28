@@ -1,13 +1,17 @@
 ---
+import { getLang, type Lang } from '../../i18n/utils';
+
 interface Props {
   title: string;
   teaser: string;
   href: string;
   eyebrow?: string;
   icon?: string;
+  lang?: Lang;
 }
 
-const { title, teaser, href, eyebrow } = Astro.props;
+const { title, teaser, href, eyebrow, lang = getLang(Astro) } = Astro.props;
+const moreLabel = lang === 'en' ? 'Learn more' : 'Mehr erfahren';
 ---
 
 <a
@@ -18,7 +22,7 @@ const { title, teaser, href, eyebrow } = Astro.props;
   <h3 class="mt-2 font-display text-lg font-bold tracking-tight text-white">{title}</h3>
   <p class="mt-2 flex-1 text-sm leading-relaxed text-white/70">{teaser}</p>
   <span class="mt-5 inline-flex items-center gap-1.5 font-mono text-xs text-gold-bright">
-    Mehr erfahren
+    {moreLabel}
     <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">→</span>
   </span>
 </a>

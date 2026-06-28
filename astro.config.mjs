@@ -8,9 +8,22 @@ export default defineConfig({
   site: process.env.PUBLIC_SITE_URL || 'https://swisslyit.ch',
   output: 'static',
   trailingSlash: 'always',
+  i18n: {
+    defaultLocale: 'de',
+    locales: ['de', 'en'],
+    routing: { prefixDefaultLocale: false },
+  },
   integrations: [
     sitemap({
-      // Exclude noindex pages from the sitemap
+      // Emit <xhtml:link rel="alternate" hreflang> entries for de/en in the sitemap.
+      i18n: {
+        defaultLocale: 'de',
+        locales: {
+          de: 'de-CH',
+          en: 'en-GB',
+        },
+      },
+      // Exclude noindex pages from the sitemap (matches /en/ variants by substring)
       filter: (page) =>
         !page.includes('/kontakt/danke/') &&
         !page.includes('/404/'),

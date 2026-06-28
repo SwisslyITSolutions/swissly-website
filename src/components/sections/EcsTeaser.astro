@@ -1,9 +1,15 @@
 ---
 import { Image } from 'astro:assets';
-import { site } from '../../data/site';
 import ecsShot from '../../assets/projekte/ecs-luzern.png';
+import { getLang, type Lang } from '../../i18n/utils';
+import { getContent } from '../../i18n/content';
 
-const { ecs } = site;
+interface Props {
+  lang?: Lang;
+}
+const { lang = getLang(Astro) } = Astro.props;
+const { ecs } = getContent(lang);
+const viewLabel = lang === 'en' ? 'View project' : 'Projekt ansehen';
 ---
 
 <section class="relative overflow-hidden bg-navy-900">
@@ -32,7 +38,7 @@ const { ecs } = site;
             rel="noopener noreferrer"
             class="group mt-6 inline-flex items-center gap-2 font-mono text-sm text-gold-bright transition hover:text-gold"
           >
-            Projekt ansehen
+            {viewLabel}
             <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">
               ↗
             </span>

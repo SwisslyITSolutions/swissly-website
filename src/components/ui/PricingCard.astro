@@ -1,4 +1,6 @@
 ---
+import { getLang, type Lang } from '../../i18n/utils';
+
 interface Props {
   name: string;
   price: string;
@@ -8,6 +10,7 @@ interface Props {
   href?: string;
   cta?: string;
   featured?: boolean;
+  lang?: Lang;
 }
 
 const {
@@ -17,9 +20,13 @@ const {
   tagline,
   features,
   href,
-  cta = 'Erstgespräch anfragen',
+  cta,
   featured = false,
+  lang = getLang(Astro),
 } = Astro.props;
+
+const ctaLabel = cta ?? (lang === 'en' ? 'Book a free intro call' : 'Erstgespräch anfragen');
+const featuredLabel = lang === 'en' ? 'Recommended' : 'Empfohlen';
 
 const cardCls = featured
   ? 'border-gold bg-navy-800 shadow-[0_0_45px_-12px_rgba(201,169,106,0.55)]'
@@ -30,7 +37,7 @@ const cardCls = featured
   {
     featured && (
       <span class="absolute -top-3 left-8 inline-flex items-center rounded-full bg-gold px-3 py-1 font-mono text-xs font-medium text-navy-900">
-        Empfohlen
+        {featuredLabel}
       </span>
     )
   }
@@ -61,7 +68,7 @@ const cardCls = featured
             : 'border border-white/25 text-white hover:border-gold hover:text-gold-bright'
         }`}
       >
-        {cta}
+        {ctaLabel}
       </a>
     )
   }

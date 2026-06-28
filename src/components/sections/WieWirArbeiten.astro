@@ -1,20 +1,41 @@
 ---
-import { process } from '../../data/process';
 import Section from '../ui/Section.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import ProcessStep from '../ui/ProcessStep.astro';
+import { getLang, type Lang } from '../../i18n/utils';
+import { getContent } from '../../i18n/content';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = getLang(Astro) } = Astro.props;
+const { process } = getContent(lang);
+
+const copy = {
+  de: {
+    eyebrow: 'wie wir arbeiten',
+    heading: 'Klarer Ablauf, keine Überraschungen.',
+    intro:
+      'Vier Schritte vom ersten Gespräch bis zum laufenden Betrieb: transparent, zum Festpreis und in Ihrem Tempo.',
+  },
+  en: {
+    eyebrow: 'how we work',
+    heading: 'A clear process, no surprises.',
+    intro:
+      'Four steps from the first call to ongoing operation: transparent, at a fixed price, at your pace.',
+  },
+}[lang];
 ---
 
 <Section tone="dark" class="border-t border-white/5">
   <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
     <div data-reveal>
-      <Eyebrow>wie wir arbeiten</Eyebrow>
+      <Eyebrow>{copy.eyebrow}</Eyebrow>
       <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
-        Klarer Ablauf, keine Überraschungen.
+        {copy.heading}
       </h2>
       <p class="mt-5 text-lg leading-relaxed text-white/70">
-        Vier Schritte vom ersten Gespräch bis zum laufenden Betrieb — transparent,
-        zum Festpreis und in Ihrem Tempo.
+        {copy.intro}
       </p>
     </div>
 

@@ -3,17 +3,50 @@ import BaseLayout from './BaseLayout.astro';
 import Button from '../components/ui/Button.astro';
 import PageHero from '../components/sections/PageHero.astro';
 import CtaBlock from '../components/sections/CtaBlock.astro';
-import { services, type Service } from '../data/services';
+import { type Service } from '../data/services';
 import { site } from '../data/site';
+import { getLang, localizedPath, type Lang } from '../i18n/utils';
+import { t } from '../i18n/ui';
+import { getContent } from '../i18n/content';
 
 interface Props {
   service: Service;
+  lang?: Lang;
 }
 
-const { service } = Astro.props;
+const { service, lang = getLang(Astro) } = Astro.props;
+const { services } = getContent(lang);
 
 const origin = 'https://swisslyit.ch';
-const url = `${origin}/leistungen/${service.slug}/`;
+const path = localizedPath(lang, `/leistungen/${service.slug}/`);
+const url = `${origin}${path}`;
+const leistungenHref = localizedPath(lang, '/leistungen/');
+const ctaHref = localizedPath(lang, '/erstgespraech/');
+
+const copy = {
+  de: {
+    overview: 'im überblick',
+    breadcrumbAria: 'Brotkrumen',
+    leistungen: 'Leistungen',
+    allServices: 'Alle Leistungen',
+    related: 'Weitere Leistungen',
+    more: 'Mehr erfahren',
+    start: 'Start',
+    ctaTitle: 'Klingt das nach Ihrem Projekt?',
+  },
+  en: {
+    overview: 'at a glance',
+    breadcrumbAria: 'Breadcrumb',
+    leistungen: 'Services',
+    allServices: 'All services',
+    related: 'More services',
+    more: 'Learn more',
+    start: 'Home',
+    ctaTitle: 'Does this sound like your project?',
+  },
+}[lang];
+
+const areaServed = lang === 'en' ? 'Central Switzerland' : site.areaServed;
 
 const serviceSchema = {
   '@context': 'https://schema.org',
@@ -24,12 +57,12 @@ const serviceSchema = {
   serviceType: service.title,
   areaServed: {
     '@type': 'AdministrativeArea',
-    name: site.areaServed,
+    name: areaServed,
   },
   provider: {
     '@type': 'ProfessionalService',
     name: site.legalName,
-    url: `${origin}/`,
+    url: `${origin}${lang === 'en' ? '/en/' : '/'}`,
     email: site.email,
   },
 };
@@ -38,8 +71,8 @@ const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Start', item: `${origin}/` },
-    { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${origin}/leistungen/` },
+    { '@type': 'ListItem', position: 1, name: copy.start, item: `${origin}${lang === 'en' ? '/en/' : '/'}` },
+    { '@type': 'ListItem', position: 2, name: copy.leistungen, item: `${origin}${leistungenHref}` },
     { '@type': 'ListItem', position: 3, name: service.title, item: url },
   ],
 };
@@ -51,21 +84,22 @@ const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
 <BaseLayout
   title={service.metaTitle}
   description={service.metaDescription}
-  path={`/leistungen/${service.slug}/`}
+  path={path}
+  lang={lang}
   jsonLd={[serviceSchema, breadcrumb]}
 >
   <!-- Header -->
   <PageHero eyebrow={service.eyebrow} title={service.title} intro={service.intro}>
-    <nav slot="breadcrumb" class="mb-8 font-mono text-xs text-white/40" aria-label="Brotkrumen">
-      <a href="/leistungen/" class="transition hover:text-gold-bright">Leistungen</a>
+    <nav slot="breadcrumb" class="mb-8 font-mono text-xs text-white/40" aria-label={copy.breadcrumbAria}>
+      <a href={leistungenHref} class="transition hover:text-gold-bright">{copy.leistungen}</a>
       <span aria-hidden="true" class="mx-2">/</span>
       <span class="text-white/70">{service.title}</span>
     </nav>
     <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-      <Button href={site.ctaHref} label={site.ctaLabel} variant="primary">
+      <Button href={ctaHref} label={t(lang, 'cta.label')} variant="primary">
         <span aria-hidden="true">→</span>
       </Button>
-      <Button href="/leistungen/" label="Alle Leistungen" variant="outline" />
+      <Button href={leistungenHref} label={copy.allServices} variant="outline" />
     </div>
   </PageHero>
 
@@ -77,7 +111,7 @@ const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
         <aside class="lg:sticky lg:top-28 lg:self-start">
           <div class="rounded-2xl border border-white/10 bg-navy-800 p-7">
             <span class="font-mono text-xs font-medium tracking-wider text-gold-bright">
-              <span aria-hidden="true">// </span>im überblick
+              <span aria-hidden="true">// </span>{copy.overview}
             </span>
             <ul class="mt-5 flex flex-col gap-3.5 text-sm text-white/80">
               {
@@ -114,18 +148,18 @@ const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
   <!-- Related services -->
   <section class="border-t border-white/5 bg-navy-800 py-20 md:py-24">
     <div class="container-x">
-      <h2 class="font-display text-2xl font-bold tracking-tight text-white">Weitere Leistungen</h2>
+      <h2 class="font-display text-2xl font-bold tracking-tight text-white">{copy.related}</h2>
       <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           related.map((rel) => (
             <a
-              href={`/leistungen/${rel.slug}/`}
+              href={localizedPath(lang, `/leistungen/${rel.slug}/`)}
               class="group flex flex-col rounded-xl border border-white/10 bg-navy-900/60 p-6 transition duration-200 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_0_30px_-10px_rgba(201,169,106,0.5)]"
             >
               <h3 class="font-display text-base font-bold text-white">{rel.title}</h3>
               <p class="mt-2 flex-1 text-sm leading-relaxed text-white/70">{rel.teaser}</p>
               <span class="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-gold-bright">
-                Mehr erfahren
+                {copy.more}
                 <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">
                   →
                 </span>
@@ -137,5 +171,5 @@ const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
     </div>
   </section>
 
-  <CtaBlock title="Klingt das nach Ihrem Projekt?" />
+  <CtaBlock title={copy.ctaTitle} lang={lang} />
 </BaseLayout>
