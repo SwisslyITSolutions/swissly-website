@@ -5,11 +5,17 @@ import { site } from '../data/site';
 import { process as processDe } from '../data/process';
 import { packages as packagesDe, pricingNote as pricingNoteDe } from '../data/pricing';
 import { services as servicesDe } from '../data/services';
+import { team as teamDe } from '../data/team';
+import { faq as faqDe } from '../data/faq';
+import { carePlans as carePlansDe, carePlanNote as carePlanNoteDe } from '../data/careplans';
 
 // English content modules
 import { process as processEn } from '../data/en/process';
 import { packages as packagesEn, pricingNote as pricingNoteEn } from '../data/en/pricing';
 import { services as servicesEn } from '../data/en/services';
+import { team as teamEn } from '../data/en/team';
+import { faq as faqEn } from '../data/en/faq';
+import { carePlans as carePlansEn, carePlanNote as carePlanNoteEn } from '../data/en/careplans';
 
 // Language-dependent site-level strings (German source lives in data/site.ts)
 const siteEn = {
@@ -42,6 +48,10 @@ const content = {
     packages: packagesDe,
     pricingNote: pricingNoteDe,
     services: servicesDe,
+    team: teamDe,
+    faq: faqDe,
+    carePlans: carePlansDe,
+    carePlanNote: carePlanNoteDe,
     claim: site.claim,
     ecs: site.ecs,
     values: site.values,
@@ -51,6 +61,10 @@ const content = {
     packages: packagesEn,
     pricingNote: pricingNoteEn,
     services: servicesEn,
+    team: teamEn,
+    faq: faqEn,
+    carePlans: carePlansEn,
+    carePlanNote: carePlanNoteEn,
     claim: siteEn.claim,
     ecs: siteEn.ecs,
     values: siteEn.values,

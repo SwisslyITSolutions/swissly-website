@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Eyebrow from '../../../components/ui/Eyebrow.astro';
+import PageHero from '../../../components/sections/PageHero.astro';
+import ServiceCard from '../../../components/ui/ServiceCard.astro';
+import PricingCard from '../../../components/ui/PricingCard.astro';
+import CarePlanCard from '../../../components/ui/CarePlanCard.astro';
+import CtaBlock from '../../../components/sections/CtaBlock.astro';
+import { getContent } from '../../../i18n/content';
+import { site } from '../../../data/site';
+
+const { services, packages, pricingNote, carePlans, carePlanNote } = getContent('en');
+const origin = 'https://swisslyit.ch';
+const ctaHref = '/en/erstgespraech/';
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/en/` },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${origin}/en/leistungen/` },
+  ],
+};
+---
+
+<BaseLayout
+  title="Services & prices: websites, IT & AI | Swissly IT"
+  description="All Swissly IT services at a glance: websites, online shops, maintenance, migrations, SEO, IT support and AI training. Transparent fixed prices from CHF 1'490."
+  path="/en/leistungen/"
+  lang="en"
+  jsonLd={breadcrumb}
+>
+  <!-- Header -->
+  <PageHero
+    eyebrow="services"
+    title="Everything for your digital presence, from one team."
+    intro="From the website through ongoing care to IT support and AI training. Clearly explained, hosted in Switzerland, owned by you."
+  />
+
+  <!-- Services grid -->
+  <section class="bg-navy-900 pb-20 md:pb-28">
+    <div class="container-x">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          services.map((service) => (
+            <ServiceCard
+              title={service.title}
+              teaser={service.teaser}
+              href={`/en/leistungen/${service.slug}/`}
+              eyebrow={service.eyebrow}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Website packages -->
+  <section id="preise" class="border-t border-white/5 bg-navy-900 py-20 md:py-28">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <Eyebrow>website packages</Eyebrow>
+        <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
+          Transparent fixed prices.
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-white/70">
+          Three packages for every need, from a compact one-pager to a full online shop.
+          Clearly costed, with no hidden fees.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-6 lg:grid-cols-3">
+        {
+          packages.map((pkg) => (
+            <PricingCard
+              name={pkg.name}
+              price={pkg.price}
+              tagline={pkg.tagline}
+              features={pkg.features}
+              featured={pkg.featured}
+              href={ctaHref}
+            />
+          ))
+        }
+      </div>
+
+      <p class="mt-8 text-sm text-white/50">{pricingNote}</p>
+    </div>
+  </section>
+
+  <!-- Care plans -->
+  <section id="care" class="border-t border-white/5 bg-navy-800 py-20 md:py-28">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <Eyebrow>care plans</Eyebrow>
+        <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
+          Ongoing care, cancellable monthly.
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-white/70">
+          Updates, backups, monitoring and support: we keep your website secure and up to
+          date, so you do not have to worry about a thing.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-6 lg:grid-cols-3">
+        {
+          carePlans.map((plan) => (
+            <CarePlanCard
+              name={plan.name}
+              monthly={plan.monthly}
+              features={plan.features}
+              popular={plan.popular}
+              href={ctaHref}
+            />
+          ))
+        }
+      </div>
+
+      <p class="mt-8 text-sm text-white/50">{carePlanNote}</p>
+    </div>
+  </section>
+
+  <!-- Hourly rate & modules -->
+  <section class="bg-navy-900 py-16 md:py-20">
+    <div class="container-x">
+      <div
+        class="grid gap-6 rounded-2xl border border-white/10 bg-navy-800/60 p-8 md:grid-cols-2 md:items-center md:p-10"
+      >
+        <div>
+          <span class="font-mono text-xs font-medium tracking-wider text-gold-bright">
+            <span aria-hidden="true">// </span>support &amp; individual services
+          </span>
+          <h2 class="mt-3 font-display text-2xl font-bold tracking-tight text-white">
+            IT support in 15-minute increments.
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-white/70">
+            Personal support remotely and on site in Central Switzerland, fairly billed,
+            with no flat fees. We build individual modules on request, to suit your needs.
+          </p>
+        </div>
+        <div class="flex flex-col gap-4 sm:flex-row md:justify-end">
+          <div class="rounded-xl border border-gold/30 bg-gold/10 px-6 py-5 text-center">
+            <div class="flex items-baseline justify-center gap-1.5">
+              <span class="font-mono text-sm text-gold-bright">CHF</span>
+              <span class="font-display text-4xl font-extrabold tracking-tight text-white">
+                {site.hourlyRate}
+              </span>
+            </div>
+            <span class="mt-1 block font-mono text-xs text-white/60">per hour</span>
+          </div>
+          <div class="rounded-xl border border-white/10 bg-navy-900/60 px-6 py-5 text-center">
+            <span class="font-display text-2xl font-bold text-white">Modules</span>
+            <span class="mt-1 block font-mono text-xs text-white/60">on request</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBlock title="Which service is right for you?" lang="en" />
+</BaseLayout>

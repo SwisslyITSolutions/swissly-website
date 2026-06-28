@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import Section from '../../components/ui/Section.astro';
+import ProcessStep from '../../components/ui/ProcessStep.astro';
+import FormField from '../../components/ui/FormField.astro';
+import Button from '../../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Free intro call | Swissly IT Solutions"
+  description="30 minutes, no obligation. We listen and give honest advice, even if we are not the right fit for you."
+  path="/en/erstgespraech/"
+  lang="en"
+>
+  <PageHero
+    eyebrow="free intro call"
+    title="Free intro call"
+    intro="30 minutes, no obligation. We listen and give honest advice, even if we are not the right fit for you."
+  />
+
+  <Section tone="dark">
+    <div class="mx-auto max-w-4xl">
+      <div class="grid gap-12 md:grid-cols-2 md:gap-16">
+        <!-- Process steps -->
+        <div class="flex flex-col gap-8">
+          <h2 class="font-display text-2xl font-bold tracking-tight text-white">
+            What to expect
+          </h2>
+          <div class="flex flex-col gap-8">
+            <ProcessStep
+              index={1}
+              title="Situation analysis"
+              text="We listen and understand where you are right now, with no preconceived solution."
+            />
+            <ProcessStep
+              index={2}
+              title="Identify bottlenecks"
+              text="Together we work out where the biggest levers for your business are."
+            />
+            <ProcessStep
+              index={3}
+              title="Honest recommendation"
+              text="You get a clear assessment, with or without Swissly."
+            />
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div>
+          <h2 class="font-display text-2xl font-bold tracking-tight text-white">
+            Enquire now
+          </h2>
+          <form
+            method="POST"
+            action="/contact-handler.php"
+            class="mt-6 flex flex-col gap-6"
+          >
+            <input type="hidden" name="betreff" value="Intro call (EN)" />
+            <input type="hidden" name="lang" value="en" />
+
+            <FormField name="name" label="Name / Company" required={true} />
+            <FormField name="email" label="Email" type="email" required={true} />
+            <FormField name="telefon" label="Phone (optional)" />
+            <FormField name="anliegen" label="Your enquiry / questions" as="textarea" rows={4} />
+
+            <!-- Honeypot anti-spam field -->
+            <input
+              type="text"
+              name="company_url"
+              value=""
+              class="hidden"
+              aria-hidden="true"
+              tabindex="-1"
+              autocomplete="off"
+              style="display:none"
+            />
+
+            <label class="flex items-start gap-3 text-sm text-white/70">
+              <input type="checkbox" name="consent" required class="mt-0.5 shrink-0" />
+              <span>
+                I have read the
+                <a href="/datenschutzerklaerung/" class="underline hover:text-white">
+                  privacy policy
+                </a>
+                and agree to my data being processed.
+              </span>
+            </label>
+
+            <Button variant="primary" type="submit" label="Book a free intro call" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

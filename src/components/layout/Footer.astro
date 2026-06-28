@@ -96,7 +96,7 @@ const legalLinks =
           <a href={`mailto:${site.email}`} class="text-gold-bright transition hover:text-gold">
             {site.email}
           </a>
-          <span class="text-white/50">{site.hours}</span>
+          <span class="text-white/50">{lang === 'en' ? 'Mon–Fri 09:00–17:00' : site.hours}</span>
         </address>
       </div>
     </div>
