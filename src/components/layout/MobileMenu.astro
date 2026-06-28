@@ -4,13 +4,18 @@ interface NavItem {
   href: string;
 }
 
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getLang, type Lang } from '../../i18n/utils';
+import { t } from '../../i18n/ui';
+
 interface Props {
   nav: NavItem[];
   ctaLabel: string;
   ctaHref: string;
+  lang?: Lang;
 }
 
-const { nav, ctaLabel, ctaHref } = Astro.props;
+const { nav, ctaLabel, ctaHref, lang = getLang(Astro) } = Astro.props;
 ---
 
 <div class="lg:hidden">
@@ -20,7 +25,7 @@ const { nav, ctaLabel, ctaHref } = Astro.props;
     class="inline-flex h-10 w-10 items-center justify-center rounded-md text-white transition hover:text-gold-bright"
     aria-expanded="false"
     aria-controls="mobile-menu"
-    aria-label="Menü öffnen"
+    aria-label={t(lang, 'menu.open')}
     data-menu-toggle
   >
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -56,19 +61,22 @@ const { nav, ctaLabel, ctaHref } = Astro.props;
           SWISSLY<span class="text-gold-bright"> IT</span>
         </span>
       </span>
-      <button
-        type="button"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-md text-white transition hover:text-gold-bright"
-        aria-label="Menü schliessen"
-        data-menu-close
-      >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-        </svg>
-      </button>
+      <div class="flex items-center gap-3">
+        <LanguageSwitcher lang={lang} />
+        <button
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-md text-white transition hover:text-gold-bright"
+          aria-label={t(lang, 'menu.close')}
+          data-menu-close
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+          </svg>
+        </button>
+      </div>
     </div>
-    <nav class="mt-10 flex flex-col gap-1" aria-label="Mobile Navigation">
+    <nav class="mt-10 flex flex-col gap-1" aria-label={t(lang, 'nav.aria.mobile')}>
       {
         nav.map((item) => (
           <a

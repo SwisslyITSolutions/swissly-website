@@ -1,0 +1,38 @@
+---
+import { getLang, localizedPath } from '../../i18n/utils';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  lang?: 'de' | 'en';
+  /** Current pathname; defaults to the live request path. */
+  path?: string;
+}
+
+const { lang = getLang(Astro), path = Astro.url?.pathname ?? '/' } = Astro.props;
+const deHref = localizedPath('de', path);
+const enHref = localizedPath('en', path);
+
+const linkBase = 'px-1 py-0.5 transition';
+const active = 'text-gold-bright';
+const idle = 'text-white/50 hover:text-white';
+---
+
+<div class="flex items-center gap-1.5 font-mono text-xs" aria-label={t(lang, 'lang.aria')}>
+  <a
+    href={deHref}
+    hreflang="de"
+    aria-current={lang === 'de' ? 'true' : undefined}
+    class:list={[linkBase, lang === 'de' ? active : idle]}
+  >
+    DE
+  </a>
+  <span class="text-white/30" aria-hidden="true">/</span>
+  <a
+    href={enHref}
+    hreflang="en"
+    aria-current={lang === 'en' ? 'true' : undefined}
+    class:list={[linkBase, lang === 'en' ? active : idle]}
+  >
+    EN
+  </a>
+</div>

@@ -7,11 +7,14 @@ export const ui = {
   de: {
     // header / nav
     'skip.toContent': 'Zum Inhalt springen',
+    'lang.aria': 'Sprache wählen',
+    'logo.ariaHome': 'Swissly IT, Startseite',
     'nav.leistungen': 'Leistungen',
     'nav.ueberUns': 'Über uns',
     'nav.faq': 'FAQ',
     'nav.kontakt': 'Kontakt',
     'nav.aria.main': 'Hauptnavigation',
+    'nav.aria.mobile': 'Mobile Navigation',
     'cta.label': 'Erstgespräch anfragen',
     'menu.open': 'Menü öffnen',
     'menu.close': 'Menü schliessen',
@@ -24,11 +27,14 @@ export const ui = {
   en: {
     // header / nav
     'skip.toContent': 'Skip to content',
+    'lang.aria': 'Select language',
+    'logo.ariaHome': 'Swissly IT, home',
     'nav.leistungen': 'Services',
     'nav.ueberUns': 'About',
     'nav.faq': 'FAQ',
     'nav.kontakt': 'Contact',
     'nav.aria.main': 'Main navigation',
+    'nav.aria.mobile': 'Mobile navigation',
     'cta.label': 'Book a free intro call',
     'menu.open': 'Open menu',
     'menu.close': 'Close menu',
