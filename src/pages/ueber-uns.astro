@@ -7,6 +7,7 @@ import EcsTeaser from '../components/sections/EcsTeaser.astro';
 import CtaBlock from '../components/sections/CtaBlock.astro';
 import { site } from '../data/site';
 import { team } from '../data/team';
+import { personSchemas } from '../lib/schema';
 import tahaPhoto from '../assets/team/taha.jpg';
 import georgPhoto from '../assets/team/georg.jpg';
 
@@ -21,6 +22,7 @@ const photos: Record<string, ImageMetadata> = {
   title="Über uns | Swissly IT Solutions"
   description="Erfahren Sie mehr über das Team hinter Swissly IT Solutions."
   path="/ueber-uns/"
+  jsonLd={personSchemas(team)}
 >
   <PageHero
     eyebrow="über uns"

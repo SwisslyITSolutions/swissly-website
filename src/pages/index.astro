@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
+import { websiteSchema, sameAs } from '../lib/schema';
 import Hero from '../components/sections/Hero.astro';
 import WasWirTun from '../components/sections/WasWirTun.astro';
 import WieWirArbeiten from '../components/sections/WieWirArbeiten.astro';
@@ -50,7 +51,7 @@ const professionalService = {
     latitude: 47.0788,
     longitude: 8.3419,
   },
-  sameAs: [site.social.github],
+  sameAs,
 };
 
 const organization = {
@@ -64,7 +65,7 @@ const organization = {
   logo,
   description: site.tagline,
   address: postalAddress,
-  sameAs: [site.social.github],
+  sameAs,
 };
 ---
 
@@ -72,7 +73,7 @@ const organization = {
   title="Swissly IT Solutions | Webseiten, IT & KI in der Zentralschweiz"
   description="Schnelle, sichere Websites und persönlicher IT-Support für KMU in der Zentralschweiz. In der Schweiz gehostet, DSG-konform, Eigentum beim Kunden. Jetzt kostenloses Erstgespräch anfragen."
   path="/"
-  jsonLd={[professionalService, organization]}
+  jsonLd={[professionalService, organization, websiteSchema('de')]}
 >
   <Hero />
   <WasWirTun />

@@ -16,6 +16,8 @@ export interface Address {
 export interface Social {
   github: string;
   linkedin?: string;
+  instagram?: string;
+  googleBusiness?: string;
 }
 
 export interface EcsTeaser {
@@ -51,6 +53,8 @@ export const site = {
   statusBar: 'Available · Hosted in Switzerland 🇨🇭',
   social: {
     github: 'https://github.com/SwisslyITSolutions',
+    instagram: 'https://www.instagram.com/swisslyit/',
+    googleBusiness: 'https://maps.app.goo.gl/nzzBwrseiQyhLioR8',
   } satisfies Social,
   nav: [
     { label: 'Leistungen', href: '/leistungen/' },

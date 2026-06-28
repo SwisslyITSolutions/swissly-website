@@ -6,6 +6,7 @@ import Section from '../../components/ui/Section.astro';
 import EcsTeaser from '../../components/sections/EcsTeaser.astro';
 import CtaBlock from '../../components/sections/CtaBlock.astro';
 import { getContent } from '../../i18n/content';
+import { personSchemas } from '../../lib/schema';
 import tahaPhoto from '../../assets/team/taha.jpg';
 import georgPhoto from '../../assets/team/georg.jpg';
 
@@ -23,6 +24,7 @@ const photos: Record<string, ImageMetadata> = {
   description="Learn more about the team behind Swissly IT Solutions."
   path="/en/ueber-uns/"
   lang="en"
+  jsonLd={personSchemas(team)}
 >
   <PageHero
     eyebrow="about"
