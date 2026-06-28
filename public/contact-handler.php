@@ -80,7 +80,8 @@ function swissly_redirect(string $url): never
 
 function swissly_error(string $reason): never
 {
-    swissly_redirect('/kontakt/?error=' . urlencode($reason));
+    global $langBase;
+    swissly_redirect(($langBase ?? '') . '/kontakt/?error=' . urlencode($reason));
 }
 
 // ─── Method gate ─────────────────────────────────────────────────────────────
@@ -88,11 +89,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     swissly_redirect('/kontakt/');
 }
 
+// ─── Language ────────────────────────────────────────────────────────────────
+// The form sends a hidden `lang` field; whitelist it and derive the URL prefix
+// so validation/success redirects land on the visitor's language version.
+$lang     = (($_POST['lang'] ?? '') === 'en') ? 'en' : 'de';
+$langBase = $lang === 'en' ? '/en' : '';
+
 // ─── Honeypot ────────────────────────────────────────────────────────────────
 // If the hidden company_url field is non-empty, a bot filled it in.
 // Respond with a benign redirect so automated scanners get no useful signal.
 if (!empty($_POST['company_url'])) {
-    swissly_redirect('/kontakt/danke/');
+    swissly_redirect($langBase . '/kontakt/danke/');
 }
 
 // ─── Client IP resolution ────────────────────────────────────────────────────
@@ -134,7 +141,9 @@ if (count($history) >= $maxReq) {
     $retryAfter = max(1, ($history[0] + $window) - $now);
     http_response_code(429);
     header('Retry-After: ' . $retryAfter);
-    exit('Zu viele Anfragen. Bitte warten Sie eine Minute und versuchen Sie es erneut.');
+    exit($lang === 'en'
+        ? 'Too many requests. Please wait a minute and try again.'
+        : 'Zu viele Anfragen. Bitte warten Sie eine Minute und versuchen Sie es erneut.');
 }
 $history[] = $now;
 file_put_contents($rlFile, json_encode($history), LOCK_EX);
@@ -201,7 +210,7 @@ if ($notionToken !== '' && $notionDbId !== '') {
                 'date' => ['start' => date('c')],
             ],
             'Notizen' => [
-                'rich_text' => [['text' => ['content' => 'Betreff: ' . $subject . ' · IP: ' . $ip]]],
+                'rich_text' => [['text' => ['content' => 'Betreff: ' . $subject . ' · Sprache: ' . $lang . ' · IP: ' . $ip]]],
             ],
         ],
     ];
@@ -267,4 +276,4 @@ if ($mailTo !== '') {
 }
 
 // ─── Success ─────────────────────────────────────────────────────────────────
-swissly_redirect('/kontakt/danke/');
+swissly_redirect($langBase . '/kontakt/danke/');
