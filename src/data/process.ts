@@ -10,7 +10,7 @@ export const process: ProcessStep[] = [
   {
     index: 1,
     title: 'Erstgespräch',
-    text: '30 Minuten, kostenlos & unverbindlich. Wir hören zu, verstehen Ihre Situation und zeigen Ihnen, was möglich ist — ohne Verkaufsdruck.',
+    text: '30 Minuten, kostenlos und unverbindlich. Wir hören zu und zeigen Ihnen, was möglich ist. Ohne Verkaufsdruck.',
   },
   {
     index: 2,
@@ -25,6 +25,6 @@ export const process: ProcessStep[] = [
   {
     index: 4,
     title: 'Launch & Betreuung',
-    text: 'Go-Live auf einem Schweizer Server — und danach laufende Betreuung via Care-Plan, damit Ihre Website langfristig gut läuft.',
+    text: 'Go-Live auf einem Schweizer Server. Danach laufende Betreuung via Care-Plan, damit Ihre Website langfristig gut läuft.',
   },
 ];
