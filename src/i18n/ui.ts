@@ -6,6 +6,7 @@ import type { Lang } from './utils';
 export const ui = {
   de: {
     // header / nav
+    'skip.toContent': 'Zum Inhalt springen',
     'nav.leistungen': 'Leistungen',
     'nav.ueberUns': 'Über uns',
     'nav.faq': 'FAQ',
@@ -22,6 +23,7 @@ export const ui = {
   },
   en: {
     // header / nav
+    'skip.toContent': 'Skip to content',
     'nav.leistungen': 'Services',
     'nav.ueberUns': 'About',
     'nav.faq': 'FAQ',
