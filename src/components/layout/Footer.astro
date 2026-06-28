@@ -1,22 +1,48 @@
 ---
 import { site } from '../../data/site';
 import StatusBar from './StatusBar.astro';
+import { getLang, type Lang } from '../../i18n/utils';
+import { t } from '../../i18n/ui';
+import { getContent } from '../../i18n/content';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = getLang(Astro) } = Astro.props;
+const c = getContent(lang);
 
 const year = 2026;
 
-const navLinks = [
-  { label: 'Über uns', href: '/ueber-uns/' },
-  { label: 'Alle Leistungen', href: '/leistungen/' },
-  { label: 'Schulungen', href: '/leistungen/schulungen/' },
-  { label: 'FAQ', href: '/faq/' },
-  { label: 'Kontakt', href: '/kontakt/' },
-];
+const navLinks =
+  lang === 'en'
+    ? [
+        { label: 'About', href: '/en/ueber-uns/' },
+        { label: 'All services', href: '/en/leistungen/' },
+        { label: 'Training', href: '/en/leistungen/schulungen/' },
+        { label: 'FAQ', href: '/en/faq/' },
+        { label: 'Contact', href: '/en/kontakt/' },
+      ]
+    : [
+        { label: 'Über uns', href: '/ueber-uns/' },
+        { label: 'Alle Leistungen', href: '/leistungen/' },
+        { label: 'Schulungen', href: '/leistungen/schulungen/' },
+        { label: 'FAQ', href: '/faq/' },
+        { label: 'Kontakt', href: '/kontakt/' },
+      ];
 
-const legalLinks = [
-  { label: 'Impressum', href: '/impressum/' },
-  { label: 'Datenschutzerklärung', href: '/datenschutzerklaerung/' },
-  { label: 'AGB', href: '/agb/' },
-];
+// Legal pages are German-only; the EN footer labels them as such and links to the DE pages.
+const legalLinks =
+  lang === 'en'
+    ? [
+        { label: 'Imprint (German)', href: '/impressum/' },
+        { label: 'Privacy (German)', href: '/datenschutzerklaerung/' },
+        { label: 'Terms (German)', href: '/agb/' },
+      ]
+    : [
+        { label: 'Impressum', href: '/impressum/' },
+        { label: 'Datenschutzerklärung', href: '/datenschutzerklaerung/' },
+        { label: 'AGB', href: '/agb/' },
+      ];
 ---
 
 <footer class="border-t border-white/10 bg-navy-900 text-white/70">
@@ -39,7 +65,7 @@ const legalLinks = [
           </span>
         </div>
         <p class="mt-4 max-w-xs font-mono text-sm text-gold-bright">{site.tagline}</p>
-        <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/60">{site.claim}</p>
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/60">{c.claim}</p>
         <div class="mt-6">
           <StatusBar />
         </div>
@@ -47,7 +73,7 @@ const legalLinks = [
 
       <!-- Navigation -->
       <nav class="lg:col-span-3" aria-label="Footer-Navigation">
-        <h2 class="font-mono text-xs uppercase tracking-wider text-white/40">Navigation</h2>
+        <h2 class="font-mono text-xs uppercase tracking-wider text-white/40">{t(lang, 'footer.navHeading')}</h2>
         <ul class="mt-4 flex flex-col gap-2.5 text-sm">
           {
             navLinks.map((link) => (
@@ -63,7 +89,7 @@ const legalLinks = [
 
       <!-- Kontakt / NAP -->
       <div class="lg:col-span-4">
-        <h2 class="font-mono text-xs uppercase tracking-wider text-white/40">Kontakt</h2>
+        <h2 class="font-mono text-xs uppercase tracking-wider text-white/40">{t(lang, 'footer.contactHeading')}</h2>
         <address class="mt-4 flex flex-col gap-2.5 text-sm not-italic leading-relaxed">
           <span>{site.legalName}</span>
           <span>{site.address.zip} {site.address.city}, {site.address.region}</span>
@@ -95,12 +121,12 @@ const legalLinks = [
             type="button"
             class="text-white/60 transition hover:text-gold-bright"
           >
-            Cookie-Einstellungen
+            {t(lang, 'footer.cookieSettings')}
           </button>
         </li>
       </ul>
       <p class="text-xs text-white/40">
-        © {year} {site.name}. Alle Rechte vorbehalten.
+        © {year} {site.name}. {t(lang, 'footer.rights')}
       </p>
     </div>
   </div>

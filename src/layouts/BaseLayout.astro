@@ -63,7 +63,7 @@ const alternates = { de: localizedPath('de', path), en: localizedPath('en', path
     <Header lang={lang} />
     <main id="main"><slot /></main>
     <Footer lang={lang} />
-    <CookieBanner />
+    <CookieBanner lang={lang} />
     {/* Consent-gated GA4 init — subscribes via onConsent, no-op without id */}
     <script>
       import { initAnalytics } from '../lib/analytics';

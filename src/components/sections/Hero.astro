@@ -1,7 +1,34 @@
 ---
-import { site } from '../../data/site';
 import Button from '../ui/Button.astro';
 import StatusBar from '../layout/StatusBar.astro';
+import { getLang, localizedPath, type Lang } from '../../i18n/utils';
+import { t } from '../../i18n/ui';
+import { getContent } from '../../i18n/content';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = getLang(Astro) } = Astro.props;
+const c = getContent(lang);
+const ctaHref = localizedPath(lang, '/erstgespraech/');
+const leistungenHref = localizedPath(lang, '/leistungen/');
+
+const copy = {
+  de: {
+    subtitle:
+      'Schnelle, sichere Websites und persönlicher IT-Support für KMU in der Zentralschweiz. In der Schweiz gehostet, Eigentum bei Ihnen. Sie kümmern sich ums Geschäft, wir um die Technik.',
+    codeSupport: 'Klartext',
+    codeComment: '// → läuft. einfach.',
+    codeDeploy: 'zentralschweiz',
+  },
+  en: {
+    subtitle:
+      'Fast, secure websites and personal IT support for SMEs in Central Switzerland. Hosted in Switzerland, owned by you. You focus on your business, we handle the tech.',
+    codeSupport: 'Plain talk',
+    codeComment: '// → it just works.',
+    codeDeploy: 'central switzerland',
+  },
+}[lang];
 ---
 
 <section class="relative overflow-hidden bg-navy-900">
@@ -30,20 +57,18 @@ import StatusBar from '../layout/StatusBar.astro';
           class="mt-6 font-display font-extrabold tracking-tight text-white"
           style="font-size:clamp(2.5rem,6vw,4.25rem);line-height:1.04;letter-spacing:-0.02em"
         >
-          {site.claim}
+          {c.claim}
         </h1>
 
         <p class="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
-          Schnelle, sichere Websites und persönlicher IT-Support für KMU in der
-          Zentralschweiz. In der Schweiz gehostet, Eigentum bei Ihnen. Sie kümmern
-          sich ums Geschäft, wir um die Technik.
+          {copy.subtitle}
         </p>
 
         <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Button href={site.ctaHref} label={site.ctaLabel} variant="primary" class="w-full sm:w-auto">
+          <Button href={ctaHref} label={t(lang, 'cta.label')} variant="primary" class="w-full sm:w-auto">
             <span aria-hidden="true">→</span>
           </Button>
-          <Button href="/leistungen/" label="Leistungen" variant="outline" class="w-full sm:w-auto" />
+          <Button href={leistungenHref} label={t(lang, 'nav.leistungen')} variant="outline" class="w-full sm:w-auto" />
         </div>
 
         <div class="mt-10">
@@ -75,11 +100,11 @@ import StatusBar from '../layout/StatusBar.astro';
 <span class="text-white/30 select-none">4  </span>  <span class="text-sky-300">hosting</span>:    <span class="text-emerald-300">'Switzerland 🇨🇭'</span>,
 <span class="text-white/30 select-none">5  </span>  <span class="text-sky-300">ownership</span>:  <span class="text-emerald-300">'you'</span>,
 <span class="text-white/30 select-none">6  </span>  <span class="text-sky-300">performance</span>: <span class="text-emerald-300">'lighthouse 90+'</span>,
-<span class="text-white/30 select-none">7  </span>  <span class="text-sky-300">support</span>:    <span class="text-emerald-300">'Klartext'</span>,
+<span class="text-white/30 select-none">7  </span>  <span class="text-sky-300">support</span>:    <span class="text-emerald-300">'{copy.codeSupport}'</span>,
 <span class="text-white/30 select-none">8  </span>{'}'};
 <span class="text-white/30 select-none">9  </span>
-<span class="text-white/30 select-none">10 </span><span class="text-white/40">// → läuft. einfach.</span>
-<span class="text-white/30 select-none">11 </span><span class="text-white">deploy</span>(<span class="text-emerald-300">'zentralschweiz'</span>);<span class="cursor-blink text-gold-bright">▋</span></code></pre>
+<span class="text-white/30 select-none">10 </span><span class="text-white/40">{copy.codeComment}</span>
+<span class="text-white/30 select-none">11 </span><span class="text-white">deploy</span>(<span class="text-emerald-300">'{copy.codeDeploy}'</span>);<span class="cursor-blink text-gold-bright">▋</span></code></pre>
         </div>
       </div>
     </div>

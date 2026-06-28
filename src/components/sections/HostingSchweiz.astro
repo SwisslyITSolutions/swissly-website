@@ -1,20 +1,57 @@
 ---
 import Eyebrow from '../ui/Eyebrow.astro';
+import { getLang, type Lang } from '../../i18n/utils';
 
-const points = [
-  {
-    title: 'Daten bleiben in der Schweiz',
-    text: 'Hosting auf Schweizer Premium-Servern. Ihre Daten und die Ihrer Kunden verlassen das Land nicht. DSG-konform von Grund auf.',
+interface Props {
+  lang?: Lang;
+}
+const { lang = getLang(Astro) } = Astro.props;
+
+const copy = {
+  de: {
+    eyebrow: 'swiss made',
+    headingTop: 'Hosting in der Schweiz.',
+    headingBottom: 'Vertrauen inklusive.',
+    intro:
+      'Schweizer Engineering bedeutet für uns mehr als ein Flaggen-Emoji: kurze Wege, klare Verantwortung und Technik, die hält, was sie verspricht.',
+    points: [
+      {
+        title: 'Daten bleiben in der Schweiz',
+        text: 'Hosting auf Schweizer Premium-Servern. Ihre Daten und die Ihrer Kunden verlassen das Land nicht. DSG-konform von Grund auf.',
+      },
+      {
+        title: 'Eigentum bei Ihnen',
+        text: 'Code, Domain und Dateien gehören Ihnen. Kein Lock-in, keine versteckten Abhängigkeiten, jederzeit volle Kontrolle.',
+      },
+      {
+        title: 'Persönlich erreichbar',
+        text: 'Ein kleines Team aus der Zentralschweiz. Kein Callcenter, keine Warteschleife. Sie sprechen direkt mit den Menschen, die Ihre IT betreuen.',
+      },
+    ],
   },
-  {
-    title: 'Eigentum bei Ihnen',
-    text: 'Code, Domain und Dateien gehören Ihnen. Kein Lock-in, keine versteckten Abhängigkeiten, jederzeit volle Kontrolle.',
+  en: {
+    eyebrow: 'swiss made',
+    headingTop: 'Hosting in Switzerland.',
+    headingBottom: 'Trust included.',
+    intro:
+      'For us, Swiss engineering means more than a flag emoji: short paths, clear responsibility, and technology that does what it promises.',
+    points: [
+      {
+        title: 'Data stays in Switzerland',
+        text: "Hosting on Swiss premium servers. Your data and your customers' data never leave the country. Compliant with Swiss data protection from the ground up.",
+      },
+      {
+        title: 'Owned by you',
+        text: 'Code, domain, and files belong to you. No lock-in, no hidden dependencies, full control at all times.',
+      },
+      {
+        title: 'Personally reachable',
+        text: 'A small team from Central Switzerland. No call centre, no hold queue. You talk directly to the people who look after your IT.',
+      },
+    ],
   },
-  {
-    title: 'Persönlich erreichbar',
-    text: 'Ein kleines Team aus der Zentralschweiz. Kein Callcenter, keine Warteschleife. Sie sprechen direkt mit den Menschen, die Ihre IT betreuen.',
-  },
-];
+}[lang];
+const points = copy.points;
 ---
 
 <section class="relative overflow-hidden bg-navy-800">
@@ -26,13 +63,12 @@ const points = [
   <div class="container-x relative py-20 md:py-28">
     <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
       <div data-reveal>
-        <Eyebrow>swiss made</Eyebrow>
+        <Eyebrow>{copy.eyebrow}</Eyebrow>
         <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
-          Hosting in der Schweiz.<br />Vertrauen inklusive.
+          {copy.headingTop}<br />{copy.headingBottom}
         </h2>
         <p class="mt-5 max-w-md text-lg leading-relaxed text-white/70">
-          Schweizer Engineering bedeutet für uns mehr als ein Flaggen-Emoji: kurze Wege,
-          klare Verantwortung und Technik, die hält, was sie verspricht.
+          {copy.intro}
         </p>
         <div
           class="mt-8 inline-flex items-center gap-3 rounded-lg border border-gold/30 bg-gold/10 px-4 py-3 font-mono text-sm text-gold-bright"
