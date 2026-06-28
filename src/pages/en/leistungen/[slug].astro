@@ -1,0 +1,15 @@
+---
+import ServiceLayout from '../../../layouts/ServiceLayout.astro';
+import { getContent } from '../../../i18n/content';
+
+export function getStaticPaths() {
+  return getContent('en').services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+---
+
+<ServiceLayout service={service} lang="en" />
