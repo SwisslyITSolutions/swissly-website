@@ -95,6 +95,13 @@ const { nav, ctaLabel, ctaHref } = Astro.props;
   const closeBtn = panel?.querySelector<HTMLButtonElement>('[data-menu-close]');
 
   if (toggle && panel) {
+    // Re-parent the panel out of <header>. On scroll the header gains
+    // `backdrop-filter` (the blur), which makes it the containing block for
+    // this `position: fixed` panel — clipping it to the header's height
+    // (~64px) so it "disappears" when opened mid-page. Moving it to <body>
+    // keeps `fixed inset-0` resolving against the viewport at any scroll pos.
+    document.body.appendChild(panel);
+
     const focusable = () =>
       Array.from(
         panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'),
