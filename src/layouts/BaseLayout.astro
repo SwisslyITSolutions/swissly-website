@@ -36,6 +36,47 @@ const alternates = { de: localizedPath('de', path), en: localizedPath('en', path
     <meta name="theme-color" content="#0C1828" />
     <link rel="icon" type="image/png" href="/images/logo/swisslyit-logo.png" />
     <link rel="preload" as="font" type="font/woff2" href={geistFontUrl} crossorigin />
+    {/* Intro-Preloader: einmal pro Browser-Session, Entscheidung vor dem ersten Paint (kein Flash auf Folgeseiten) */}
+    <script is:inline>
+      (function () {
+        try {
+          if (sessionStorage.getItem('swy_intro')) return; // in dieser Session schon gezeigt
+          sessionStorage.setItem('swy_intro', '1');
+          document.documentElement.classList.add('swy-intro');
+        } catch (e) {
+          document.documentElement.classList.add('swy-intro'); // Storage gesperrt -> einmalig pro Load
+        }
+      })();
+    </script>
+    <style is:inline>
+      #swy-preloader { display: none; }
+      html.swy-intro #swy-preloader {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        background: #0C1828;
+        animation: swy-failsafe 0s linear 2.6s forwards; /* Sicherheitsnetz, falls JS nicht raeumt */
+      }
+      #swy-preloader.swy-done { opacity: 0; transition: opacity 0.45s ease; }
+      #swy-preloader img {
+        width: clamp(112px, 22vw, 168px);
+        height: auto;
+        animation: swy-intro 1.15s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+      }
+      @keyframes swy-intro {
+        0%   { transform: scale(0.86) rotate(-90deg); opacity: 0; filter: drop-shadow(0 0 0 rgba(201, 169, 106, 0)); }
+        55%  { transform: scale(1.07) rotate(-12deg); opacity: 1; filter: drop-shadow(0 0 26px rgba(201, 169, 106, 0.62)); }
+        100% { transform: scale(1) rotate(0deg); opacity: 1; filter: drop-shadow(0 0 9px rgba(201, 169, 106, 0.32)); }
+      }
+      @keyframes swy-failsafe { to { opacity: 0; visibility: hidden; } }
+      @keyframes swy-intro-rm { from { opacity: 0; } to { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        #swy-preloader img { animation: swy-intro-rm 0.5s ease both; }
+      }
+    </style>
     <Seo title={title} description={description} path={path} ogImage={ogImage} noindex={noindex || staging} lang={lang} alternates={alternates} />
     {blocks.map((schema) => <JsonLd schema={schema} />)}
     {/* Consent Mode v2 — set defaults BEFORE any GA script can fire */}
@@ -55,6 +96,22 @@ const alternates = { de: localizedPath('de', path), en: localizedPath('en', path
     )}
   </head>
   <body class="min-h-screen bg-navy-900 antialiased">
+    {/* Intro-Preloader: rein dekorativ (aria-hidden); wird nur sichtbar, wenn html.swy-intro gesetzt ist */}
+    <div id="swy-preloader" aria-hidden="true">
+      <img src="/images/logo/swisslyit-logo.png" alt="" width="168" height="168" />
+    </div>
+    <script is:inline>
+      (function () {
+        var el = document.getElementById('swy-preloader');
+        if (!el || !document.documentElement.classList.contains('swy-intro')) return;
+        var reduce = false;
+        try { reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+        setTimeout(function () {
+          el.classList.add('swy-done');
+          setTimeout(function () { if (el && el.parentNode) el.remove(); }, 500);
+        }, reduce ? 650 : 1150);
+      })();
+    </script>
     <a
       href="#main"
       class="sr-only rounded-md bg-gold px-4 py-2 font-medium text-navy-900 focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100]"
