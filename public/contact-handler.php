@@ -69,6 +69,9 @@ $mailTo       = getenv('CONTACT_MAIL_TO')    ?: (defined('CONTACT_MAIL_TO')    ?
 // Comma-separated list of trusted reverse-proxy IPs (REMOTE_ADDR values).
 // Empty by default ⇒ X-Forwarded-For is ignored entirely.
 $trustedProxy = getenv('TRUSTED_PROXY')      ?: (defined('TRUSTED_PROXY')      ? TRUSTED_PROXY      : '');
+// Cloudflare Turnstile secret key. Empty ⇒ the Turnstile check is skipped
+// (honeypot + rate-limit still apply). Set it to enforce the bot challenge.
+$turnstileSecret = getenv('TURNSTILE_SECRET') ?: (defined('TURNSTILE_SECRET') ? TURNSTILE_SECRET : '');
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -147,6 +150,42 @@ if (count($history) >= $maxReq) {
 }
 $history[] = $now;
 file_put_contents($rlFile, json_encode($history), LOCK_EX);
+
+// ─── Cloudflare Turnstile (server-verified bot challenge) ──────────────────────
+// This is the gate a direct POST cannot fake: the visitor's browser solves the
+// challenge and the resulting single-use token is verified here against Cloudflare.
+// Bots that POST straight to this script send no token ⇒ rejected for free (no
+// outbound call). Skipped entirely only when TURNSTILE_SECRET is unset (e.g. dev).
+if ($turnstileSecret !== '') {
+    $tsToken = (string) ($_POST['cf-turnstile-response'] ?? '');
+    if ($tsToken === '') {
+        swissly_error('captcha');
+    }
+    $tsCh = curl_init('https://challenges.cloudflare.com/turnstile/v0/siteverify');
+    curl_setopt_array($tsCh, [
+        CURLOPT_POST           => true,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT        => 10,
+        CURLOPT_POSTFIELDS     => http_build_query([
+            'secret'   => $turnstileSecret,
+            'response' => $tsToken,
+            'remoteip' => $ip,
+        ]),
+    ]);
+    $tsBody = curl_exec($tsCh);
+    $tsHttp = (int) curl_getinfo($tsCh, CURLINFO_HTTP_CODE);
+    curl_close($tsCh);
+
+    $tsOk = false;
+    if ($tsBody !== false && $tsHttp >= 200 && $tsHttp < 300) {
+        $tsData = json_decode((string) $tsBody, true);
+        $tsOk   = is_array($tsData) && (($tsData['success'] ?? false) === true);
+    }
+    if (!$tsOk) {
+        error_log('[contact-handler] Turnstile verification failed (HTTP ' . $tsHttp . '): ' . (string) $tsBody);
+        swissly_error('captcha');
+    }
+}
 
 // ─── Validate ────────────────────────────────────────────────────────────────
 $name     = trim((string) ($_POST['name']     ?? ''));

@@ -5,6 +5,7 @@ import Section from '../../components/ui/Section.astro';
 import ProcessStep from '../../components/ui/ProcessStep.astro';
 import FormField from '../../components/ui/FormField.astro';
 import Button from '../../components/ui/Button.astro';
+import Turnstile from '../../components/ui/Turnstile.astro';
 ---
 
 <BaseLayout
@@ -86,6 +87,8 @@ import Button from '../../components/ui/Button.astro';
                 and agree to my data being processed.
               </span>
             </label>
+
+            <Turnstile theme="dark" lang="en" />
 
             <Button variant="primary" type="submit" label="Book a free intro call" />
           </form>

@@ -33,7 +33,7 @@ npm run dev      # Dev-Server auf http://localhost:4321
 ```bash
 npm run build    # Erzeugt dist/
 npm run preview  # Testet dist/ lokal auf http://localhost:4321
-npm test         # 134 Unit-Tests (Vitest)
+npm test         # Unit-Tests (Vitest)
 ```
 
 ---
@@ -49,6 +49,7 @@ Datei `.env` (nie committen, ist in `.gitignore`):
 | `NOTION_LEADS_DB_ID` | Notion Datenbank-ID (Leads-DB) | `abc123...` |
 | `CONTACT_MAIL_TO` | E-Mail-Empfänger für Kontaktformular | `info@swisslyit.ch` |
 | `TRUSTED_PROXY` | IP des Reverse Proxy (Rate-Limiting im PHP) | `127.0.0.1` |
+| `PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare Turnstile Site-Key (öffentlich, wird ins HTML gebaut) | `0x4AAAA...` |
 
 **Hinweis:** `PUBLIC_*`-Variablen sind im Browser sichtbar (GA-ID ist öffentlich). Alle anderen nur serverseitig (im PHP-Handler).
 
@@ -84,6 +85,7 @@ Verwende `config.php.example` als Vorlage (`cp public/config.php.example public/
 define('NOTION_TOKEN',       'secret_xxx');
 define('NOTION_LEADS_DB_ID', 'abc123...');
 define('CONTACT_MAIL_TO',    'info@swisslyit.ch');
+define('TURNSTILE_SECRET',   '0x4AAAA...'); // Cloudflare Turnstile Secret-Key (privat)
 // define('TRUSTED_PROXY',   '');
 ```
 
@@ -92,6 +94,15 @@ Der PHP-Handler (`contact-handler.php`) liest diese Datei via:
 $configFile = __DIR__ . '/config.php';
 if (is_file($configFile)) { require $configFile; }
 ```
+
+### Spam-Schutz: Cloudflare Turnstile
+
+Der Handler verifiziert (zusätzlich zu Honeypot + Rate-Limit) ein Cloudflare-Turnstile-Token serverseitig — ein Direkt-POST ohne gültiges Token wird abgewiesen.
+
+1. Gratis-Widget anlegen: https://dash.cloudflare.com → **Turnstile** → Add widget. Domain: `swisslyit.ch` (für lokale Tests zusätzlich `localhost`). Modus: *Managed* (empfohlen).
+2. **Site-Key** (öffentlich) → in `.env` als `PUBLIC_TURNSTILE_SITE_KEY=…`, dann `npm run build`. Ohne Site-Key wird das Widget einfach nicht gerendert (Formular bleibt nutzbar).
+3. **Secret-Key** (privat) → in `config.php` auf dem Server als `TURNSTILE_SECRET=…`. Ohne Secret überspringt der Handler die Turnstile-Prüfung (Honeypot + Rate-Limit greifen weiter).
+4. **CSP in der Live-`.htaccess`** um `https://challenges.cloudflare.com` ergänzen — in `script-src`, in `connect-src` und als neue Direktive `frame-src https://challenges.cloudflare.com`. (Repo `public/.htaccess` ist bereits angepasst; da `.htaccess` nicht mitdeployt wird, muss die Live-Datei manuell nachgezogen werden.)
 
 ### Notion Leads-Datenbank
 
@@ -182,6 +193,7 @@ npm test
 - [ ] `config.php` auf Server (ausserhalb httpdocs) angelegt
 - [ ] Notion Integration Token + DB-ID konfiguriert
 - [ ] Formular-Test: Kontakt-Formular absenden → Notion-Eintrag + E-Mail erhalten
+- [ ] Cloudflare Turnstile: Site-Key in `.env` (Build) + Secret in `config.php` (Server) gesetzt; CSP in Live-`.htaccess` um `challenges.cloudflare.com` ergänzt; Direkt-POST ohne Token wird abgewiesen
 - [ ] GA4: Cookie-Banner "Akzeptieren" → GA lädt; "Ablehnen" → kein GA
 - [ ] HTTPS-Redirect: http://swisslyit.ch → https://swisslyit.ch ✓
 - [ ] www-Redirect: https://www.swisslyit.ch → https://swisslyit.ch ✓

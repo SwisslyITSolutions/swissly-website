@@ -5,6 +5,7 @@ import Section from '../components/ui/Section.astro';
 import ProcessStep from '../components/ui/ProcessStep.astro';
 import FormField from '../components/ui/FormField.astro';
 import Button from '../components/ui/Button.astro';
+import Turnstile from '../components/ui/Turnstile.astro';
 ---
 
 <BaseLayout
@@ -84,6 +85,8 @@ import Button from '../components/ui/Button.astro';
                 gelesen und stimme der Verarbeitung meiner Daten zu.
               </span>
             </label>
+
+            <Turnstile theme="dark" lang="de" />
 
             <Button variant="primary" type="submit" label="Erstgespräch anfragen" />
           </form>

@@ -5,6 +5,7 @@ import Section from '../../components/ui/Section.astro';
 import FormField from '../../components/ui/FormField.astro';
 import Button from '../../components/ui/Button.astro';
 import Map from '../../components/ui/Map.astro';
+import Turnstile from '../../components/ui/Turnstile.astro';
 import { site } from '../../data/site';
 ---
 
@@ -28,7 +29,7 @@ import { site } from '../../data/site';
         aria-live="assertive"
         class="mb-6 hidden rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
       >
-        Bitte füllen Sie alle Pflichtfelder korrekt aus und stimmen Sie der Datenschutzerklärung zu.
+        Bitte füllen Sie alle Pflichtfelder korrekt aus und stimmen Sie der Datenschutzerklärung zu. Falls der Spam-Schutz nicht bestätigt wurde, laden Sie die Seite neu und senden Sie erneut.
       </div>
       <script>
         const notice = document.getElementById('form-notice');
@@ -65,6 +66,8 @@ import { site } from '../../data/site';
             gelesen und stimme der Verarbeitung meiner Daten zu.
           </span>
         </label>
+
+        <Turnstile theme="light" lang="de" />
 
         <Button variant="primary" type="submit" label="Nachricht senden" />
       </form>

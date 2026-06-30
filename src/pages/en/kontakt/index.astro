@@ -5,6 +5,7 @@ import Section from '../../../components/ui/Section.astro';
 import FormField from '../../../components/ui/FormField.astro';
 import Button from '../../../components/ui/Button.astro';
 import Map from '../../../components/ui/Map.astro';
+import Turnstile from '../../../components/ui/Turnstile.astro';
 import { site } from '../../../data/site';
 ---
 
@@ -29,7 +30,7 @@ import { site } from '../../../data/site';
         aria-live="assertive"
         class="mb-6 hidden rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
       >
-        Please fill in all required fields correctly and agree to the privacy policy.
+        Please fill in all required fields correctly and agree to the privacy policy. If the spam check could not be confirmed, reload the page and submit again.
       </div>
       <script>
         const notice = document.getElementById('form-notice');
@@ -67,6 +68,8 @@ import { site } from '../../../data/site';
             and agree to my data being processed.
           </span>
         </label>
+
+        <Turnstile theme="light" lang="en" />
 
         <Button variant="primary" type="submit" label="Send message" />
       </form>

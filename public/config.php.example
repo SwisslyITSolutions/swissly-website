@@ -32,9 +32,17 @@
  *                        prevents rate-limit bypass via a forged XFF header.
  *                        Only set this if the site sits behind a known proxy/CDN
  *                        and you need the real client IP for rate-limiting.
+ *
+ *   TURNSTILE_SECRET   — Cloudflare Turnstile *secret* key (server-side). Create a
+ *                        free widget at https://dash.cloudflare.com → Turnstile.
+ *                        You get a Site Key (public → website .env as
+ *                        PUBLIC_TURNSTILE_SITE_KEY) and this Secret Key (private).
+ *                        Leave empty to disable the Turnstile check (honeypot +
+ *                        rate-limit still apply).
  */
 
 define('NOTION_TOKEN',       'secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 define('NOTION_LEADS_DB_ID', 'b25acf93-9c56-40f9-b6d1-be29c7a26f44'); // 📨 Leads
 define('CONTACT_MAIL_TO',    'info@swisslyit.ch');
+define('TURNSTILE_SECRET',   '0x4AAAAAAAxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 // define('TRUSTED_PROXY',   '');

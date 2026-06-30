@@ -1,7 +1,11 @@
-import { expect, test } from 'vitest';
+import { afterEach, expect, test, vi } from 'vitest';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import Kontakt from '../src/pages/kontakt/index.astro';
 import Danke from '../src/pages/kontakt/danke.astro';
+
+afterEach(() => {
+  vi.unstubAllEnvs();
+});
 
 test('form has correct action and POST method', async () => {
   const c = await AstroContainer.create();
@@ -56,4 +60,19 @@ test('danke page has noindex', async () => {
   const c = await AstroContainer.create();
   const html = await c.renderToString(Danke);
   expect(html).toContain('noindex');
+});
+
+test('shows Cloudflare Turnstile widget when a site key is configured', async () => {
+  vi.stubEnv('PUBLIC_TURNSTILE_SITE_KEY', '1x00000000000000000000AA');
+  const c = await AstroContainer.create();
+  const html = await c.renderToString(Kontakt);
+  expect(html).toContain('cf-turnstile');
+  expect(html).toContain('challenges.cloudflare.com/turnstile/v0/api.js');
+});
+
+test('omits Turnstile widget when no site key (form still usable)', async () => {
+  vi.stubEnv('PUBLIC_TURNSTILE_SITE_KEY', '');
+  const c = await AstroContainer.create();
+  const html = await c.renderToString(Kontakt);
+  expect(html).not.toContain('cf-turnstile');
 });

@@ -1,0 +1,43 @@
+---
+/**
+ * Cloudflare Turnstile — server-verified bot protection for the contact forms.
+ *
+ * Renders nothing unless PUBLIC_TURNSTILE_SITE_KEY is set at build time, so the
+ * forms keep working (and never show a broken widget) before the keys exist.
+ * The widget injects a hidden `cf-turnstile-response` token into the form;
+ * contact-handler.php verifies it via the Turnstile siteverify API — which is
+ * why a direct POST (no browser, no token) cannot bypass it.
+ *
+ * Setup: create a free widget at https://dash.cloudflare.com → Turnstile.
+ *   Site Key   → PUBLIC_TURNSTILE_SITE_KEY in .env  (public, baked into the HTML)
+ *   Secret Key → TURNSTILE_SECRET in config.php on the server (private)
+ */
+interface Props {
+  /** Match the surrounding section background. */
+  theme?: 'light' | 'dark' | 'auto';
+  /** Widget UI language. */
+  lang?: 'de' | 'en' | 'auto';
+}
+
+const { theme = 'auto', lang = 'auto' } = Astro.props;
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+{
+  siteKey && (
+    <>
+      <div
+        class="cf-turnstile"
+        data-sitekey={siteKey}
+        data-theme={theme}
+        data-language={lang}
+      />
+      <script
+        is:inline
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        async
+        defer
+      />
+    </>
+  )
+}
